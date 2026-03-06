@@ -1082,6 +1082,7 @@ body.is-android .ws-av { width: 34px !important; height: 34px !important; }
     position: fixed; inset: 0;
     flex-direction: row;
     background: var(--bg);
+    z-index: 10;
   }
 
   /* ── Icon Rail (far left, like Discord) ── */
