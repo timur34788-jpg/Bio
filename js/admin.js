@@ -15,21 +15,14 @@ async function loadAdminUsers(){
     if(!list.length){body.innerHTML='<p style="color:var(--muted)">Kullanıcı yok.</p>';return;}
 
     let h='<div class="admin-section">';
-    // Başlık + Arama + Toplu işlem araç çubuğu
-    h+=`<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-        <div class="admin-sec-title" style="margin:0">Tüm Kullanıcılar (${list.length})</div>
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:.78rem;color:var(--muted);">
-            <input type="checkbox" id="selectAllUsers" onchange="toggleSelectAllUsers(this)"> Tümünü Seç
-          </label>
-          <button class="a-btn red" id="bulkDeleteBtn" style="display:none;padding:6px 12px;font-size:.75rem;" onclick="bulkDeleteUsers()">🗑️ Seçilenleri Sil</button>
-          <button onclick="adminExportUsersXLS()" style="padding:6px 12px;background:#1d6f42;color:#fff;border:none;border-radius:7px;font-size:.75rem;font-weight:700;cursor:pointer;">📥 XLSX İndir</button>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <input id="adminUserSearch" class="admin-inp" placeholder="👤 Kullanıcı adı ara..." oninput="filterAdminUsers()" style="flex:1;">
-        <input id="adminIdSearch" class="admin-inp" placeholder="🆔 ID ile ara..." oninput="filterAdminUsers()" style="flex:1;">
+    // Başlık + Toplu işlem araç çubuğu
+    h+=`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+      <div class="admin-sec-title" style="margin:0">Tüm Kullanıcılar (${list.length})</div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:.78rem;color:var(--muted);">
+          <input type="checkbox" id="selectAllUsers" onchange="toggleSelectAllUsers(this)"> Tümünü Seç
+        </label>
+        <button class="a-btn red" id="bulkDeleteBtn" style="display:none;padding:6px 12px;font-size:.75rem;" onclick="bulkDeleteUsers()">🗑️ Seçilenleri Sil</button>
       </div>
     </div>`;
     h+='<div class="admin-card">';
@@ -39,7 +32,7 @@ async function loadAdminUsers(){
       const isAdminUser=!!u.isAdmin;
       const isMe=u.username===_cu;
       const on=!!_online[u.username];
-      h+=`<div class="admin-row" id="urow-${esc(u.username)}" data-username="${esc((u.username||'').toLowerCase())}" data-userid="${esc((u.userId||'').toLowerCase())}">
+      h+=`<div class="admin-row" id="urow-${esc(u.username)}">
         <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
           ${!isMe?`<input type="checkbox" class="user-select-cb" data-u="${esc(u.username)}" onchange="onUserCheckChange()" style="width:16px;height:16px;cursor:pointer;flex-shrink:0;">`:'<div style="width:16px;flex-shrink:0;"></div>'}
           <div class="admin-row-av" style="background:${strColor(u.username)}">${initials(u.username)}</div>
@@ -49,7 +42,7 @@ async function loadAdminUsers(){
               ${isAdminUser?'<span class="admin-tag">Admin</span>':''}
               ${isBanned?'<span class="banned-tag">Banlı</span>':''}
             </div>
-            <div class="admin-row-sub">${on?'🟢 Çevrimiçi':'⚫ Çevrimdışı'} · ${u.origin||'—'} · 🏢 ${u._ws||'?'} · 📅 ${u.createdAt?new Date(u.createdAt).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Bilinmiyor'}${u.userId?` · <span style="font-family:monospace;color:var(--accent);font-size:.68rem;">🆔 ${esc(u.userId)}</span>`:''}</div>
+            <div class="admin-row-sub">${on?'🟢 Çevrimiçi':'⚫ Çevrimdışı'} · ${u.origin||'—'} · 🏢 ${u._ws||'?'} · 📅 ${u.createdAt?new Date(u.createdAt).toLocaleString('tr-TR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'Bilinmiyor'}</div>
             ${u.lastIP?`<div style="font-size:11px;color:#e67e22;margin-top:2px;font-family:monospace;">🌐 ${esc(u.lastIP)}</div>`:''}
           </div>
         </div>
@@ -67,136 +60,7 @@ async function loadAdminUsers(){
     });
     h+='</div></div>';
     body.innerHTML=h;
-    // Store list for export
-    body._userList = list;
   }}catch(e){body.innerHTML='<p style="color:var(--muted);padding:20px">Yüklenemedi: '+(e&&e.message||e)+'</p>';}
-}
-
-function filterAdminUsers(){
-  const sq = (document.getElementById('adminUserSearch')?.value||'').toLowerCase().trim();
-  const iq = (document.getElementById('adminIdSearch')?.value||'').toLowerCase().trim();
-  document.querySelectorAll('.admin-row[data-username]').forEach(row=>{
-    const uMatch = !sq || row.dataset.username.includes(sq);
-    const iMatch = !iq || row.dataset.userid.includes(iq);
-    row.style.display = (uMatch && iMatch) ? '' : 'none';
-  });
-}
-
-async function adminExportUsersXLS(){
-  showToast('⏳ Hazırlanıyor...');
-  
-  // --- 1. Kullanıcı verisini çek ---
-  const users = await adminRestGet('users').catch(()=>null)||{};
-  const list = Object.values(users).filter(u=>u&&u.username)
-    .sort((a,b)=>(a.username||'').localeCompare(b.username||''));
-
-  // --- 2. SheetJS kütüphanesini yükle ---
-  await new Promise((res,rej)=>{
-    if(window.XLSX){ res(); return; }
-    const s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-    s.onload=res; s.onerror=rej;
-    document.head.appendChild(s);
-  });
-
-  // --- 3. JSZip kütüphanesini yükle ---
-  await new Promise((res,rej)=>{
-    if(window.JSZip){ res(); return; }
-    const s=document.createElement('script');
-    s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-    s.onload=res; s.onerror=rej;
-    document.head.appendChild(s);
-  });
-
-  // --- 4. XLSX oluştur ---
-  const headers = ['Kullanıcı Adı','ID','E-posta','Köken','Kayıt IP','Son IP','Kayıt Tarihi','Son Görülme','Admin','Banlı'];
-  const wsData = [headers, ...list.map(u=>[
-    u.username||'',
-    u.userId||'',
-    u.email||'',
-    u.origin||'',
-    u.regIP||'',
-    u.lastIP||'',
-    u.createdAt?new Date(u.createdAt).toLocaleString('tr-TR'):'',
-    u.lastSeen?new Date(u.lastSeen).toLocaleString('tr-TR'):'',
-    u.isAdmin?'Evet':'Hayır',
-    u.banned?'Evet':'Hayır'
-  ])];
-
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet(wsData);
-  // Sütun genişlikleri
-  ws['!cols'] = [20,18,30,18,16,16,22,22,8,8].map(w=>({wch:w}));
-  // Başlık satırı kalın
-  headers.forEach((_,i)=>{
-    const cell = ws[XLSX.utils.encode_cell({r:0,c:i})];
-    if(cell) { cell.s = {font:{bold:true}}; }
-  });
-  XLSX.utils.book_append_sheet(wb, ws, 'Üyeler');
-  const xlsxBytes = XLSX.write(wb, {type:'array', bookType:'xlsx'});
-
-  // --- 5. Şifreli ZIP oluştur ---
-  const password = 'NC' + Date.now().toString(36).toUpperCase().slice(-5) + Math.random().toString(36).slice(2,5).toUpperCase();
-  const fileName = 'natureco_uyeler_' + new Date().toISOString().slice(0,10) + '.xlsx';
-  
-  const zip = new JSZip();
-  zip.file(fileName, xlsxBytes);
-  // JSZip şifrelemeyi desteklemez — ZIP oluştur, şifreyi mesaj ile gönder
-  const zipBlob = await zip.generateAsync({
-    type:'blob',
-    compression:'DEFLATE',
-    compressionOptions:{level:9}
-  });
-
-  // --- 6. İndir ---
-  const url = URL.createObjectURL(zipBlob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'natureco_uyeler_' + new Date().toISOString().slice(0,10) + '_SIFRE_' + password + '.zip';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-
-  // --- 7. Şifreyi admin'e DM olarak gönder ---
-  try {
-    if(typeof dbRef === 'function' && window._cu) {
-      const msgKey = 'export_' + Date.now();
-      const adminNote = {
-        user: 'NatureBot',
-        text: '🔒 **Güvenli Dışa Aktarım**\n\n' +
-              '📁 ' + fileName + '\n' +
-              '👥 ' + list.length + ' üye\n' +
-              '📅 ' + new Date().toLocaleString('tr-TR') + '\n\n' +
-              '🔑 ZIP Şifresi: `' + password + '`\n\n' +
-              '_Bu mesaj yalnızca sana görünür._',
-        ts: Date.now(),
-        sys: false,
-        isBot: true
-      };
-      // Admin bildirimler yoluna yaz
-      await dbRef('adminNotifications/' + window._cu + '/' + msgKey).set(adminNote);
-      // Aynı zamanda kendine DM olarak gönder  
-      const dmRoom = [window._cu, window._cu].sort().join('_dm_');
-      await dbRef('msgs/' + dmRoom + '/' + msgKey).set(adminNote);
-    }
-  } catch(e2) { console.warn('Şifre bildirimi gönderilemedi:', e2); }
-
-  showToast('📥 ZIP indirildi! Şifre: ' + password + ' — Mesajlara bakın');
-  
-  // Şifreyi ekranda da göster
-  setTimeout(()=>{
-    const pw = document.createElement('div');
-    pw.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface2);border:2px solid var(--accent);border-radius:16px;padding:24px 32px;z-index:999999;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.8);max-width:90vw;';
-    pw.innerHTML = [
-      '<div style="font-size:1rem;font-weight:700;color:var(--text-hi);margin-bottom:12px;">🔑 ZIP Dosya Şifresi</div>',
-      '<div style="font-family:monospace;font-size:1.5rem;font-weight:900;color:var(--accent);letter-spacing:3px;background:var(--surface);padding:12px 20px;border-radius:10px;margin-bottom:12px;">' + password + '</div>',
-      '<div style="font-size:.75rem;color:var(--muted);margin-bottom:14px;">Bu şifre mesajlarınıza da gönderildi.</div>',
-      '<button id="_pwCopyBtn" style="padding:8px 18px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;margin-right:8px;">📋 Kopyala</button>',
-      '<button id="_pwCloseBtn" style="padding:8px 18px;background:var(--surface);color:var(--muted);border:1px solid var(--border);border-radius:8px;cursor:pointer;">Kapat</button>'
-    ].join('');
-    document.body.appendChild(pw);
-    document.getElementById('_pwCopyBtn').onclick = function(){ navigator.clipboard.writeText(password).then(()=>{ this.textContent='✅ Kopyalandı'; }); };
-    document.getElementById('_pwCloseBtn').onclick = function(){ pw.remove(); };
-  }, 500);
 }
 
 function onUserCheckChange(){
@@ -322,14 +186,10 @@ function loadAdminMsgs(){
       let h=`<div class="admin-section">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
           <div class="admin-sec-title" style="margin:0">Son Mesajlar (${allMsgs.length})</div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <input id="adminMsgSearch" placeholder="Ara..." oninput="adminFilterMsgs(this.value)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:5px 10px;color:var(--text-hi);font-size:.78rem;outline:none;width:160px;">
-            <button class="a-btn red" onclick="adminClearAllMsgs()">Tümünü Sil</button>
-          </div>
+          <button class="a-btn red" onclick="adminClearAllMsgs()">🗑️ Tümünü Sil</button>
         </div>
-        <div class="admin-card" id="adminMsgList">`;
-      const _shownMsgs = allMsgs.slice(0, 100);
-      _shownMsgs.forEach(m=>{
+        <div class="admin-card">`;
+      allMsgs.forEach(m=>{
         const txt=m.file?`📎 ${m.file.name||'Dosya'}`:m.text;
         h+=`<div class="admin-row" style="align-items:flex-start">
           <div class="admin-row-av" style="background:${strColor(m.user)};flex-shrink:0">${initials(m.user)}</div>
@@ -347,7 +207,6 @@ function loadAdminMsgs(){
           </div>
         </div>`;
       });
-      if(allMsgs.length > 100) h += `<div style="text-align:center;padding:14px;"><button class="a-btn" style="background:var(--surface2);" onclick="adminTab('msgs')">Sadece ilk 100 mesaj gösteriliyor. Tümü için arama kullanın.</button></div>`;
       h+='</div></div>';
       body.innerHTML=h;
     }
@@ -359,16 +218,6 @@ async function adminDeleteMsgFromPanel(roomId,key){
     await adminRestDelete('msgs/'+roomId+'/'+key);
     showToast('Mesaj silindi.');loadAdminMsgs();
   }catch(e){showToast('Hata.');}
-}
-
-function adminFilterMsgs(q){
-  const list = document.getElementById('adminMsgList');
-  if(!list) return;
-  const term = (q||'').toLowerCase().trim();
-  list.querySelectorAll('.admin-row').forEach(row=>{
-    const text = row.textContent.toLowerCase();
-    row.style.display = (!term || text.includes(term)) ? '' : 'none';
-  });
 }
 
 
@@ -1045,16 +894,28 @@ async function adminCreateUserSubmit() {
     if(existing){ if(res) res.textContent='❌ Bu kullanıcı adı zaten alınmış.'; return; }
     // Login sistemi hashStr(pass+user) kullanıyor — aynı formatta kaydet
     const passwordHash = await hashStr(password + username);
+    // Login icin GEREKLI tum alanlar — banned/isAdmin olmadan giris reddedilir
+    const isAdminRole = (role === 'admin');
     const userData = {
-      username, role,
+      username,
       passwordHash,
+      role,
+      isAdmin:   isAdminRole,
+      banned:    false,
       createdAt: Date.now(),
       createdBy: _cu,
-      online: false,
-      avatar: '', bio: ''
+      lastSeen:  Date.now(),
+      online:    false,
+      avatar:    '',
+      bio:       '',
+      origin:    'Belirtilmemis'
     };
     await adminRestSet('users/'+username, userData);
-    if(res) res.innerHTML = '<span style="color:var(--green)">✅ '+username+' kullanıcısı oluşturuldu!</span>';
+    // Admin rolundeyse admins/ tablosuna da kaydet
+    if(isAdminRole){
+      await adminRestSet('admins/'+username, true).catch(()=>{});
+    }
+    if(res) res.innerHTML = '<span style="color:var(--green)">✅ <b>'+username+'</b> olusturuldu! Sifre: <b>'+password+'</b></span>';
     document.getElementById('cu_username').value='';
     document.getElementById('cu_password').value='';
   } catch(e) {
@@ -1065,154 +926,47 @@ async function adminCreateUserSubmit() {
 
 /* ── Admin: Davet Linkleri ── */
 
-/* ══════════════════════════════════════════════
-   🔗 DAVET LİNKLERİ — Token Tabanlı Sistem
-══════════════════════════════════════════════ */
-
 window._renderInviteLinks = async function(body) {
   body.innerHTML = '<div class="ld"><span></span><span></span><span></span></div>';
-  const [invites, settings] = await Promise.all([
-    adminRestGet('invites').catch(()=>null)||{},
-    adminRestGet('settings').catch(()=>null)||{}
-  ]);
+  const settings = await adminRestGet('settings').catch(()=>null)||{};
+  const inviteCode = settings.inviteCode || '';
   const regOpen = (settings.registration||'open') === 'open';
-  const baseUrl = window.location.origin + window.location.pathname + '#inv_';
+  const baseUrl = window.location.origin + window.location.pathname;
 
-  const now = Date.now();
-  const invList = Object.entries(invites||{}).map(([token, inv])=>({token,...inv}))
-    .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-
-  // Status hesapla
-  function invStatus(inv) {
-    if(inv.expiresAt && now > inv.expiresAt) return {label:'Süresi Doldu', color:'var(--red)', icon:'🔴'};
-    if(inv.maxUses && (inv.usedCount||0) >= inv.maxUses) return {label:'Doldu', color:'#e67e22', icon:'🟠'};
-    return {label:'Aktif', color:'var(--green)', icon:'🟢'};
-  }
-
-  let h = '<div class="admin-section">';
-  h += `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
-    <div class="admin-sec-title" style="margin:0">🔗 Davet Linkleri</div>
-    <div style="display:flex;gap:6px;align-items:center;">
-      <div style="font-size:.78rem;padding:5px 10px;border-radius:8px;background:${regOpen?'rgba(46,204,113,.15)':'rgba(224,85,85,.15)'};color:${regOpen?'var(--green)':'var(--red)'};">
-        ${regOpen?'🟢 Kayıt Açık':'🔴 Kayıt Kapalı'}
-      </div>
-      <button onclick="adminShowCreateInvite()" style="padding:8px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;">➕ Yeni Link</button>
-    </div>
-  </div>`;
-
-  // Yeni link oluşturma formu (gizli)
-  h += `<div id="invCreateForm" style="display:none;background:var(--surface);border:1px solid var(--accent);border-radius:14px;padding:16px;margin-bottom:14px;">
-    <div style="font-size:.88rem;font-weight:700;color:var(--text-hi);margin-bottom:12px;">➕ Yeni Davet Linki Oluştur</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
-      <div>
-        <div style="font-size:.7rem;color:var(--muted);margin-bottom:4px;">Max Kullanım Sayısı</div>
-        <input id="inv_maxUses" class="admin-inp" type="number" value="10" min="1" max="9999" style="margin-bottom:0;">
-      </div>
-      <div>
-        <div style="font-size:.7rem;color:var(--muted);margin-bottom:4px;">Geçerlilik (gün)</div>
-        <input id="inv_days" class="admin-inp" type="number" value="60" min="1" max="3650" style="margin-bottom:0;">
-      </div>
-    </div>
-    <div style="margin-bottom:10px;">
-      <div style="font-size:.7rem;color:var(--muted);margin-bottom:4px;">Açıklama (isteğe bağlı)</div>
-      <input id="inv_note" class="admin-inp" placeholder="Örn: Instagram paylaşımı için" style="margin-bottom:0;">
-    </div>
-    <div style="display:flex;gap:8px;">
-      <button onclick="adminCreateInviteLink()" style="flex:1;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;">✅ Oluştur</button>
-      <button onclick="document.getElementById('invCreateForm').style.display='none'" style="padding:10px 14px;background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:8px;cursor:pointer;">İptal</button>
-    </div>
-  </div>`;
-
-  if(!invList.length) {
-    h += '<div class="admin-card" style="padding:20px;text-align:center;color:var(--muted);font-size:.85rem;">Henüz davet linki yok. Yeni Link butonuna bas.</div>';
-  } else {
-    h += '<div style="display:flex;flex-direction:column;gap:10px;">';
-    invList.forEach(inv => {
-      const st = invStatus(inv);
-      const used = inv.usedCount||0;
-      const max = inv.maxUses||'∞';
-      const exp = inv.expiresAt ? new Date(inv.expiresAt).toLocaleDateString('tr-TR') : 'Süresiz';
-      const created = inv.createdAt ? new Date(inv.createdAt).toLocaleDateString('tr-TR') : '?';
-      const link = baseUrl + inv.token;
-      const uses = Object.values(inv.uses||{});
-
-      h += `<div class="admin-card" style="padding:14px;">
-        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;">
-          <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
-              <span style="font-size:.78rem;font-weight:900;color:${st.color};background:${st.color}22;padding:3px 8px;border-radius:6px;">${st.icon} ${st.label}</span>
-              <span style="font-size:.72rem;color:var(--muted);">👥 ${used}/${max} kullanım · 📅 ${exp} · 🗓 ${created}</span>
-            </div>
-            ${inv.note?`<div style="font-size:.75rem;color:var(--muted);margin-bottom:6px;">📝 ${esc(inv.note)}</div>`:''}
-            <div style="background:var(--surface2);border-radius:7px;padding:7px 10px;font-family:monospace;font-size:.72rem;color:var(--text);word-break:break-all;">${link}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;">
-            <button onclick="navigator.clipboard.writeText('${link}').then(()=>showToast('📋 Kopyalandı!'))" style="padding:7px 12px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-size:.75rem;font-weight:700;cursor:pointer;">📋 Kopyala</button>
-            <button onclick="adminShowInviteUses('${inv.token}')" style="padding:7px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:7px;font-size:.75rem;cursor:pointer;">👥 Kayıtlar (${used})</button>
-            <button onclick="if(confirm('Bu davet linki silinsin mi?'))adminRestDelete('invites/${inv.token}').then(()=>{showToast('Silindi.');adminTab('invite');})" style="padding:7px 12px;background:rgba(224,85,85,.15);color:var(--red);border:1px solid rgba(224,85,85,.3);border-radius:7px;font-size:.75rem;cursor:pointer;">🗑️ Sil</button>
+  body.innerHTML = `
+    <div class="admin-section">
+      <div class="admin-sec-title">🔗 Davet Linkleri</div>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:520px;">
+        
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">📋 Kayıt Durumu</div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:10px;height:10px;border-radius:50%;background:${regOpen?'var(--green)':'var(--red)'}"></div>
+            <span style="font-size:.88rem;font-weight:700;color:var(--text-hi);">${regOpen?'Kayıt Açık':'Kayıt Kapalı'}</span>
           </div>
         </div>
-        <div id="invUses_${inv.token}" style="display:none;"></div>
-      </div>`;
-    });
-    h += '</div>';
-  }
-  h += '</div>';
-  body.innerHTML = h;
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">🔑 Davet Kodu</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input class="admin-inp" id="inv_code" value="${inviteCode}" placeholder="Davet kodu (boş = kod gerekmez)" style="flex:1;">
+            <button onclick="adminSaveInviteCode()" style="padding:9px 14px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap;">Kaydet</button>
+          </div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:6px;">Boş bırakılırsa davet kodu sorulmaz.</div>
+        </div>
+
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px;">🌐 Davet Linki</div>
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.8rem;color:var(--text);word-break:break-all;font-family:monospace;" id="inv_link_display">
+            ${inviteCode ? baseUrl+'?invite='+inviteCode : baseUrl}
+          </div>
+          <button onclick="adminCopyInviteLink()" style="margin-top:8px;padding:8px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;">📋 Kopyala</button>
+        </div>
+
+        <div id="inv_result" style="font-size:.82rem;color:var(--muted);"></div>
+      </div>
+    </div>`;
 };
-
-function adminShowCreateInvite() {
-  const f = document.getElementById('invCreateForm');
-  if(f) f.style.display = f.style.display==='none' ? 'block' : 'none';
-}
-
-async function adminCreateInviteLink() {
-  const maxUses = parseInt(document.getElementById('inv_maxUses')?.value)||10;
-  const days = parseInt(document.getElementById('inv_days')?.value)||60;
-  const note = (document.getElementById('inv_note')?.value||'').trim();
-  const token = Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-  const expiresAt = Date.now() + days * 24 * 60 * 60 * 1000;
-  try {
-    await adminRestSet('invites/' + token, {
-      token, maxUses, expiresAt, note: note||null,
-      createdAt: Date.now(), createdBy: _cu, usedCount: 0, uses: {}
-    });
-    showToast('✅ Davet linki oluşturuldu!');
-    adminTab('invite');
-  } catch(e) { showToast('❌ Hata: ' + (e.message||e)); }
-}
-
-async function adminShowInviteUses(token) {
-  const el = document.getElementById('invUses_' + token);
-  if(!el) return;
-  if(el.style.display !== 'none') { el.style.display='none'; return; }
-  el.innerHTML = '<div class="ld"><span></span><span></span><span></span></div>';
-  el.style.display = 'block';
-  try {
-    const inv = await adminRestGet('invites/' + token).catch(()=>null)||{};
-    const uses = Object.values(inv.uses||{}).sort((a,b)=>b.joinedAt-a.joinedAt);
-    if(!uses.length) { el.innerHTML='<div style="color:var(--muted);font-size:.78rem;padding:8px;">Henüz kayıt yok.</div>'; return; }
-    let h = `<div style="border-top:1px solid var(--border);margin-top:10px;padding-top:10px;">
-      <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">Kayıt Olanlar</div>
-      <div style="display:flex;flex-direction:column;gap:6px;">`;
-    uses.forEach(u => {
-      h += `<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--surface2);border-radius:8px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:${strColor(u.username||'?')};display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:#fff;flex-shrink:0;">${initials(u.username||'?')}</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);">${esc(u.username||'?')}
-            ${u.userId?`<span style="font-family:monospace;font-size:.65rem;color:var(--accent);margin-left:4px;">🆔 ${esc(u.userId)}</span>`:''}
-          </div>
-          <div style="font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-            📧 ${esc(u.email||'?')} · 🌍 ${esc(u.origin||'?')} · 🌐 ${esc(u.ip||'?')}
-          </div>
-          <div style="font-size:.68rem;color:var(--muted);">📅 ${u.joinedAt?new Date(u.joinedAt).toLocaleString('tr-TR'):'?'}</div>
-        </div>
-      </div>`;
-    });
-    h += '</div></div>';
-    el.innerHTML = h;
-  } catch(e) { el.innerHTML = '<div style="color:var(--red);font-size:.78rem;padding:8px;">Yüklenemedi.</div>'; }
-}
 
 async function adminSaveInviteCode() {
   const code = (document.getElementById('inv_code')?.value||'').trim();
@@ -1320,6 +1074,23 @@ async function loadAdminSettings(){
     });
     html += '<button class="a-btn blue" style="width:100%;margin-top:4px;" onclick="execExportFromSettings()">⬇️ Yedek Al</button></div></div>';
 
+
+    // ── Manuel Kullanıcı Hash Aracı ──
+    html += '<div class="admin-card" style="margin-top:18px">';
+    html += '<div class="admin-sec-title" style="margin-bottom:10px">🔑 Manuel Kullanıcı Hash Aracı</div>';
+    html += '<div style="font-size:12px;color:var(--muted);margin-bottom:10px">Firebase\'e manuel kullanıcı eklerken doğru <code>passwordHash</code> değerini üretir.</div>';
+    html += '<div style="display:grid;gap:8px">';
+    html += '<input class="admin-inp" id="hashToolUser" placeholder="Kullanıcı adı (örn: İnci)" />';
+    html += '<input class="admin-inp" id="hashToolPass" type="password" placeholder="Şifre" />';
+    html += '<button class="a-btn" onclick="generateUserHash()" style="background:var(--accent)">🔐 Hash Üret</button>';
+    html += '</div>';
+    html += '<div id="hashToolResult" style="margin-top:10px;display:none">';
+    html += '<div style="font-size:11px;color:var(--muted);margin-bottom:4px">passwordHash (Firebase\'e kopyala):</div>';
+    html += '<div id="hashToolValue" style="font-family:monospace;font-size:11px;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;word-break:break-all;cursor:pointer;color:var(--green)" onclick="copyHashValue()" title="Kopyalamak için tıkla"></div>';
+    html += '<div style="font-size:11px;color:var(--muted);margin-top:6px">☝️ Tıklayarak kopyala</div>';
+    html += '</div>';
+    html += '</div>';
+
     body.innerHTML = html;
   }}catch(e){ body.innerHTML='<p style="color:var(--muted);padding:20px">Yüklenemedi.</p>'; }
 }
@@ -1336,6 +1107,29 @@ async function execExportFromSettings(){
   showToast('✅ Yedek indirildi!');
 }
 
+async function generateUserHash(){
+  const user = (document.getElementById('hashToolUser')?.value||'').trim();
+  const pass = document.getElementById('hashToolPass')?.value||'';
+  if(!user){ showToast('❌ Kullanıcı adı girin'); return; }
+  if(!pass){ showToast('❌ Şifre girin'); return; }
+  const hash = await hashStr(pass + user);
+  const result = document.getElementById('hashToolResult');
+  const value = document.getElementById('hashToolValue');
+  if(result && value){
+    value.textContent = hash;
+    result.style.display = 'block';
+  }
+}
+function copyHashValue(){
+  const val = document.getElementById('hashToolValue')?.textContent||'';
+  if(!val) return;
+  navigator.clipboard.writeText(val).then(()=>showToast('✅ Hash kopyalandı!')).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = val; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('✅ Hash kopyalandı!');
+  });
+}
 async function toggleRegistration(){
   const btn = document.getElementById('regToggleBtn');
   if(!btn) return;
@@ -1941,321 +1735,3 @@ function clearActivityLogs(){
   _db.ref('activityLog').remove().then(()=>{ showToast('Loglar temizlendi.'); loadAdminActivityFull(); });
 }
 
-
-/* ══════════════════════════════════════════════
-   🤖 ADMIN: NatureBot Moderatör Ayarları
-══════════════════════════════════════════════ */
-
-async function loadAdminNatureBot() {
-  const body = document.getElementById('adminBody');
-  body.innerHTML = '<div class="ld"><span></span><span></span><span></span></div>';
-
-  const [_bs, _mutes, _modLogs] = await Promise.all([
-    adminRestGet('botSettings').catch(()=>null),
-    adminRestGet('mutes').catch(()=>null),
-    adminRestGet('modLogs').catch(()=>null)
-  ]);
-  const botSettings = _bs || {};
-  const mutes = _mutes || {};
-  const modLogs = _modLogs || {};
-
-  const ms = botSettings.modSettings || {};
-  const bw = (botSettings.badWords||[]).join('\n');
-  const now = Date.now();
-
-  // Toggle helper
-  const tog = (key, label, def=false) => {
-    const val = ms[key] !== undefined ? ms[key] : def;
-    return `<label style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface2);border-radius:10px;cursor:pointer;">
-      <span style="font-size:.85rem;color:var(--text-hi);">${label}</span>
-      <input type="checkbox" id="bms_${key}" ${val?'checked':''} style="width:18px;height:18px;cursor:pointer;">
-    </label>`;
-  };
-
-  const numInp = (key, label, def, min=0, max=9999) => {
-    const val = ms[key] !== undefined ? ms[key] : def;
-    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface2);border-radius:10px;">
-      <span style="font-size:.85rem;color:var(--text-hi);">${label}</span>
-      <input type="number" id="bms_${key}" value="${val}" min="${min}" max="${max}" style="width:80px;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 8px;color:var(--text);font-size:.82rem;text-align:center;">
-    </div>`;
-  };
-
-  // Aktif muteler
-  const activeMutes = Object.entries(mutes).filter(([,d])=>d&&d.expiresAt&&now<d.expiresAt);
-
-  // Son mod logları
-  const logArr = Object.values(modLogs).sort((a,b)=>b.ts-a.ts).slice(0,30);
-  const actionColor = {ban:'var(--red)',kick:'#e67e22',mute:'var(--accent)',warn:'#f0c040'};
-
-  let h = '<div class="admin-section">';
-  h += '<div class="admin-sec-title">🤖 NatureBot Moderatör Paneli</div>';
-
-  // ── Küfür Ayarları
-  h += `<div class="admin-card" style="padding:14px;margin-bottom:10px;">
-    <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);margin-bottom:10px;">🚫 Küfür / Yasaklı Kelime</div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      ${tog('deleteBadWord','Küfürlü mesajı otomatik sil', true)}
-      ${tog('autoWarnBadWord','Küfür yazana uyarı gönder', true)}
-      ${tog('autoKickBadWord','Küfür yazanı 30dk uzaklaştır', false)}
-      ${tog('autoBanBadWord','Küfür yazanı otomatik banla', false)}
-    </div>
-  </div>`;
-
-  // ── Spam Ayarları
-  h += `<div class="admin-card" style="padding:14px;margin-bottom:10px;">
-    <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);margin-bottom:10px;">📨 Spam Koruması</div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      ${tog('autoMuteSpam','Spam yapanı otomatik sustur', true)}
-      ${numInp('spamThreshold','Eşik (kaç mesaj)', 5, 2, 20)}
-      ${numInp('spamWindow','Zaman penceresi (ms)', 6000, 1000, 30000)}
-      ${numInp('spamMuteDuration','Susturma süresi (dk)', 60, 1, 1440)}
-    </div>
-  </div>`;
-
-  // ── Karşılama
-  h += `<div class="admin-card" style="padding:14px;margin-bottom:10px;">
-    <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);margin-bottom:10px;">👋 Yeni Üye Karşılama</div>
-    <div style="display:flex;flex-direction:column;gap:6px;">
-      ${tog('welcomeEnabled','Yeni üyeleri karşıla', true)}
-      <div>
-        <div style="font-size:.7rem;color:var(--muted);margin-bottom:4px;">{user} = kullanıcı adı</div>
-        <input class="admin-inp" id="bms_welcomeMsg" value="${esc(ms.welcomeMsg||'👋 {user} aramıza katıldı! Hoş geldin 🌿')}" style="margin-bottom:0;">
-      </div>
-    </div>
-  </div>`;
-
-  // ── Yasaklı Kelimeler Listesi
-  h += `<div class="admin-card" style="padding:14px;margin-bottom:10px;">
-    <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);margin-bottom:8px;">📋 Yasaklı Kelimeler</div>
-    <div style="font-size:.72rem;color:var(--muted);margin-bottom:8px;">Her satıra bir kelime yaz. Büyük/küçük harf fark etmez.</div>
-    <textarea id="bms_badWords" style="width:100%;min-height:120px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px;color:var(--text);font-size:.78rem;resize:vertical;box-sizing:border-box;">${bw}</textarea>
-  </div>`;
-
-  // ── Kaydet
-  h += `<button onclick="saveAdminBotSettings()" style="width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-weight:900;font-size:.9rem;cursor:pointer;margin-bottom:14px;">💾 Bot Ayarlarını Kaydet</button>`;
-
-  // ── Aktif Muteler
-  h += `<div class="admin-card" style="padding:14px;margin-bottom:10px;">
-    <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);margin-bottom:10px;">🔇 Aktif Susturmalar (${activeMutes.length})</div>`;
-  if(!activeMutes.length) {
-    h += '<div style="color:var(--muted);font-size:.78rem;">Aktif susturma yok.</div>';
-  } else {
-    activeMutes.forEach(([user, data]) => {
-      const remaining = Math.ceil((data.expiresAt - now)/60000);
-      h += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
-        <div>
-          <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);">${esc(user)}</div>
-          <div style="font-size:.7rem;color:var(--red);">⏱ ${remaining} dk kaldı</div>
-        </div>
-        <button onclick="adminRestDelete('mutes/${esc(user)}').then(()=>{showToast('✅ Susturma kaldırıldı.');loadAdminNatureBot();})" class="a-btn green" style="font-size:.72rem;">🔊 Kaldır</button>
-      </div>`;
-    });
-  }
-  h += '</div>';
-
-  // ── Mod Logları
-  h += `<div class="admin-card" style="padding:14px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-      <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);">📋 Mod Logları (Son 30)</div>
-      <button onclick="if(confirm('Tüm mod logları silinsin mi?'))adminRestDelete('modLogs').then(()=>{showToast('Loglar temizlendi.');loadAdminNatureBot();})" class="a-btn red" style="font-size:.72rem;padding:5px 10px;">🗑️ Temizle</button>
-    </div>`;
-  if(!logArr.length) {
-    h += '<div style="color:var(--muted);font-size:.78rem;">Log kaydı yok.</div>';
-  } else {
-    const aIcon = {ban:'🚫',kick:'🦶',mute:'🔇',warn:'⚠️'};
-    logArr.forEach(log => {
-      h += `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);">
-        <div style="font-size:1.1rem;flex-shrink:0;">${aIcon[log.action]||'📌'}</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:.82rem;color:var(--text-hi);">
-            <span style="color:${actionColor[log.action]||'var(--text)'};font-weight:700;">${(log.action||'').toUpperCase()}</span>
-            → <span style="font-weight:700;">${esc(log.target||'?')}</span>
-            ${log.detail?`<span style="color:var(--muted);"> · ${esc(log.detail)}</span>`:''}
-          </div>
-          <div style="font-size:.7rem;color:var(--muted);">${log.ts?new Date(log.ts).toLocaleString('tr-TR'):'?'} · #${esc(log.room||'?')}</div>
-        </div>
-      </div>`;
-    });
-  }
-  h += '</div></div>';
-
-  body.innerHTML = h;
-}
-
-async function saveAdminBotSettings() {
-  const g = id => document.getElementById(id);
-  const toggleKeys = ['deleteBadWord','autoWarnBadWord','autoKickBadWord','autoBanBadWord','autoMuteSpam','welcomeEnabled'];
-  const numKeys = ['spamThreshold','spamWindow','spamMuteDuration'];
-
-  const modSettings = {};
-  toggleKeys.forEach(k => { const el=g('bms_'+k); if(el) modSettings[k]=el.checked; });
-  numKeys.forEach(k => { const el=g('bms_'+k); if(el) modSettings[k]=parseInt(el.value)||0; });
-  const wm = g('bms_welcomeMsg'); if(wm) modSettings.welcomeMsg = wm.value;
-
-  const bwText = g('bms_badWords')?.value||'';
-  const badWords = bwText.split('\n').map(s=>s.trim()).filter(Boolean);
-
-  try {
-    await adminRestSet('botSettings/modSettings', modSettings);
-    await adminRestSet('botSettings/badWords', badWords);
-    showToast('✅ Bot ayarları kaydedildi!');
-    // Çalışan bota yeni ayarları bildir
-    if(window._natureBotMod?.reload) window._natureBotMod.reload();
-  } catch(e) { showToast('❌ Hata: ' + (e.message||e)); }
-}
-
-/* ═══════════════════════════════════
-   EKSİK ADMIN SEKMELERİ
-═══════════════════════════════════ */
-
-async function loadAdminStats() {
-  const b = document.getElementById('adminBody');
-  if(!b) return;
-  b.innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">Yükleniyor...</div>';
-
-  try {
-    const [usersSnap, roomsSnap, msgsSnap, forumSnap] = await Promise.all([
-      adminRestGet('users'),
-      adminRestGet('rooms'),
-      adminRestGet('msgs'),
-      adminRestGet('forum'),
-    ]);
-
-    const users  = usersSnap  || {};
-    const rooms  = roomsSnap  || {};
-    const msgs   = msgsSnap   || {};
-    const forum  = forumSnap  || {};
-
-    const uCount = Object.keys(users).length;
-    const rCount = Object.keys(rooms).length;
-    const mCount = Object.values(msgs).reduce((s,r)=>s+Object.keys(r||{}).length,0);
-    const fCount = Object.keys(forum).length;
-
-    // Son 7 gün aktif kullanıcı
-    const weekAgo = Date.now() - 7*24*60*60*1000;
-    const activeWeek = Object.values(users).filter(u=>u&&u.lastSeen&&u.lastSeen>weekAgo).length;
-
-    // Sunucu başına dağılım
-    const byServer = {};
-    Object.values(users).forEach(u=>{ if(u&&u._ws){ byServer[u._ws]=(byServer[u._ws]||0)+1; } });
-
-    b.innerHTML = `
-      <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        ${[
-          {label:'Toplam Üye',   val:uCount,      icon:'👤', color:'#5b9bd5'},
-          {label:'Aktif (7g)',   val:activeWeek,  icon:'🟢', color:'#2ecc71'},
-          {label:'Odalar',       val:rCount,      icon:'💬', color:'#9b72ff'},
-          {label:'Mesajlar',     val:mCount,      icon:'📨', color:'#f5a623'},
-          {label:'Forum',        val:fCount,      icon:'📋', color:'#e05555'},
-        ].map(s=>`
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
-            <div style="font-size:1.6rem;margin-bottom:4px;">${s.icon}</div>
-            <div style="font-size:1.4rem;font-weight:900;color:${s.color};">${s.val.toLocaleString('tr-TR')}</div>
-            <div style="font-size:.72rem;color:var(--muted);margin-top:2px;">${s.label}</div>
-          </div>`).join('')}
-      </div>
-      <div style="padding:0 20px 20px;">
-        <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Sunucu Dağılımı</div>
-        ${Object.entries(byServer).map(([s,n])=>`
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-            <div style="font-size:.82rem;color:var(--text-hi);min-width:80px;">${esc(s)}</div>
-            <div style="flex:1;height:8px;background:var(--surface);border-radius:4px;overflow:hidden;">
-              <div style="height:100%;width:${Math.round(n/uCount*100)}%;background:var(--accent);border-radius:4px;transition:width .6s;"></div>
-            </div>
-            <div style="font-size:.75rem;color:var(--muted);min-width:30px;text-align:right;">${n}</div>
-          </div>`).join('') || '<div style="color:var(--muted);font-size:.82rem;">Veri yok</div>'}
-      </div>`;
-  } catch(e) {
-    b.innerHTML = `<div style="color:#e05555;padding:20px;">Hata: ${e.message||e}</div>`;
-  }
-}
-
-async function loadAdminReports() {
-  const b = document.getElementById('adminBody');
-  if(!b) return;
-  b.innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">Yükleniyor...</div>';
-
-  try {
-    const data = await adminRestGet('reports') || {};
-    const list = Object.entries(data).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0));
-
-    if(!list.length){
-      b.innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">📭 Henüz şikayet yok</div>';
-      return;
-    }
-
-    b.innerHTML = `<div style="padding:16px;">` +
-      list.map(([id,r])=>`
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <div style="font-size:.8rem;font-weight:700;color:var(--text-hi);">
-              <span style="color:#e05555;">${esc(r.reporter||'?')}</span> → <span style="color:var(--accent);">${esc(r.reported||'?')}</span>
-            </div>
-            <div style="font-size:.68rem;color:var(--muted);">${r.ts?new Date(r.ts).toLocaleDateString('tr-TR'):''}</div>
-          </div>
-          <div style="font-size:.78rem;color:var(--text);margin-bottom:8px;">${esc(r.reason||'Sebep belirtilmedi')}</div>
-          <div style="display:flex;gap:6px;">
-            <button onclick="adminMuteUser('${esc(r.reported||'')}',60)" style="font-size:.7rem;padding:4px 10px;background:rgba(245,166,35,.15);border:1px solid rgba(245,166,35,.3);border-radius:6px;color:#f5a623;cursor:pointer;">60dk Sustur</button>
-            <button onclick="adminBanUser('${esc(r.reported||'')}')" style="font-size:.7rem;padding:4px 10px;background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.3);border-radius:6px;color:#e05555;cursor:pointer;">Banla</button>
-            <button onclick="adminRestDelete('reports/${id}').then(()=>loadAdminReports())" style="font-size:.7rem;padding:4px 10px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:6px;color:var(--muted);cursor:pointer;">Kapat</button>
-          </div>
-        </div>`).join('') + `</div>`;
-  } catch(e) {
-    b.innerHTML = `<div style="color:#e05555;padding:20px;">Hata: ${e.message||e}</div>`;
-  }
-}
-
-async function loadAdminGrowthChart() {
-  const b = document.getElementById('adminBody');
-  if(!b) return;
-  b.innerHTML = '<div style="color:var(--muted);padding:40px;text-align:center;">Yükleniyor...</div>';
-
-  try {
-    const users = await adminRestGet('users') || {};
-    // Son 30 gün — gün başına kayıt sayısı
-    const days = 30;
-    const now = Date.now();
-    const counts = Array(days).fill(0);
-    Object.values(users).forEach(u=>{
-      if(!u||!u.createdAt) return;
-      const diff = Math.floor((now - u.createdAt) / (24*60*60*1000));
-      if(diff>=0 && diff<days) counts[days-1-diff]++;
-    });
-    const maxCount = Math.max(...counts, 1);
-    const labels = Array.from({length:days},(_,i)=>{
-      const d = new Date(now - (days-1-i)*24*60*60*1000);
-      return i % 5 === 0 ? d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'}) : '';
-    });
-
-    b.innerHTML = `
-      <div style="padding:20px;">
-        <div style="font-size:.85rem;font-weight:900;color:var(--text-hi);margin-bottom:16px;">📈 Son 30 Gün — Yeni Kayıt</div>
-        <div style="display:flex;align-items:flex-end;gap:3px;height:120px;border-bottom:1px solid var(--border);padding-bottom:4px;">
-          ${counts.map((c,i)=>`
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
-              ${c>0?`<div style="font-size:.55rem;color:var(--accent);">${c}</div>`:''}
-              <div title="${labels[i]||''}" style="width:100%;background:var(--accent);border-radius:3px 3px 0 0;height:${Math.round(c/maxCount*100)}px;min-height:${c>0?'3px':'0'};opacity:.85;transition:height .3s;"></div>
-            </div>`).join('')}
-        </div>
-        <div style="display:flex;justify-content:space-between;margin-top:4px;">
-          ${labels.filter(Boolean).map(l=>`<div style="font-size:.6rem;color:var(--muted);">${l}</div>`).join('')}
-        </div>
-        <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;">
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
-            <div style="font-size:1.2rem;font-weight:900;color:var(--accent);">${counts.slice(-7).reduce((s,n)=>s+n,0)}</div>
-            <div style="font-size:.7rem;color:var(--muted);">Son 7 gün</div>
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
-            <div style="font-size:1.2rem;font-weight:900;color:var(--accent);">${counts.reduce((s,n)=>s+n,0)}</div>
-            <div style="font-size:.7rem;color:var(--muted);">Son 30 gün</div>
-          </div>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;">
-            <div style="font-size:1.2rem;font-weight:900;color:var(--accent);">${Object.keys(users).length}</div>
-            <div style="font-size:.7rem;color:var(--muted);">Toplam üye</div>
-          </div>
-        </div>
-      </div>`;
-  } catch(e) {
-    b.innerHTML = `<div style="color:#e05555;padding:20px;">Hata: ${e.message||e}</div>`;
-  }
-}
