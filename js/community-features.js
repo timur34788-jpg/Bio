@@ -7,7 +7,7 @@
    1. ETKİNLİKLER (Discord Events)
 ══════════════════════════ */
 function openEventsModal(){
-  dbRef('events/'+(_currentServer||'main')).orderByChild('startAt').once('value',snap=>{
+  dbRef('events/'+(window._currentServer||'main')).orderByChild('startAt').once('value',snap=>{
     const events=snap.val()||{};
     let m=document.getElementById('eventsModal');
     if(!m){m=document.createElement('div');m.id='eventsModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
@@ -74,10 +74,10 @@ function openCreateEvent(){
 async function createEvent(){
   const title=document.getElementById('evtTitle').value.trim(); const startAt=document.getElementById('evtStart').value;
   if(!title||!startAt) return showToast('Başlık ve başlangıç tarihi gerekli');
-  await dbRef('events/'+(_currentServer||'main')+'/evt_'+Date.now()).set({ title, desc:document.getElementById('evtDesc').value, startAt:new Date(startAt).getTime(), endAt:document.getElementById('evtEnd').value?new Date(document.getElementById('evtEnd').value).getTime():null, color:document.getElementById('evtColor').value, icon:document.getElementById('evtIconPrev').textContent, interested:{}, by:_cu, at:Date.now() });
+  await dbRef('events/'+(window._currentServer||'main')+'/evt_'+Date.now()).set({ title, desc:document.getElementById('evtDesc').value, startAt:new Date(startAt).getTime(), endAt:document.getElementById('evtEnd').value?new Date(document.getElementById('evtEnd').value).getTime():null, color:document.getElementById('evtColor').value, icon:document.getElementById('evtIconPrev').textContent, interested:{}, by:_cu, at:Date.now() });
   document.getElementById('createEventModal').style.display='none'; openEventsModal(); showToast('📅 Etkinlik oluşturuldu!');
 }
-async function toggleEventInterest(id){const r=dbRef('events/'+(_currentServer||'main')+'/'+id+'/interested/'+_cu);const s=await r.once('value');if(s.val())await r.remove();else await r.set(true);openEventsModal();}
+async function toggleEventInterest(id){const r=dbRef('events/'+(window._currentServer||'main')+'/'+id+'/interested/'+_cu);const s=await r.once('value');if(s.val())await r.remove();else await r.set(true);openEventsModal();}
 
 /* ══════════════════════════
    2. ÖVGÜ / TAKDİR (Teams Praise)
@@ -119,12 +119,12 @@ async function sendPraise(){
   const badge=BADGES.find(b=>b.id===bId);
   const id='praise_'+Date.now();
   const isPublic=document.getElementById('praisePublic').checked;
-  await dbRef('praise/'+(_currentServer||'main')+'/'+id).set({from:_cu,fromName:_cName||_cu,toUser,badge,msg:document.getElementById('praiseMsg').value,public:isPublic,at:Date.now()});
+  await dbRef('praise/'+(window._currentServer||'main')+'/'+id).set({from:_cu,fromName:_cName||_cu,toUser,badge,msg:document.getElementById('praiseMsg').value,public:isPublic,at:Date.now()});
   if(isPublic){const rid=window._deskRoom||window._cRoom;if(rid)await dbRef('msgs/'+rid).push({user:_cu,name:_cName||_cu,praiseCard:{id,fromName:_cName||_cu,toUser,badge,msg:document.getElementById('praiseMsg').value},ts:Date.now()});}
   document.getElementById('praiseModal').style.display='none'; showToast(`${badge.e} Övgü ${toUser}'ya gönderildi!`);
 }
 async function openPraiseWall(){
-  const snap=await dbRef('praise/'+(_currentServer||'main')).orderByChild('at').limitToLast(30).once('value'); const praises=snap.val()||{};
+  const snap=await dbRef('praise/'+(window._currentServer||'main')).orderByChild('at').limitToLast(30).once('value'); const praises=snap.val()||{};
   let m=document.getElementById('praiseWallModal');
   if(!m){m=document.createElement('div');m.id='praiseWallModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
   m.innerHTML=`<div class="bb-modal" style="width:600px;max-height:86vh;display:flex;flex-direction:column;">
@@ -161,7 +161,7 @@ const AUTOMOD_PRESETS=[
   {id:'flood',n:'Karakter Tekrarı',d:'Aynı karakter tekrarı'},
 ];
 async function openAutoModModal(){
-  const snap=await dbRef('automod/'+(_currentServer||'main')).once('value'); const rules=snap.val()||{};
+  const snap=await dbRef('automod/'+(window._currentServer||'main')).once('value'); const rules=snap.val()||{};
   let m=document.getElementById('automodModal');
   if(!m){m=document.createElement('div');m.id='automodModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
   m.innerHTML=`<div class="bb-modal" style="width:620px;max-height:86vh;display:flex;flex-direction:column;">
@@ -189,9 +189,9 @@ async function openAutoModModal(){
   </div>`;
   m.style.display='flex';
 }
-async function toggleAutomodPreset(pid){const r=dbRef('automod/'+(_currentServer||'main')+'/preset_'+pid);const s=await r.once('value');await r.set({enabled:!s.val()?.enabled,type:'preset',pid});openAutoModModal();}
-async function toggleAutomodRule(id){const r=dbRef('automod/'+(_currentServer||'main')+'/'+id+'/enabled');const s=await r.once('value');await r.set(!s.val());openAutoModModal();}
-async function deleteAutomodRule(id){await dbRef('automod/'+(_currentServer||'main')+'/'+id).remove();openAutoModModal();}
+async function toggleAutomodPreset(pid){const r=dbRef('automod/'+(window._currentServer||'main')+'/preset_'+pid);const s=await r.once('value');await r.set({enabled:!s.val()?.enabled,type:'preset',pid});openAutoModModal();}
+async function toggleAutomodRule(id){const r=dbRef('automod/'+(window._currentServer||'main')+'/'+id+'/enabled');const s=await r.once('value');await r.set(!s.val());openAutoModModal();}
+async function deleteAutomodRule(id){await dbRef('automod/'+(window._currentServer||'main')+'/'+id).remove();openAutoModModal();}
 function openCreateAutomodRule(){
   let m=document.getElementById('createAutomodModal');
   if(!m){m=document.createElement('div');m.id='createAutomodModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
@@ -220,11 +220,11 @@ function openCreateAutomodRule(){
 }
 async function createAutomodRule(){
   const name=document.getElementById('amName').value.trim(); if(!name) return showToast('Kural adı gerekli');
-  await dbRef('automod/'+(_currentServer||'main')+'/rule_'+Date.now()).set({name,type:document.getElementById('amType').value,pattern:document.getElementById('amPattern').value,action:document.getElementById('amAction').value,enabled:true,by:_cu});
+  await dbRef('automod/'+(window._currentServer||'main')+'/rule_'+Date.now()).set({name,type:document.getElementById('amType').value,pattern:document.getElementById('amPattern').value,action:document.getElementById('amAction').value,enabled:true,by:_cu});
   document.getElementById('createAutomodModal').style.display='none'; openAutoModModal(); showToast('🤖 AutoMod kuralı oluşturuldu!');
 }
 async function checkAutomod(text,roomId){
-  const snap=await dbRef('automod/'+(_currentServer||'main')).once('value'); const rules=snap.val()||{};
+  const snap=await dbRef('automod/'+(window._currentServer||'main')).once('value'); const rules=snap.val()||{};
   for(const[id,r]of Object.entries(rules)){
     if(!r.enabled) continue; let match=false;
     if(r.type==='preset'){
@@ -245,11 +245,11 @@ async function checkAutomod(text,roomId){
 ══════════════════════════ */
 const _slowTimers={};
 async function setSlowMode(channelId,seconds){
-  await dbRef('rooms/'+(_currentServer||'main')+'/'+channelId+'/slowMode').set(seconds);
+  await dbRef('rooms/'+(window._currentServer||'main')+'/'+channelId+'/slowMode').set(seconds);
   showToast(seconds>0?`⏱️ Yavaş mod: ${seconds}sn`:'⏱️ Yavaş mod kapatıldı');
 }
 async function checkSlowMode(channelId){
-  const snap=await dbRef('rooms/'+(_currentServer||'main')+'/'+channelId+'/slowMode').once('value');
+  const snap=await dbRef('rooms/'+(window._currentServer||'main')+'/'+channelId+'/slowMode').once('value');
   const sec=snap.val()||0; if(!sec) return true;
   const last=_slowTimers[channelId+_cu]||0;
   const elapsed=(Date.now()-last)/1000;
@@ -302,12 +302,12 @@ async function updateMyProfile(updates){
 ══════════════════════════ */
 async function showOnboardingIfNeeded(){
   if(!_cu) return;
-  const snap=await dbRef('onboarding/'+(_currentServer||'main')+'/completed/'+_cu).once('value');
+  const snap=await dbRef('onboarding/'+(window._currentServer||'main')+'/completed/'+_cu).once('value');
   if(snap.val()) return;
   openOnboarding();
 }
 async function openOnboarding(){
-  const cfgSnap=await dbRef('onboarding/'+(_currentServer||'main')+'/config').once('value');
+  const cfgSnap=await dbRef('onboarding/'+(window._currentServer||'main')+'/config').once('value');
   const cfg=cfgSnap.val();
   if(!cfg?.enabled) return;
   let m=document.getElementById('onboardingModal');
@@ -324,7 +324,7 @@ async function openOnboarding(){
   m.style.display='flex';
 }
 async function completeOnboarding(){
-  await dbRef('onboarding/'+(_currentServer||'main')+'/completed/'+_cu).set(true);
+  await dbRef('onboarding/'+(window._currentServer||'main')+'/completed/'+_cu).set(true);
   document.getElementById('onboardingModal').style.display='none';
 }
 async function openOnboardingConfig(){
@@ -342,7 +342,7 @@ async function openOnboardingConfig(){
   m.style.display='flex';
 }
 async function saveOnboardingConfig(){
-  await dbRef('onboarding/'+(_currentServer||'main')+'/config').set({welcomeMsg:document.getElementById('obWelcomeMsg').value,channels:document.getElementById('obChannels').value.split(',').map(s=>s.trim()).filter(Boolean),enabled:document.getElementById('obEnabled').checked});
+  await dbRef('onboarding/'+(window._currentServer||'main')+'/config').set({welcomeMsg:document.getElementById('obWelcomeMsg').value,channels:document.getElementById('obChannels').value.split(',').map(s=>s.trim()).filter(Boolean),enabled:document.getElementById('obEnabled').checked});
   document.getElementById('onboardingConfigModal').style.display='none'; showToast('✅ Onboarding ayarlandı!');
 }
 
@@ -350,7 +350,7 @@ async function saveOnboardingConfig(){
    7. ÜYELERI YÖNET / BAN / TIMEOUT
 ══════════════════════════ */
 async function openMemberMgmt(){
-  const snap=await dbRef('members/'+(_currentServer||'main')).once('value').catch(()=>({val:()=>({})})); const members=snap.val()||{};
+  const snap=await dbRef('members/'+(window._currentServer||'main')).once('value').catch(()=>({val:()=>({})})); const members=snap.val()||{};
   let m=document.getElementById('memberMgmtModal');
   if(!m){m=document.createElement('div');m.id='memberMgmtModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
   m.innerHTML=`<div class="bb-modal" style="width:640px;max-height:86vh;display:flex;flex-direction:column;">
@@ -370,9 +370,9 @@ async function openMemberMgmt(){
   </div>`;
   m.style.display='flex';
 }
-async function kickMember(uid){if(!confirm('Üyeyi atmak istiyor musunuz?'))return;await dbRef('members/'+(_currentServer||'main')+'/'+uid).remove();openMemberMgmt();showToast('👢 Üye atıldı');}
-async function banMember(uid){if(!confirm('Üyeyi yasaklamak istiyor musunuz?'))return;await dbRef('members/'+(_currentServer||'main')+'/'+uid+'/banned').set(true);openMemberMgmt();showToast('🚫 Üye yasaklandı');}
-async function timeoutMember(uid){const min=parseInt(prompt('Kaç dakika susturulsun?','5'));if(!min)return;const until=Date.now()+min*60000;await dbRef('members/'+(_currentServer||'main')+'/'+uid+'/timeout').set(until);openMemberMgmt();showToast(`⏱️ ${min} dakika susturuldu`);}
+async function kickMember(uid){if(!confirm('Üyeyi atmak istiyor musunuz?'))return;await dbRef('members/'+(window._currentServer||'main')+'/'+uid).remove();openMemberMgmt();showToast('👢 Üye atıldı');}
+async function banMember(uid){if(!confirm('Üyeyi yasaklamak istiyor musunuz?'))return;await dbRef('members/'+(window._currentServer||'main')+'/'+uid+'/banned').set(true);openMemberMgmt();showToast('🚫 Üye yasaklandı');}
+async function timeoutMember(uid){const min=parseInt(prompt('Kaç dakika susturulsun?','5'));if(!min)return;const until=Date.now()+min*60000;await dbRef('members/'+(window._currentServer||'main')+'/'+uid+'/timeout').set(until);openMemberMgmt();showToast(`⏱️ ${min} dakika susturuldu`);}
 
 window.openEventsModal = openEventsModal;
 window.openCreateEvent = openCreateEvent;

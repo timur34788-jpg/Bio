@@ -75,7 +75,7 @@ function renderPollMsg(poll, roomId, msgKey) {
       const cnt = counts[i]; const pct = total ? Math.round(cnt/total*100) : 0;
       const voted = Array.isArray(uv) ? uv.includes(i) : uv===i;
       const correct = poll.quiz && poll.correct===i;
-      return `<div onclick="${expired?'':``votePoll('${roomId}','${msgKey}',${i})``}" style="margin-bottom:7px;cursor:${expired?'default':'pointer'};">
+      return `<div onclick="${expired?'':`votePoll('${roomId}','${msgKey}',${i})`}" style="margin-bottom:7px;cursor:${expired?'default':'pointer'};">
         <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
           <span style="font-size:.83rem;color:var(--text-hi);font-weight:${voted?700:400};">${voted?'✅':'⬜'} ${opt}${correct&&expired?' <span style="color:#2ecc71;font-size:.72rem;">(Doğru)</span>':''}</span>
           <span style="font-size:.75rem;color:var(--muted);">${cnt} (${pct}%)</span>

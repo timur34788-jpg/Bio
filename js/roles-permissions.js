@@ -167,7 +167,7 @@ function openMemberRolesModal(userId, userName) {
               <span style="width:12px;height:12px;border-radius:50%;background:${r.color};"></span>
               <span style="font-weight:600;font-size:.85rem;color:var(--text-hi);">${r.icon||''} ${r.name}</span>
             </span>
-            <input type="checkbox" ${ur[id]?'checked':''} style="width:18px;height:18px;accent-color:var(--accent);" onchange="${ur[id]?`removeRole('${userId}','${id}')`:``assignRole('${userId}','${id}')``}">
+            <input type="checkbox" ${ur[id]?'checked':''} style="width:18px;height:18px;accent-color:var(--accent);" onchange="${ur[id]?`removeRole('${userId}','${id}')`:`assignRole('${userId}','${id}')`}">
           </label>`).join('')}
       </div>
     </div>`;
