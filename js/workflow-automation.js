@@ -31,7 +31,7 @@ const WF_ACTIONS = [
 let _wfCurrent = {name:'Yeni Workflow',trigger:{},steps:[],enabled:true};
 let _workflows = {};
 
-function wfR(p){return dbRef('workflows/'+(_currentServer||'main')+(p?'/'+p:''));}
+function wfR(p){return dbRef('workflows/'+(window._currentServer||'main')+(p?'/'+p:''));}
 
 /* ── WORKFLOW BUILDER ── */
 function openWorkflowBuilder(editId) {
@@ -120,7 +120,7 @@ async function deleteWorkflow(id) { await wfR(id).remove(); delete _workflows[id
 
 /* ── OTOMASYON KURALLARI ── */
 function openAutomationsModal() {
-  dbRef('automations/'+(_currentServer||'main')).once('value', snap=>{
+  dbRef('automations/'+(window._currentServer||'main')).once('value', snap=>{
     const autos = snap.val()||{};
     let m=document.getElementById('automationsModal');
     if(!m){m=document.createElement('div');m.id='automationsModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
@@ -168,15 +168,15 @@ function openCreateAutoModal(){
   m.style.display='flex';
 }
 async function createAuto(){
-  await dbRef('automations/'+(_currentServer||'main')+'/auto_'+Date.now()).set({ trigger:document.getElementById('autoTrig').value, action:document.getElementById('autoAct').value, param:document.getElementById('autoParam').value, enabled:true, by:_cu, at:Date.now() });
+  await dbRef('automations/'+(window._currentServer||'main')+'/auto_'+Date.now()).set({ trigger:document.getElementById('autoTrig').value, action:document.getElementById('autoAct').value, param:document.getElementById('autoParam').value, enabled:true, by:_cu, at:Date.now() });
   document.getElementById('createAutoModal').style.display='none'; openAutomationsModal(); showToast('🤖 Otomasyon oluşturuldu!');
 }
-async function toggleAuto(id){const r=dbRef('automations/'+(_currentServer||'main')+'/'+id+'/enabled');const s=await r.once('value');await r.set(!s.val());openAutomationsModal();}
-async function deleteAuto(id){await dbRef('automations/'+(_currentServer||'main')+'/'+id).remove();openAutomationsModal();}
+async function toggleAuto(id){const r=dbRef('automations/'+(window._currentServer||'main')+'/'+id+'/enabled');const s=await r.once('value');await r.set(!s.val());openAutomationsModal();}
+async function deleteAuto(id){await dbRef('automations/'+(window._currentServer||'main')+'/'+id).remove();openAutomationsModal();}
 
 /* ── WEBHOOK YÖNETİMİ ── */
 function openWebhooksModal(){
-  dbRef('webhooks/'+(_currentServer||'main')).once('value',snap=>{
+  dbRef('webhooks/'+(window._currentServer||'main')).once('value',snap=>{
     const whs=snap.val()||{};
     let m=document.getElementById('webhooksModal');
     if(!m){m=document.createElement('div');m.id='webhooksModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
@@ -212,7 +212,7 @@ async function createIncomingWebhook(){
   const name=prompt('Webhook adı:'); if(!name) return;
   const id='wh_'+Date.now(); const token=btoa(id).replace(/[^a-z0-9]/gi,'').slice(0,24);
   const url=window.location.origin+'/webhook/'+token;
-  await dbRef('webhooks/'+(_currentServer||'main')+'/'+id).set({name,url,token,type:'incoming',by:_cu,at:Date.now()});
+  await dbRef('webhooks/'+(window._currentServer||'main')+'/'+id).set({name,url,token,type:'incoming',by:_cu,at:Date.now()});
   openWebhooksModal(); showToast('🌐 Webhook oluşturuldu!');
 }
 function openOutgoingWHModal(){
@@ -235,10 +235,10 @@ function openOutgoingWHModal(){
   m.style.display='flex';
 }
 async function saveOutgoingWH(){
-  await dbRef('webhooks/'+(_currentServer||'main')+'/wh_'+Date.now()).set({name:document.getElementById('owName').value,url:document.getElementById('owUrl').value,trigger:document.getElementById('owTrig').value,type:'outgoing',by:_cu,at:Date.now()});
+  await dbRef('webhooks/'+(window._currentServer||'main')+'/wh_'+Date.now()).set({name:document.getElementById('owName').value,url:document.getElementById('owUrl').value,trigger:document.getElementById('owTrig').value,type:'outgoing',by:_cu,at:Date.now()});
   document.getElementById('outgoingWHModal').style.display='none'; openWebhooksModal(); showToast('🌐 Giden webhook oluşturuldu!');
 }
-async function deleteWebhook(id){await dbRef('webhooks/'+(_currentServer||'main')+'/'+id).remove();openWebhooksModal();}
+async function deleteWebhook(id){await dbRef('webhooks/'+(window._currentServer||'main')+'/'+id).remove();openWebhooksModal();}
 
 /* ── MESAJ ZAMANLAMA ── */
 function openScheduleMsg(roomId){
@@ -263,24 +263,24 @@ async function scheduleMsg(roomId){
   if(!text||!time) return showToast('Mesaj ve zaman gerekli');
   const ts=new Date(time).getTime(); if(ts<=Date.now()) return showToast('Gelecek bir zaman seçin');
   const id='sched_'+Date.now();
-  await dbRef('scheduledMsgs/'+(_currentServer||'main')+'/'+id).set({roomId,text,sendAt:ts,by:_cu,name:_cName||_cu,status:'pending'});
+  await dbRef('scheduledMsgs/'+(window._currentServer||'main')+'/'+id).set({roomId,text,sendAt:ts,by:_cu,name:_cName||_cu,status:'pending'});
   document.getElementById('schedMsgModal').style.display='none';
   showToast(`⏰ ${new Date(ts).toLocaleString('tr')} için zamanlandı`);
-  setTimeout(async()=>{ await dbRef('msgs/'+roomId).push({user:_cu,name:_cName||_cu,text,ts:Date.now(),scheduled:true}); await dbRef('scheduledMsgs/'+(_currentServer||'main')+'/'+id+'/status').set('sent'); }, ts-Date.now());
+  setTimeout(async()=>{ await dbRef('msgs/'+roomId).push({user:_cu,name:_cName||_cu,text,ts:Date.now(),scheduled:true}); await dbRef('scheduledMsgs/'+(window._currentServer||'main')+'/'+id+'/status').set('sent'); }, ts-Date.now());
 }
 
 /* ── TASLAKLAR (Drafts) ── */
 async function saveDraft(roomId, text){
   if(!text.trim()) return;
-  await dbRef('drafts/'+(_currentServer||'main')+'/'+_cu+'/'+roomId).set({text,at:Date.now()});
+  await dbRef('drafts/'+(window._currentServer||'main')+'/'+_cu+'/'+roomId).set({text,at:Date.now()});
   showToast('💾 Taslak kaydedildi');
 }
 async function loadDraft(roomId){
-  const snap=await dbRef('drafts/'+(_currentServer||'main')+'/'+_cu+'/'+roomId).once('value');
+  const snap=await dbRef('drafts/'+(window._currentServer||'main')+'/'+_cu+'/'+roomId).once('value');
   return snap.val()?.text||'';
 }
 async function openDrafts(){
-  const snap=await dbRef('drafts/'+(_currentServer||'main')+'/'+_cu).once('value'); const drafts=snap.val()||{};
+  const snap=await dbRef('drafts/'+(window._currentServer||'main')+'/'+_cu).once('value'); const drafts=snap.val()||{};
   let m=document.getElementById('draftsModal');
   if(!m){m=document.createElement('div');m.id='draftsModal';m.className='bb-modal-overlay';document.body.appendChild(m);}
   m.innerHTML=`<div class="bb-modal" style="width:540px;max-height:84vh;display:flex;flex-direction:column;">
@@ -291,7 +291,7 @@ async function openDrafts(){
         <div style="font-size:.85rem;color:var(--text-hi);margin-bottom:8px;">${d.text.slice(0,150)}${d.text.length>150?'...':''}</div>
         <div style="display:flex;gap:6px;">
           <button onclick="useDraft('${rid}','${d.text.replace(/'/g,"\\'")}')" style="padding:5px 10px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.78rem;">Kullan</button>
-          <button onclick="dbRef('drafts/'+(_currentServer||'main')+'/'+_cu+'/${rid}').remove().then(openDrafts)" style="padding:5px 10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#e74c3c;border-radius:6px;cursor:pointer;font-size:.78rem;">Sil</button>
+          <button onclick="dbRef('drafts/'+(window._currentServer||'main')+'/'+_cu+'/${rid}').remove().then(openDrafts)" style="padding:5px 10px;background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3);color:#e74c3c;border-radius:6px;cursor:pointer;font-size:.78rem;">Sil</button>
         </div>
       </div>`).join('')||'<div style="text-align:center;padding:40px;color:var(--muted);">Taslak yok</div>'}
     </div>

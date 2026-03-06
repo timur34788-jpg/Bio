@@ -3,7 +3,7 @@
    project-management.js
 ═══════════════════════════════════════════════════════════════ */
 let _pmView = 'board', _pmTasks = {}, _pmCF = {}, _pmFilters = {}, _pmTimer = null;
-const pmR = p => dbRef('pm/' + (_currentServer||'main') + (p?'/'+p:''));
+const pmR = p => dbRef('pm/' + (window._currentServer||'main') + (p?'/'+p:''));
 
 const PM_STATUSES = [
   {id:'todo',label:'📋 Yapılacak',color:'#607d8b'},
