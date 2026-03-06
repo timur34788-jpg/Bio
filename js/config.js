@@ -235,6 +235,10 @@ function hashStrSync(s){
 }
 
 
+/* ── Eksik değişken tanımlamaları ── */
+let _fbInitPromise = null;
+let _cu = null;
+
 /* ── Firebase Init ── */
 
 async function fbInit(){

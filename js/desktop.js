@@ -2248,7 +2248,8 @@ window.liveStopBlur = liveStopBlur;
 
 
 /* ── STUN/TURN sunucuları ── */
-const CONF_ICE = {
+// CONF_ICE conference.js'de tanımlı, burada sadece kullanılıyor
+var CONF_ICE = CONF_ICE || {
   iceServers: [
     { urls: 'stun:stun.l.google.com:19302' },
     { urls: 'stun:stun1.l.google.com:19302' },
