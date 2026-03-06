@@ -2972,8 +2972,7 @@ function _reLayoutTiles() {
 /* ═══════════════════════════════════════
    18. ZAMANLAYICI
 ═══════════════════════════════════════ */
-let _confTimerInterval = null;
-let _confSeconds = 0;
+// _confTimerInterval ve _confSeconds conference.js'de tanımlı
 
 function _startConfTimer() {
   _confSeconds = 0;
@@ -3223,7 +3222,7 @@ function _addConfButtonsToChatHeader() {
 /* ═══════════════════════════════════════
    26. SOHBET BAŞLIĞI GÜNCELLENINCE BUTONLARI EKLE
 ═══════════════════════════════════════ */
-const _origDeskOpenRoom = window.deskOpenRoom;
+// _origDeskOpenRoom conference.js'de tanımlı
 window.deskOpenRoom = function() {
   if (_origDeskOpenRoom) _origDeskOpenRoom.apply(this, arguments);
   setTimeout(_addConfButtonsToChatHeader, 100);
@@ -3460,7 +3459,8 @@ function _renderMembersTab(panel, room) {
 ═══════════════════════════════════════ */
 
 // Orijinal fonksiyonu kaydedip genişletiyoruz
-const _origShowMsgMenu = window.showMsgMenuAtBtn;
+// _origShowMsgMenu slack-features.js'de tanımlı - burada window'dan al
+window._origShowMsgMenuDesk = window.showMsgMenuAtBtn;
 window.showMsgMenuAtBtn = function(e) {
   e.stopPropagation();
   e.preventDefault();
@@ -3773,7 +3773,7 @@ function showChannelListMenu(anchorEl) {
 }
 
 /* Susturulan kanalları göster/gizle */
-let _showMuted = false;
+// _showMuted slack-features.js'de tanımlı
 function toggleMutedChannels() {
   _showMuted = !_showMuted;
   document.querySelectorAll('.room-item.muted').forEach(el => {
@@ -3816,7 +3816,7 @@ async function createSection(name) {
    5. TERCİHLER PANELİ
 ═══════════════════════════════════════ */
 
-let _prefTab = 'notifications';
+// _prefTab slack-features.js'de tanımlı
 
 function showPreferencesModal() {
   const existing = document.getElementById('prefsModal');
@@ -4159,9 +4159,9 @@ function injectSidebarButtons() {
    7. SOHBET ODASI DEĞİŞİNCE SEKMELERİ BAŞLAT
 ═══════════════════════════════════════ */
 
-const _origDeskOpenRoom2 = window.deskOpenRoom;
+window._origDeskOpenRoom2Desk = window.deskOpenRoom;
 window.deskOpenRoom = function(room) {
-  if (_origDeskOpenRoom2) _origDeskOpenRoom2.apply(this, arguments);
+  if (_origDeskOpenRoom2Desk) _origDeskOpenRoom2Desk.apply(this, arguments);
   const r = room || window._deskRoom;
   if (r) setTimeout(() => initChannelTabs(r), 150);
 };
@@ -4180,9 +4180,9 @@ function _tryInjectSidebar(attempt) {
 setTimeout(() => _tryInjectSidebar(0), 800);
 
 // deskNav hook - sidebar her göründüğünde inject et
-const _origDeskNavSF = window.deskNav;
+window._origDeskNavSFDesk = window.deskNav;
 window.deskNav = function(tab) {
-  if (_origDeskNavSF) _origDeskNavSF.apply(this, arguments);
+  if (_origDeskNavSFDesk) _origDeskNavSFDesk.apply(this, arguments);
   if (tab === 'home') {
     setTimeout(injectSidebarButtons, 300);
   }
