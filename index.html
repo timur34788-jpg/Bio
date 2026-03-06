@@ -53,6 +53,19 @@
     <div class="rail-btn" id="rb-tasks" onclick="deskNav('tasks')" title="Görev Panosu">
       <div class="rail-btn-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
     </div>
+
+    <div class="rail-btn" onclick="openProjectManager()" title="Proje Yönetimi (ClickUp)">
+      <div class="rail-btn-ic" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;">📋</div>
+    </div>
+    <div class="rail-btn" onclick="openEventsModal()" title="Etkinlikler">
+      <div class="rail-btn-ic" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;">📅</div>
+    </div>
+    <div class="rail-btn" onclick="openPraiseWall()" title="Övgü Duvarı">
+      <div class="rail-btn-ic" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🌟</div>
+    </div>
+    <div class="rail-btn" onclick="openMoreFeaturesMenu(this)" title="Daha Fazla Özellik">
+      <div class="rail-btn-ic" style="display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⚡</div>
+    </div>
     <div class="rail-btn" id="rb-admin" onclick="deskNav('admin')" title="Admin Paneli" style="display:none">
       <div class="rail-btn-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M2 19h20v2H2v-2z" fill="#f0c040"/>
@@ -2089,5 +2102,100 @@
 </div>
 
 <script src="js/business.js?v=1"></script>
+<script src="js/roles-permissions.js?v=1"></script>
+<script src="js/voice-channels.js?v=1"></script>
+<script src="js/polls-forms.js?v=1"></script>
+<script src="js/project-management.js?v=1"></script>
+<script src="js/workflow-automation.js?v=1"></script>
+<script src="js/community-features.js?v=1"></script>
+
+<script>
+/* ═══ YENİ ÖZELLİK MENÜSİ ═══ */
+function openMoreFeaturesMenu(btn) {
+  const existing = document.getElementById('moreFeaturesPopup');
+  if (existing) { existing.remove(); return; }
+  const rect = btn.getBoundingClientRect();
+  const pop = document.createElement('div');
+  pop.id = 'moreFeaturesPopup';
+  pop.style.cssText = 'position:fixed;left:'+(rect.right+8)+'px;top:'+rect.top+'px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:8px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,.4);min-width:220px;max-height:80vh;overflow-y:auto;';
+  const items = [
+    ['⚡','Workflow Builder','openWorkflowsManager()'],
+    ['🤖','Otomasyon Kuralları','openAutomationsModal()'],
+    ['🌐','Webhook Yönetimi','openWebhooksModal()'],
+    ['📊','Anket Oluştur','openPollCreator(window._deskRoom||window._cRoom||"general")'],
+    ['📋','Form Oluşturucu','openFormBuilder()'],
+    ['✅','Onay İsteği','openApprovalCreator(window._deskRoom||window._cRoom||"general")'],
+    ['🎭','Roller & İzinler','openRolesModal()'],
+    ['🔊','Ses Kanalı Oluştur','openVoiceChannelCreator()'],
+    ['🤖','AutoMod','openAutoModModal()'],
+    ['🛡️','Üye Yönetimi','openMemberMgmt()'],
+    ['👥','Çalışan Dizini','openEmployeeDirectory()'],
+    ['⏰','Mesaj Zamanla','openScheduleMsg(window._deskRoom||window._cRoom||"general")'],
+    ['💾','Taslaklar','openDrafts()'],
+    ['🏃','Sprint Yönetimi','openProjectManager();setTimeout(()=>pmOpenSprints(),300)'],
+    ['🎯','Hedefler & OKR','openProjectManager();setTimeout(()=>pmOpenGoals(),300)'],
+  ];
+  pop.innerHTML = '<div style="font-size:.72rem;color:var(--muted);font-weight:700;padding:4px 8px 8px;">ÖZELLİKLER</div>' +
+    items.map(([icon,label,fn]) =>
+      `<div onclick="${fn};document.getElementById('moreFeaturesPopup')?.remove()" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:.84rem;color:var(--text-hi);transition:background .12s;" onmouseover="this.style.background='var(--hover)'" onmouseout="this.style.background='transparent'">
+        <span style="font-size:1.1rem;width:22px;text-align:center;">${icon}</span><span>${label}</span>
+      </div>`
+    ).join('');
+  document.body.appendChild(pop);
+  setTimeout(() => document.addEventListener('click', function close(e) { if(!pop.contains(e.target)&&e.target!==btn){pop.remove();document.removeEventListener('click',close);} }), 100);
+}
+
+/* ═══ MESAJ GİRİŞİNE SAĞ TIK MENÜSİ ═══ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Add context menu to message inputs for scheduling/drafts
+  document.addEventListener('contextmenu', e => {
+    const inp = e.target.closest('#deskMsgInput, #msgInput, [id*="MsgInput"]');
+    if (!inp) return;
+    e.preventDefault();
+    const existing = document.getElementById('msgCtxMenu');
+    if (existing) existing.remove();
+    const menu = document.createElement('div');
+    menu.id = 'msgCtxMenu';
+    menu.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:6px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.3);min-width:180px;`;
+    const roomId = window._deskRoom || window._cRoom || 'general';
+    const menuItems = [
+      ['⏰ Mesajı Zamanla', () => openScheduleMsg(roomId)],
+      ['💾 Taslak Kaydet', () => saveDraft(roomId, inp.value)],
+      ['📊 Anket Oluştur', () => openPollCreator(roomId)],
+      ['✅ Onay İsteği', () => openApprovalCreator(roomId)],
+    ];
+    menu.innerHTML = menuItems.map(([l]) => `<div style="padding:8px 12px;border-radius:6px;cursor:pointer;font-size:.83rem;color:var(--text-hi);" onmouseover="this.style.background='var(--hover)'" onmouseout="this.style.background='transparent'">${l}</div>`).join('');
+    menuItems.forEach(([,fn], i) => { menu.children[i].onclick = () => { fn(); menu.remove(); }; });
+    document.body.appendChild(menu);
+    setTimeout(() => document.addEventListener('click', function c(){menu.remove();document.removeEventListener('click',c);}, {once:true}), 50);
+  });
+
+  // Show onboarding for new users after login
+  setTimeout(() => { if(typeof showOnboardingIfNeeded==='function') showOnboardingIfNeeded(); }, 3000);
+});
+
+/* ═══ MESAJLARDA POLL/FORM/APPROVAL RENDER ═══ */
+const _origRenderMsg = window.renderMsg || window._renderMsg;
+window._renderPollsInMsg = function(msgEl, msg) {
+  if (msg.poll && msgEl) {
+    const pc = msgEl.querySelector('.poll-placeholder');
+    if (pc && typeof renderPollMsg === 'function') {
+      pc.outerHTML = renderPollMsg(msg.poll, msg.roomId||window._deskRoom, msg.key);
+    }
+  }
+  if (msg.formCard && msgEl) {
+    const fc = msgEl.querySelector('.form-placeholder');
+    if (fc) fc.outerHTML = `<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:12px;max-width:360px;"><div style="font-weight:700;color:var(--text-hi);margin-bottom:8px;">📋 ${msg.formCard.title}</div><div style="display:flex;gap:8px;"><button onclick="openFormFill('${msg.formCard.id}')" style="flex:1;padding:8px;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:.83rem;">Formu Doldur</button><button onclick="openFormResults('${msg.formCard.id}')" style="padding:8px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.83rem;color:var(--text-hi);">Sonuçlar</button></div></div>`;
+  }
+  if (msg.approvalCard && msgEl) {
+    const ac = msgEl.querySelector('.approval-placeholder');
+    if (ac && typeof renderApprovalCard === 'function') ac.outerHTML = renderApprovalCard(msg.approvalCard);
+  }
+  if (msg.praiseCard && msgEl) {
+    const prc = msgEl.querySelector('.praise-placeholder');
+    if (prc && typeof renderPraiseCard === 'function') prc.outerHTML = renderPraiseCard(msg.praiseCard);
+  }
+};
+</script>
 </body>
 </html>
