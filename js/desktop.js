@@ -2257,19 +2257,7 @@ var CONF_ICE = CONF_ICE || {
   ]
 };
 
-/* ── Durum değişkenleri ── */
-let _confId       = null;   // Aktif konferans ID
-let _confType     = null;   // 'conference' | 'stream'
-let _confPeers    = {};     // { username: RTCPeerConnection }
-let _confStreams   = {};     // { username: MediaStream }
-let _confLocal    = null;   // Yerel medya akışı
-let _confScreen   = null;   // Ekran paylaşım akışı
-let _confMuted    = false;
-let _confCamOff   = false;
-let _confSharing  = false;
-let _confListeners= [];     // Firebase listener temizleyicileri
-let _confRole     = null;   // 'broadcaster' | 'viewer'
-let _confRoom     = null;   // Bağlı olunan kanal/oda
+/* ── Durum değişkenleri conference.js'de tanımlı ── */
 
 /* ═══════════════════════════════════════
    1. KONFERANS BAŞLAT (odadaki tüm üyeleri davet et)
