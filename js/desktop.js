@@ -3261,7 +3261,8 @@ window.renderConferenceInviteMsg = renderConferenceInviteMsg;
    Masaüstü sohbet başlığının altına sekme çubuğu
 ═══════════════════════════════════════ */
 
-let _activeChannelTab = 'messages';
+// _activeChannelTab slack-features.js'de tanımlı
+if (typeof _activeChannelTab === 'undefined') var _activeChannelTab = 'messages';
 
 function initChannelTabs(room) {
   const header = document.getElementById('deskChatHeader');
