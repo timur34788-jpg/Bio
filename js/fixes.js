@@ -411,7 +411,7 @@ window.showWorkflowModal = function() {
 ══════════════════════════════════════════════════════════════════ */
 
 // deskLoadAdmin'i override ederek yeni görünüm ver
-if (typeof _origDeskLoadAdmin === 'undefined') var _origDeskLoadAdmin = window.deskLoadAdmin;
+const _origDeskLoadAdmin = window.deskLoadAdmin;
 window.deskLoadAdmin = function() {
   const panel = document.getElementById('deskPanelContent');
   if (!panel) { if (_origDeskLoadAdmin) _origDeskLoadAdmin.call(this); return; }
