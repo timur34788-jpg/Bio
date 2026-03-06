@@ -3225,7 +3225,8 @@ function _addConfButtonsToChatHeader() {
 /* ═══════════════════════════════════════
    26. SOHBET BAŞLIĞI GÜNCELLENINCE BUTONLARI EKLE
 ═══════════════════════════════════════ */
-// _origDeskOpenRoom conference.js'de tanımlı
+// Gerçek deskOpenRoom'u burada yakala (conference.js'den önce değil, şimdi)
+const _origDeskOpenRoom = deskOpenRoom;
 window.deskOpenRoom = function() {
   if (_origDeskOpenRoom) _origDeskOpenRoom.apply(this, arguments);
   setTimeout(_addConfButtonsToChatHeader, 100);
