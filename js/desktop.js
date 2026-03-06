@@ -1,6 +1,10 @@
 /* Nature.co — desktop.js */
 /* Otomatik bölümlendi */
 
+// Eksik global değişken tanımlamaları
+if (typeof _isAdmin === 'undefined') var _isAdmin = false;
+if (typeof _cu === 'undefined') var _cu = null;
+
 /* ══════════════════════════════════════════
    DESKTOP ENGINE
 ══════════════════════════════════════════ */
