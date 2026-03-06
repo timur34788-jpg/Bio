@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="theme-color" content="#070d1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Biyom Business">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="icon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
+<title>Biyom Business</title>
+<link rel="icon" href="data:image/svg+xml,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'><defs><clipPath id='lci'><path d='M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z'/></clipPath></defs><path d='M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z' fill='%230e2b0c'/><g clip-path='url(%23lci)'><line x1='60' y1='14' x2='60' y2='108' stroke='%234a8f40' stroke-width='1.2'/><line x1='60' y1='35' x2='78' y2='55' stroke='%234a8f40' stroke-width='.7'/><line x1='60' y1='35' x2='42' y2='55' stroke='%234a8f40' stroke-width='.7'/><line x1='60' y1='52' x2='82' y2='68' stroke='%234a8f40' stroke-width='.6'/><line x1='60' y1='52' x2='38' y2='68' stroke='%234a8f40' stroke-width='.6'/><line x1='60' y1='68' x2='78' y2='82' stroke='%234a8f40' stroke-width='.5'/><line x1='60' y1='68' x2='42' y2='82' stroke='%234a8f40' stroke-width='.5'/><line x1='60' y1='82' x2='70' y2='94' stroke='%234a8f40' stroke-width='.4'/><line x1='60' y1='82' x2='50' y2='94' stroke='%234a8f40' stroke-width='.4'/></g><path d='M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z' fill='none' stroke='%234a8f40' stroke-width='1.2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">  <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+
+<!-- ── Yan Dönme Engelleme Overlay ── -->
+<div id="orientationBlock">
+  <div class="ob-icon">📱</div>
+  <div class="ob-text">Lütfen telefonu dik tutun</div>
+</div>
+
+<!-- ══ DESKTOP SHELL (hidden on mobile) ══ -->
+<div id="desktopShell" style="display:none;">
+
+  <!-- Icon Rail -->
+  <div id="deskRail">
+    <div class="rail-logo" onclick="showServerSwitchWithLogin()" title="Sunucu Değiştir" style="cursor:pointer;padding:4px;"><svg viewBox="0 0 120 120" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcrl"><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z"/></clipPath></defs><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="#0e2b0c"/><g clip-path="url(#lcrl)"><line x1="60" y1="14" x2="60" y2="108" stroke="#4a8f40" stroke-width="1.2"/><line x1="60" y1="35" x2="78" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="35" x2="42" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="52" x2="82" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="52" x2="38" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="68" x2="78" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="68" x2="42" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="82" x2="70" y2="94" stroke="#4a8f40" stroke-width=".4"/><line x1="60" y1="82" x2="50" y2="94" stroke="#4a8f40" stroke-width=".4"/></g><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="none" stroke="#4a8f40" stroke-width="1.2"/></svg></div>
+    <div class="rail-sep"></div>
+    <div class="rail-btn act" id="rb-home" onclick="deskNav('home')" title="Ana Sayfa">
+      <div class="rail-btn-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+    </div>
+    <div class="rail-btn" id="rb-forum" onclick="deskNav('forum')" title="Forum">
+      <div class="rail-btn-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M9 12h6m-6 4h4"/></svg></div>
+    </div>
+    <div class="rail-btn" id="rb-friends" onclick="deskNav('friends')" title="Arkadaşlar">
+      <div class="rail-btn-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg></div>
+      <div class="notif-pill" id="deskFrNotif" style="display:none">!</div>
+    </div>
+    <div class="notif-pill" id="deskGameInviteNotif" style="display:none">!</div>
+    </div>
+    <div class="notif-pill" id="deskLiveNotif" style="display:none">●</div>
+    </div>
+    </div>
+     </div>
+    <div class="rail-sep"></div>
+    </div>
+    </div>
+
+    <div class="rail-btn" id="rb-tasks" onclick="deskNav('tasks')" title="Görev Panosu">
+      <div class="rail-btn-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+    </div>
+    <div class="rail-btn" id="rb-admin" onclick="deskNav('admin')" title="Admin Paneli" style="display:none">
+      <div class="rail-btn-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 19h20v2H2v-2z" fill="#f0c040"/>
+  <path d="M2 19l3-9 4.5 4.5L12 5l2.5 9.5L19 10l3 9H2z" fill="#f0c040" stroke="#d4a017" stroke-width="1" stroke-linejoin="round"/>
+  <circle cx="2" cy="10" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+  <circle cx="12" cy="5" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+  <circle cx="22" cy="10" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+</svg></div>
+    </div>
+
+    <div id="deskRailUser" onclick="deskNav('profile')">
+      <div class="sdot"></div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="deskSidebar">
+    <div id="deskSidebarHeader">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div id="deskSidebarTitle" onclick="showServerSwitchModal()" title="Sunucu değiştir" style="cursor:pointer;user-select:none;" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">Biyom Business</div>
+          <div id="deskSidebarSub">Ana Sayfa</div>
+        </div>
+        <!-- Zil + Profil -->
+        <div style="display:flex;align-items:center;gap:4px;">
+          <div onclick="openCarbonModal()" title="Karbon" style="display:flex;align-items:center;gap:3px;background:rgba(46,204,113,.13);border:1px solid rgba(46,204,113,.3);border-radius:100px;padding:2px 8px;cursor:pointer;flex-shrink:0;margin-right:2px;"><span style="font-size:.72rem;">🌿</span><span id="_workStatusBadge" style="font-size:.63rem;font-weight:900;color:#2ecc71;">CO₂</span></div>
+
+          <div id="deskBellBtn" onclick="openNotifCenter(this)" title="Bildirimler" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:8px;cursor:pointer;position:relative;color:rgba(255,255,255,.7);transition:background .15s;flex-shrink:0;" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <div id="deskNotifDot" style="display:none;position:absolute;top:3px;right:3px;width:6px;height:6px;background:#e05555;border-radius:50%;border:1.5px solid #222529;"></div>
+          </div>
+          <div id="deskSidebarAvatar" onclick="deskNav('profile')" title="Profilim" style="width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:900;color:#fff;cursor:pointer;flex-shrink:0;background:#5b9bd5;border:1.5px solid rgba(255,255,255,.2);transition:opacity .15s;position:relative;" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+            <div class="sdot" style="position:absolute;bottom:-2px;right:-2px;width:9px;height:9px;border-radius:50%;background:var(--green);border:2px solid #222529;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slack benzeri ekstra butonlar - kalıcı -->
+    <div id="sidebarExtraBtns" style="display:flex;align-items:center;gap:4px;padding:6px 12px 4px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:2px;">
+      <button onclick="typeof showCreateMenu==='function'?showCreateMenu(this):null" title="Oluştur"
+        style="display:flex;align-items:center;gap:6px;background:rgba(74,143,64,.15);border:1px solid rgba(74,143,64,.3);
+               color:#6dbf67;border-radius:9px;padding:5px 12px;font-size:.75rem;font-weight:800;cursor:pointer;transition:all .15s;flex:1;"
+        onmouseover="this.style.background='rgba(74,143,64,.25)'" onmouseout="this.style.background='rgba(74,143,64,.15)'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Oluştur
+      </button>
+      <button onclick="typeof showChannelListMenu==='function'?showChannelListMenu(this):null" title="Kanal Listesini Yönet"
+        style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:transparent;
+               border:1px solid rgba(255,255,255,.1);border-radius:9px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;flex-shrink:0;"
+        onmouseover="this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.background='transparent'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      </button>
+      <button onclick="typeof showPreferencesModal==='function'?showPreferencesModal():null" title="Tercihler"
+        style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:transparent;
+               border:1px solid rgba(255,255,255,.1);border-radius:9px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;flex-shrink:0;"
+        onmouseover="this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.background='transparent'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M20 12h2M2 12h2M12 20v2M12 2v2"/></svg>
+      </button>
+    </div>
+    <div id="deskSearch" onclick="openGlobalSearch()" style="cursor:pointer;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span style="color:var(--muted);font-size:.82rem;">Ara... <span style="margin-left:auto;font-size:.7rem;opacity:.6;">⌘K</span></span>
+    </div>
+    <div id="deskSideList">
+    </div>
+  </div>
+
+  <!-- Main Area -->
+  <div id="deskMain">
+    <!-- Empty state (no room selected) -->
+    <div id="deskEmptyState">
+      <div style="position:relative;margin-bottom:8px;">
+        <svg viewBox="0 0 120 120" width="72" height="72" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 24px rgba(74,143,64,.3));"><defs><clipPath id="lcbi"><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z"/></clipPath></defs><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="#0e2b0c"/><g clip-path="url(#lcbi)"><line x1="60" y1="14" x2="60" y2="108" stroke="#4a8f40" stroke-width="1.2"/><line x1="60" y1="35" x2="78" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="35" x2="42" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="52" x2="82" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="52" x2="38" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="68" x2="78" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="68" x2="42" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="82" x2="70" y2="94" stroke="#4a8f40" stroke-width=".4"/><line x1="60" y1="82" x2="50" y2="94" stroke="#4a8f40" stroke-width=".4"/></g><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="none" stroke="#4a8f40" stroke-width="1.2"/></svg>
+      </div>
+      <div class="big-title">Biyom Business'a Hoş Geldin</div>
+      <div class="big-sub">Soldaki listeden bir kanal, grup veya kişi seçerek sohbete başla</div>
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div onclick="document.querySelector('#deskSideList .room-item')&&document.querySelector('#deskSideList .room-item').click()" style="background:rgba(74,143,64,.15);border:1px solid rgba(74,143,64,.25);border-radius:10px;padding:8px 14px;font-size:.78rem;color:#a5d6a7;cursor:pointer;transition:background .15s;" onmouseover="this.style.background='rgba(74,143,64,.28)'" onmouseout="this.style.background='rgba(74,143,64,.15)'">💬 Kanal Seç</div>
+        <div onclick="deskNav('friends')" style="background:rgba(91,155,213,.12);border:1px solid rgba(91,155,213,.2);border-radius:10px;padding:8px 14px;font-size:.78rem;color:#90caf9;cursor:pointer;transition:background .15s;" onmouseover="this.style.background='rgba(91,155,213,.25)'" onmouseout="this.style.background='rgba(91,155,213,.12)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg> Arkadaşlar</div>
+      </div>
+    </div>
+
+    <!-- Active chat -->
+    <div id="deskChatArea" style="display:none;flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <!-- Chat header -->
+      <div id="deskChatHeader">
+        <div id="deskChatHdrIcon">#</div>
+        <div style="flex:1;min-width:0;">
+          <div id="deskChatHdrName">—</div>
+          <div id="deskChatHdrSub" style="font-size:.72rem;color:var(--muted);"></div>
+        </div>
+        <div class="dsk-hdr-actions">
+          <div class="dsk-hdr-btn" id="deskSearchBtn" onclick="openMsgSearch()" title="Mesajlarda Ara"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskCallAudio" onclick="startCall('audio')" title="Sesli Arama" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskCallVideo" onclick="startCall('video')" title="Görüntülü Arama" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskCallScreen" onclick="startCall('screen')" title="Ekran Paylaş" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="15" rx="2"/><path d="M8 21h8m-4-3v3"/></svg></div>
+          <!-- Konferans Butonları -->
+          <div class="dsk-hdr-btn" id="deskConfAudio" onclick="(typeof startConference==='function'?startConference('audio'):showToast('Yükleniyor...'))" title="Sesli Konferans"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskConfVideo" onclick="(typeof startConference==='function'?startConference('conference'):showToast('Yükleniyor...'))" title="Görüntülü Konferans"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/><circle cx="8" cy="12" r="2" fill="currentColor" stroke="none" opacity=".5"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskConfStream" onclick="(typeof startGameStream==='function'?startGameStream():showToast('Yükleniyor...'))" title="Ekran/Oyun Yayını" style="color:#e05555;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/><path d="M7 10h2m-1-1v2m5-1h2" stroke-width="1.8"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskManageGroup" onclick="openGroupPanel(_deskRoom||_cRoom)" title="Grubu Yönet" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg></div>
+          <div class="dsk-hdr-btn" id="deskToggleMembers" onclick="toggleDeskMembers()" title="Üyeler" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.85"/></svg></div>
+          <div class="dsk-hdr-btn" onclick="toggleChatMenu(event)" title="Daha Fazla"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></div>
+        </div>
+      </div>
+
+      <!-- Admin panel -->
+      <div id="deskSpyBanner"></div>
+
+      <div style="flex:1;display:flex;overflow:hidden;flex-direction:column;">
+        <!-- Sabitlenmiş mesaj -->
+        <div id="deskPinBar" style="display:none;align-items:center;gap:8px;background:var(--surface);border-bottom:2px solid var(--blue);padding:7px 14px;cursor:pointer;flex-shrink:0;">
+          <span style="color:var(--blue);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.66 0-3 1.34-3 3 0 1.17.67 2.17 1.64 2.67L9 10H6l-1 3h14l-1-3h-3l-1.64-2.33A3 3 0 0 0 15 5a3 3 0 0 0-3-3z"/><line x1="12" y1="13" x2="12" y2="22"/></svg></span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:.68rem;font-weight:900;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;">Sabitlenmiş Mesaj</div>
+            <div id="deskPinBarText" style="font-size:.78rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></div>
+          </div>
+          <div onclick="event.stopPropagation();unpinMsg()" style="font-size:1rem;color:var(--muted);cursor:pointer;padding:2px 6px;border-radius:4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        </div>
+        <div style="flex:1;display:flex;overflow:hidden;position:relative;">
+        <!-- Drag & Drop Overlay (Desktop) -->
+        <div id="deskDropOverlay">
+          <div class="drop-icon">📂</div>
+          <div class="drop-text">Dosyayı buraya bırak</div>
+          <div class="drop-sub">PNG · JPG · PDF · ZIP desteklenir</div>
+        </div>
+        <!-- Scroll-to-Bottom Butonu (Desktop) -->
+        <div id="deskScrollToBottomBtn" onclick="deskScrollToBottom()">
+          <span>↓</span>
+          <div class="stb-badge">yeni</div>
+        </div>
+        <!-- Messages -->
+        <div id="deskMsgs" onclick="document.activeElement&&document.activeElement.blur()">
+        </div>
+
+        <!-- Members panel -->
+        <div id="deskMemberPanel" class="hidden">
+          <div class="desk-mp-title">Üyeler</div>
+          <div class="desk-mp-list" id="deskMemberList"></div>
+        </div>
+        </div><!-- end inner flex -->
+      </div>
+
+      <!-- Input area -->
+      <div id="deskInputArea">
+        <div id="deskInputBox">
+          <button class="dsk-inp-btn" onclick="toggleEmoji()" title="Emoji"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></button>
+          <button class="dsk-inp-btn" onclick="pickFile()" title="Dosya"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+          <textarea id="deskInp" rows="1" placeholder="Mesaj yaz..." oninput="deskInpResize(this)" onkeydown="onDeskMsgKey(event)"></textarea>
+          <span class="rec-timer" id="deskRecTimer">0:00</span>
+          
+          <button id="deskSendBtn" onclick="sendDeskMsg()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forum / Friends / Profile panels -->
+    <div id="deskPanelContent" style="flex:1;overflow-y:auto;display:none;"></div>
+  </div>
+</div>
+
+<!-- ══ LOGIN ══ -->
+    <div id="serverList" style="display:flex;flex-direction:column;gap:12px;">
+      <!-- JS tarafından doldurulur -->
+    </div>
+
+    <div style="margin-top:24px;text-align:center;font-size:.72rem;color:var(--muted);">
+      Her sunucu bağımsızdır — ayrı hesap, ayrı odalar
+    </div>
+  </div>
+</div>
+
+<div class="screen active" id="loginScreen">
+<div class="nc-aurora-1"></div><div class="nc-aurora-2"></div>
+  <div class="login-box">
+    <div style="display:flex;align-items:center;margin-bottom:8px;">
+          </div>
+    <div class="login-logo"><svg viewBox="0 0 120 120" width="56" height="56" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lcll"><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z"/></clipPath></defs><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="#0e2b0c"/><g clip-path="url(#lcll)"><line x1="60" y1="14" x2="60" y2="108" stroke="#4a8f40" stroke-width="1.2"/><line x1="60" y1="35" x2="78" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="35" x2="42" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="52" x2="82" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="52" x2="38" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="68" x2="78" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="68" x2="42" y2="82" stroke="#4a8f40" stroke-width=".5"/><line x1="60" y1="82" x2="70" y2="94" stroke="#4a8f40" stroke-width=".4"/><line x1="60" y1="82" x2="50" y2="94" stroke="#4a8f40" stroke-width=".4"/></g><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="none" stroke="#4a8f40" stroke-width="1.2"/></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+  <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.28);border-radius:100px;padding:5px 14px;font-size:.72rem;font-weight:600;letter-spacing:.06em;color:#34d399;font-family:'Syne',sans-serif;">
+    <span style="width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:ncPulse 2s infinite;display:inline-block;"></span>
+    İş Platformu
+  </div>
+</div>
+    <div class="login-title">Biyom Business</div>
+
+    <!-- Sekme -->
+    <div style="display:flex;background:var(--surface);border-radius:10px;padding:3px;margin-bottom:18px;gap:3px;">
+      <div id="tabGiris" onclick="showLoginTab('giris')" style="flex:1;padding:9px;text-align:center;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;background:var(--surface2);color:var(--text-hi);transition:all .15s;">Giriş Yap</div>
+      <div id="tabKayit" onclick="showLoginTab('kayit')" style="flex:1;padding:9px;text-align:center;border-radius:8px;font-size:.82rem;font-weight:700;cursor:pointer;color:var(--muted);transition:all .15s;">Kayıt Ol</div>
+    </div>
+
+    <div class="login-err" id="loginErr"></div>
+
+    <!-- GİRİŞ FORMU — tek adım: kullanıcı adı + şifre -->
+    <div id="girisForm">
+      <div id="loginStep1">
+        <div class="login-field">
+          <div class="login-label">Kullanıcı Adı</div>
+          <input class="login-inp" id="loginUser" type="text" placeholder="Kullanıcı adın..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+        </div>
+        <div class="login-field" style="margin-top:12px;">
+          <div class="login-label">Şifre</div>
+          <input class="login-inp" id="loginPass" type="password" placeholder="Şifren..." autocomplete="current-password" autocorrect="off" autocapitalize="none" spellcheck="false" onkeydown="if(event.key==='Enter')submitLogin()">
+        </div>
+        <div style="text-align:right;margin-top:4px;">
+          <span onclick="showForgotPassword()" style="font-size:.72rem;color:var(--blue);cursor:pointer;">Şifremi unuttum</span>
+        </div>
+        <button class="login-btn" id="loginBtn" onclick="submitLogin()" style="margin-top:16px;">Giriş Yap →</button>
+        <!-- Gizli elementler — JS uyumluluğu için -->
+        <div id="loginStep2" style="display:none;"></div>
+        <div id="loginUserAvatar" style="display:none;"></div>
+        <div id="loginUserLabel" style="display:none;"></div>
+        <div id="loginEmailField" style="display:none;"></div>
+        <div id="loginPhoneField" style="display:none;"></div>
+        <div id="loginPhoneOtpStep" style="display:none;"></div>
+        <input id="loginPhone" type="hidden">
+        <input id="loginPhoneOtp" type="hidden">
+        <div id="loginPhoneOtpMain" style="display:none;"></div>
+        <button id="phoneOtpBtn" style="display:none;"></button>
+        <div id="loginForgotRow" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- KAYIT FORMU -->
+    <!-- Kayıt kapalı mesajı -->
+    <div id="regClosedMsg" style="display:none;padding:24px 16px;text-align:center;">
+      <div style="font-size:42px;margin-bottom:12px;">🔒</div>
+      <div style="font-size:16px;font-weight:700;color:var(--text-hi);margin-bottom:8px;">Kayıt Şu An Kapalı</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:20px;">Bu sunucuda yeni üye alımı geçici olarak durdurulmuştur.</div>
+      <div id="regClosedOtherServers" style="display:flex;flex-direction:column;gap:10px;"></div>
+    </div>
+    <div id="kayitForm" style="display:none;">
+      <div class="login-field">
+        <div class="login-label">Davet Kodu <span style="font-size:.7rem;color:var(--muted);">(Adminden alın)</span></div>
+        <input class="login-inp" id="regInviteCode" type="text" placeholder="Davet kodunu girin..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+        </div>
+      <div class="login-field">
+        <div class="login-label">Kullanıcı Adı</div>
+        <input class="login-inp" id="regUser" type="text" placeholder="Kullanıcı adın..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
+      </div>
+        <!-- Kayıt yöntemi seçimi -->
+        <div style="margin-bottom:14px;">
+          <div class="login-label">Kayıt Yöntemi</div>
+          <div style="display:flex;gap:8px;">
+            <label style="flex:1;display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--text-hi);">
+              <input type="radio" name="regMethod" value="email" checked onchange="toggleRegMethod()" style="accent-color:var(--green);"> 📧 E-posta
+            </label>
+            <label style="flex:1;display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--text-hi);">
+              <input type="radio" name="regMethod" value="phone" onchange="toggleRegMethod()" style="accent-color:var(--green);"> 📱 Telefon
+            </label>
+          </div>
+        </div>
+        <!-- E-posta alanı -->
+        <div id="regEmailField">
+          <div class="login-field">
+            <div class="login-label">E-posta Adresi</div>
+            <input class="login-inp" id="regEmail" type="email" placeholder="ornek@mail.com" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false">
+          </div>
+        </div>
+        <!-- Telefon alanı (gizli) -->
+        <div id="regPhoneField" style="display:none;">
+          <div class="login-field">
+            <div class="login-label">Telefon Numarası</div>
+            <input class="login-inp" id="regPhone" type="tel" placeholder="+90 5xx xxx xx xx" autocomplete="tel">
+          </div>
+        </div>
+      <div class="login-field">
+          <div class="login-label">Doğrulama</div>
+          <input class="login-inp" id="regPass" type="password" placeholder="En az 6 karakter..." autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-field">
+          <div class="login-label">Doğrulama (tekrar)</div>
+          <input class="login-inp" id="regPass2" type="password" placeholder="Tekrar gir..." autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-field">
+        <div class="login-label">Köken / Uyruk</div>
+        <select class="login-inp" id="regOrigin" style="-webkit-appearance:none;cursor:pointer;">
+          <option value="">— Seçiniz —</option>
+              <option value="🇹🇷 Türk">🇹🇷 Türk</option>
+              <option value="🇦🇿 Azerbaycanlı">🇦🇿 Azerbaycanlı</option>
+              <option value="🇺🇿 Özbek">🇺🇿 Özbek</option>
+              <option value="🇹🇲 Türkmen">🇹🇲 Türkmen</option>
+              <option value="🇰🇿 Kazak">🇰🇿 Kazak</option>
+              <option value="🇰🇬 Kırgız">🇰🇬 Kırgız</option>
+              <option value="🇺🇦 Ukraynalı">🇺🇦 Ukraynalı</option>
+              <option value="🇷🇺 Rus">🇷🇺 Rus</option>
+              <option value="🇩🇪 Alman">🇩🇪 Alman</option>
+              <option value="🇬🇧 İngiliz">🇬🇧 İngiliz</option>
+              <option value="🇫🇷 Fransız">🇫🇷 Fransız</option>
+              <option value="🇳🇱 Hollandalı">🇳🇱 Hollandalı</option>
+              <option value="🇧🇪 Belçikalı">🇧🇪 Belçikalı</option>
+              <option value="🇦🇹 Avusturyalı">🇦🇹 Avusturyalı</option>
+              <option value="🇨🇭 İsviçreli">🇨🇭 İsviçreli</option>
+              <option value="🇸🇪 İsveçli">🇸🇪 İsveçli</option>
+              <option value="🇳🇴 Norveçli">🇳🇴 Norveçli</option>
+              <option value="🇩🇰 Danimarkalı">🇩🇰 Danimarkalı</option>
+              <option value="🇫🇮 Finlandiyalı">🇫🇮 Finlandiyalı</option>
+              <option value="🇮🇹 İtalyan">🇮🇹 İtalyan</option>
+              <option value="🇪🇸 İspanyol">🇪🇸 İspanyol</option>
+              <option value="🇵🇹 Portekizli">🇵🇹 Portekizli</option>
+              <option value="🇬🇷 Yunan">🇬🇷 Yunan</option>
+              <option value="🇧🇬 Bulgar">🇧🇬 Bulgar</option>
+              <option value="🇷🇴 Rumen">🇷🇴 Rumen</option>
+              <option value="🇵🇱 Polonyalı">🇵🇱 Polonyalı</option>
+              <option value="🇭🇺 Macar">🇭🇺 Macar</option>
+              <option value="🇨🇿 Çek">🇨🇿 Çek</option>
+              <option value="🇸🇰 Slovak">🇸🇰 Slovak</option>
+              <option value="🇷🇸 Sırp">🇷🇸 Sırp</option>
+              <option value="🇭🇷 Hırvat">🇭🇷 Hırvat</option>
+              <option value="🇧🇦 Boşnak">🇧🇦 Boşnak</option>
+              <option value="🇸🇮 Sloven">🇸🇮 Sloven</option>
+              <option value="🇲🇰 Makedon">🇲🇰 Makedon</option>
+              <option value="🇦🇱 Arnavut">🇦🇱 Arnavut</option>
+              <option value="🇲🇪 Karadağlı">🇲🇪 Karadağlı</option>
+              <option value="🇸🇾 Suriyeli">🇸🇾 Suriyeli</option>
+              <option value="🇮🇶 Iraklı">🇮🇶 Iraklı</option>
+              <option value="🇮🇷 İranlı">🇮🇷 İranlı</option>
+              <option value="🇦🇫 Afganlı">🇦🇫 Afganlı</option>
+              <option value="🇵🇰 Pakistanlı">🇵🇰 Pakistanlı</option>
+              <option value="🇮🇳 Hintli">🇮🇳 Hintli</option>
+              <option value="🇧🇩 Bangladeşli">🇧🇩 Bangladeşli</option>
+              <option value="🇨🇳 Çinli">🇨🇳 Çinli</option>
+              <option value="🇯🇵 Japon">🇯🇵 Japon</option>
+              <option value="🇰🇷 Koreli">🇰🇷 Koreli</option>
+              <option value="🇸🇦 Suudi Arabistanlı">🇸🇦 Suudi Arabistanlı</option>
+              <option value="🇦🇪 BAE'li">🇦🇪 BAE'li</option>
+              <option value="🇶🇦 Katarlı">🇶🇦 Katarlı</option>
+              <option value="🇲🇦 Faslı">🇲🇦 Faslı</option>
+              <option value="🇩🇿 Cezayirli">🇩🇿 Cezayirli</option>
+              <option value="🇹🇳 Tunuslu">🇹🇳 Tunuslu</option>
+              <option value="🇪🇬 Mısırlı">🇪🇬 Mısırlı</option>
+              <option value="🇱🇾 Libyalı">🇱🇾 Libyalı</option>
+              <option value="🇸🇴 Somalili">🇸🇴 Somalili</option>
+              <option value="🇪🇹 Etiyopyalı">🇪🇹 Etiyopyalı</option>
+              <option value="🇳🇬 Nijeryalı">🇳🇬 Nijeryalı</option>
+              <option value="🇿🇦 Güney Afrikalı">🇿🇦 Güney Afrikalı</option>
+              <option value="🇺🇸 Amerikalı">🇺🇸 Amerikalı</option>
+              <option value="🇨🇦 Kanadalı">🇨🇦 Kanadalı</option>
+              <option value="🇲🇽 Meksikalı">🇲🇽 Meksikalı</option>
+              <option value="🇧🇷 Brezilyalı">🇧🇷 Brezilyalı</option>
+              <option value="🇦🇷 Arjantinli">🇦🇷 Arjantinli</option>
+              <option value="🇦🇺 Avustralyalı">🇦🇺 Avustralyalı</option>
+              <option value="🌍 Diğer">🌍 Diğer</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px;padding:10px 2px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <input type="checkbox" id="regTosCheck" style="width:18px;height:18px;min-width:18px;margin-top:2px;accent-color:#2ecc71;cursor:pointer;">
+          <label for="regTosCheck" style="font-size:12.5px;color:#bbb;line-height:1.5;cursor:pointer;">
+            <a href="#" onclick="event.preventDefault();showTosTab('tos');document.getElementById('tosModal').style.display='block'" style="color:#2ecc71;text-decoration:underline;">Üyelik Sözleşmesi</a>'ni okudum, anladım ve kabul ediyorum.
+          </label>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <input type="checkbox" id="regKvkkCheck" style="width:18px;height:18px;min-width:18px;margin-top:2px;accent-color:#2ecc71;cursor:pointer;">
+          <label for="regKvkkCheck" style="font-size:12.5px;color:#bbb;line-height:1.5;cursor:pointer;">
+            <a href="#" onclick="event.preventDefault();showTosTab('kvkk');document.getElementById('tosModal').style.display='block'" style="color:#2ecc71;text-decoration:underline;">KVKK Aydınlatma Metni</a>'ni okudum; köken/milliyet bilgisinin özel nitelikli veri olarak işlenmesine <strong style="color:#fff;">açık rıza</strong> veriyorum.
+          </label>
+        </div>
+      </div>
+            <button class="login-btn" id="regBtn" onclick="submitRegister()">Kayıt Ol →</button>
+      <!-- Kod doğrulama adımı -->
+      <div id="regVerifyStep" style="display:none;margin-top:12px;">
+        <div id="regVerifyLabel" class="login-label" style="font-size:.75rem;color:var(--muted);margin-bottom:6px;">Telefonuna gelen 6 haneli kodu gir</div>
+        <div class="login-label" style="margin-bottom:6px;">📧 E-postana onay kodu gönderildi. Kodu girin:</div>
+        <input class="login-inp" id="regVerifyCode" type="text" placeholder="6 haneli kod..." maxlength="6" autocomplete="one-time-code" style="text-align:center;letter-spacing:6px;font-size:22px;">
+        <button class="login-btn" id="regVerifyBtn" onclick="verifyRegCode()" style="margin-top:8px;">Hesabı Aktifleştir ✓</button>
+        <div style="margin-top:8px;font-size:12px;color:#aaa;text-align:center;">Kod gelmedi mi? <span style="color:#e67e22;cursor:pointer;" onclick="resendRegCode()">Tekrar gönder</span></div>
+      </div>
+    </div>
+
+    <!-- ══ MOBİL UYGULAMA BANNERS ══ -->
+    <div id="installBanners" style="margin-top:18px;">
+      <!-- divider -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
+        <span style="color:rgba(255,255,255,0.2);font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;">Mobil Uygulama</span>
+        <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
+      </div>
+      <!-- Android Banner -->
+      <div id="androidInstallBanner" style="display:none;background:linear-gradient(135deg,#071a10,#0a2016);border:1px solid rgba(0,232,122,0.2);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden;box-shadow:0 2px 20px rgba(0,232,122,0.06);margin-bottom:10px;">
+        <div style="position:absolute;top:-40px;right:-40px;width:130px;height:130px;background:radial-gradient(circle,rgba(0,232,122,0.12) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+          <div style="width:46px;height:46px;border-radius:13px;background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10z" fill="#00e87a"/><path d="M3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zM20.5 8c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5z" fill="#00e87a" opacity=".7"/><path d="M15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C14.05 1.23 13.54 1 13 1h-2c-.54 0-1.05.23-1.64.63L7.88.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.3 1.3C7.9 2.79 7.5 3.82 7.5 5H16.5c0-1.18-.4-2.21-1.03-2.84z" fill="#00e87a"/><circle cx="10" cy="4" r=".8" fill="#071a10"/><circle cx="14" cy="4" r=".8" fill="#071a10"/></svg>
+          </div>
+          <div style="color:#dff5ea;font-weight:800;font-size:0.88rem;flex:1;">Android Uygulaması</div>
+          <button id="apkDownloadBtn" onclick="downloadAPK()" style="background:linear-gradient(135deg,#00e87a,#00bf62);color:#001a08;border:none;border-radius:10px;padding:10px 14px;font-weight:800;font-size:0.76rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,232,122,0.3);white-space:nowrap;transition:all 0.35s;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>APK İndir
+          </button>
+        </div>
+        <div style="display:flex;gap:5px;padding-left:60px;">
+          <span style="background:rgba(0,232,122,0.09);border:1px solid rgba(0,232,122,0.18);color:rgba(160,230,190,0.7);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap;">Ücretsiz</span>
+          <span style="background:rgba(0,232,122,0.09);border:1px solid rgba(0,232,122,0.18);color:rgba(160,230,190,0.7);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap;">Android 5.0+</span>
+        </div>
+      </div>
+      <!-- iOS Banner -->
+      <div id="iosInstallBanner" style="display:none;background:linear-gradient(135deg,#081624,#0a1a2e);border:1px solid rgba(91,155,213,0.2);border-radius:16px;padding:14px 16px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-25px;right:-25px;width:110px;height:110px;background:radial-gradient(circle,rgba(91,155,213,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;" id="iosRow1">
+          <div style="width:46px;height:46px;border-radius:13px;background:rgba(91,155,213,0.1);border:1px solid rgba(91,155,213,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#5b9bd5"/></svg>
+          </div>
+          <div style="color:#dce8f5;font-weight:800;font-size:0.88rem;flex:1;">iPhone / iPad</div>
+          <button onclick="toggleIOSSteps()" id="iosHowBtn" style="background:linear-gradient(135deg,#5b9bd5,#3a7ab8);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:800;font-size:0.76rem;cursor:pointer;flex-shrink:0;white-space:nowrap;box-shadow:0 4px 14px rgba(91,155,213,0.25);transition:all 0.3s;">Nasıl Yapılır?</button>
+        </div>
+        <div id="iosBadges" style="display:flex;gap:5px;justify-content:center;">
+          <span style="background:rgba(91,155,213,0.09);border:1px solid rgba(91,155,213,0.18);color:rgba(140,185,230,0.7);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap;">Ana Ekrana Ekle</span>
+          <span style="background:rgba(91,155,213,0.09);border:1px solid rgba(91,155,213,0.18);color:rgba(140,185,230,0.7);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap;">3 Adım</span>
+          <span style="background:rgba(91,155,213,0.09);border:1px solid rgba(91,155,213,0.18);color:rgba(140,185,230,0.7);font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:100px;white-space:nowrap;">Safari</span>
+        </div>
+        <div id="iosSteps" style="display:none;margin-top:10px;">
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(91,155,213,0.05);border:1px solid rgba(91,155,213,0.1);border-radius:10px;padding:10px 12px;">
+              <div style="width:22px;height:22px;border-radius:7px;background:rgba(91,155,213,0.16);color:#5b9bd5;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.66rem;flex-shrink:0;">1</div>
+              <div><div style="color:#bdd5ee;font-size:0.78rem;font-weight:700;">Safari'de aç</div><div style="color:rgba(120,160,200,0.4);font-size:0.65rem;margin-top:1px;">Chrome çalışmaz</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(91,155,213,0.05);border:1px solid rgba(91,155,213,0.1);border-radius:10px;padding:10px 12px;">
+              <div style="width:22px;height:22px;border-radius:7px;background:rgba(91,155,213,0.16);color:#5b9bd5;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.66rem;flex-shrink:0;">2</div>
+              <div><div style="color:#bdd5ee;font-size:0.78rem;font-weight:700;">Paylaş butonuna bas</div><div style="color:rgba(120,160,200,0.4);font-size:0.65rem;margin-top:1px;">Alt ortadaki kare + ok ikonu</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(91,155,213,0.05);border:1px solid rgba(91,155,213,0.1);border-radius:10px;padding:10px 12px;">
+              <div style="width:22px;height:22px;border-radius:7px;background:rgba(91,155,213,0.16);color:#5b9bd5;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.66rem;flex-shrink:0;">3</div>
+              <div><div style="color:#bdd5ee;font-size:0.78rem;font-weight:700;">"Ana Ekrana Ekle" → Ekle</div><div style="color:rgba(120,160,200,0.4);font-size:0.65rem;margin-top:1px;">Hazır! Uygulama gibi açılır 🎉</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ ROOMS ══ -->
+<div class="screen" id="roomsScreen">
+   <div class="ws-header">
+    <div class="ws-name" id="wsHeaderName" onclick="showServerSwitchModal()" style="cursor:pointer;" title="Sunucu değiştir">Biyom Business</div>
+    <div id="workStatusWidget" onclick="openWorkStatusModal()" title="Karbon" style="display:flex;align-items:center;gap:4px;background:rgba(46,204,113,.13);border:1px solid rgba(46,204,113,.3);border-radius:100px;padding:3px 9px;cursor:pointer;flex-shrink:0;"><span style="font-size:.75rem;">🌿</span><span id="carbonCount" style="font-size:.66rem;font-weight:900;color:#2ecc71;">0g CO₂</span></div>
+    <div style="display:flex;align-items:center;gap:14px;flex-shrink:0;margin-left:auto;">
+      <!-- Bildirim Zili -->
+      <div onclick="openNotifCenter()" title="Bildirimler" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;color:rgba(255,255,255,.7);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div id="mobNotifDot" style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:var(--red);border-radius:50%;"></div>
+      </div>
+      <!-- NatureBot -->
+      <div id="mobileRobotSlot" style="width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;"></div>
+      <!-- Profil Avatarı -->
+      <div class="ws-av" id="myAvatar" onclick="openProfile()" style="width:28px;height:28px;flex-shrink:0;"><div class="sdot"></div></div>
+    </div>
+  </div>
+
+  <div class="search-row" onclick="openGlobalSearch()" style="cursor:pointer;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span style="color:var(--muted);font-size:.85rem;">Kişi, kanal veya görev ara...</span>
+  </div>
+  <div class="rooms-scroll" id="roomsList">
+  </div>
+
+</div>
+  <div class="tab-bar">
+    <div class="tab act" id="tabHome" onclick="switchMainTab('home')"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div></div><div class="tab-lb">Ana Sayfa</div></div>
+    <div class="tab" id="tabMsgs" onclick="openDMModal()"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div></div><div class="tab-lb">Mesajlar</div></div>
+    <div class="tab" id="tabForum" onclick="switchMainTab('forum')"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M9 12h6m-6 4h4"/></svg></div></div><div class="tab-lb">Forum</div></div>
+    <div class="tab-wrap" onclick="openFriendsModal()"><div class="tab" id="tabFriends"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg></div></div><div class="tab-lb">Arkadaşlar</div></div><div class="notif-dot" id="frNotifDot"></div></div>
+    <div class="tab-lb">Oyunlar</div></div>
+    <div class="tab-lb">İzle</div></div>
+    <div class="tab" id="tabLiveRoom" onclick="switchMainTab('liveroom');mobLiveRoomInit()"><div class="tab-ic-wrap" style="position:relative;"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div><div id="tabLiveRoomDot" style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:#e05555;border-radius:50%;animation:livepulse 1.2s ease-in-out infinite;"></div></div><div class="tab-lb">Canlı</div></div>
+  </div>
+
+<!-- ══ FORUM ══ -->
+<div class="screen" id="forumScreen">
+  <div class="ws-header">
+    
+    <div class="ws-name">📋 Forum</div>
+
+  </div>
+
+  <!-- Yeni Paylaşım Kutusu -->
+  <div id="forumNewPost" style="padding:10px 12px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0;">
+    <div style="display:flex;gap:10px;align-items:flex-start;">
+      <div id="forumMyAv" style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:#fff;flex-shrink:0;background:#5b9bd5;"></div>
+      <div style="flex:1;min-width:0;overflow:hidden;">
+        <!-- Rich Text / BBCode Editör Kutusu -->
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .15s;" id="forumEditorWrap"
+          onfocusin="this.style.borderColor='var(--accent)'" onfocusout="this.style.borderColor='var(--border)'">
+          <!-- Toolbar -->
+          <div id="forumToolbar" style="display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:1px;padding:6px 8px;border-bottom:1px solid var(--border);background:var(--surface2);align-items:center;scrollbar-width:none;-webkit-overflow-scrolling:touch;" onscroll="this.style.setProperty('--tb-scroll',this.scrollLeft+'px')">
+            <button onclick="bbWrap('b')" title="Kalın" class="fmt-btn"><b>B</b></button>
+            <button onclick="bbWrap('i')" title="İtalik" class="fmt-btn"><i>I</i></button>
+            <button onclick="bbWrap('u')" title="Altı Çizili" class="fmt-btn"><u>U</u></button>
+            <button onclick="bbWrap('s')" title="Üstü Çizili" class="fmt-btn"><s>S</s></button>
+            <span style="width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0;"></span>
+            <button onclick="bbColor()" title="Renk" class="fmt-btn" style="font-size:.85rem;">🎨</button>
+            <button onclick="bbSize()" title="Yazı boyutu" class="fmt-btn" style="font-size:.78rem;font-weight:700;">Aa</button>
+            <span style="width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0;"></span>
+            <button onclick="bbWrap('url')" title="Link" class="fmt-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+            <button onclick="bbWrap('img')" title="Resim URL" class="fmt-btn" style="font-size:.85rem;">🖼️</button>
+            <span style="width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0;"></span>
+            <button onclick="bbInsert('[list]\n[*] ')" title="Liste" class="fmt-btn" style="font-size:.85rem;">• ≡</button>
+            <button onclick="bbWrap('quote')" title="Alıntı" class="fmt-btn" style="font-size:.95rem;">❝</button>
+            <button onclick="bbWrap('code')" title="Kod" class="fmt-btn" style="font-family:monospace;font-size:.8rem;">&lt;/&gt;</button>
+            <button onclick="bbWrap('spoiler')" title="Spoiler" class="fmt-btn" style="font-size:.75rem;">👁️</button>
+            <span style="width:1px;height:18px;background:var(--border);margin:0 4px;flex-shrink:0;"></span>
+            <button onclick="toggleBbPreview()" title="Önizleme" class="fmt-btn" id="bbPreviewBtn" style="font-size:.75rem;font-weight:700;">👁 Önizle</button>
+          </div>
+          <!-- Textarea -->
+          <textarea id="forumPostInp" placeholder="Düşüncelerini paylaş..." rows="3"
+            style="width:100%;background:transparent;border:none;padding:10px 13px;color:var(--text-hi);font-size:.9rem;font-family:inherit;outline:none;resize:none;-webkit-appearance:none;line-height:1.5;box-sizing:border-box;display:block;min-height:80px;max-height:200px;"
+            oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,200)+'px'"></textarea>
+          <!-- Önizleme alanı -->
+          <div id="bbPreviewArea" style="display:none;padding:10px 13px;min-height:60px;border-top:1px solid var(--border);font-size:.9rem;line-height:1.6;color:var(--text-hi);background:var(--bg2);word-break:break-word;"></div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:7px;">
+          <div style="display:flex;gap:6px;">
+            <select id="forumCategorySelect" onchange="onForumCatChange(this.value)" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:.75rem;padding:4px 8px;outline:none;cursor:pointer;">
+              <option value="" disabled selected>— Kategori seç —</option>
+              <option value="genel">💬 Genel</option>
+              <option value="tarih">📜 Tarih</option>
+              <option value="kultur">🎭 Kültür</option>
+              <option value="spor">⚽ Spor</option>
+              <option value="muzik">🎵 Müzik</option>
+              <option value="teknoloji">💻 Teknoloji</option>
+              <option value="soru">❓ Soru</option>
+            </select>
+          </div>
+          <button onclick="submitForumPost()" style="background:linear-gradient(135deg,#00c463,#00e87a);border:none;border-radius:100px;color:#000;padding:8px 20px;font-size:.82rem;font-weight:800;cursor:pointer;transition:opacity .15s;font-family:'Syne',sans-serif;letter-spacing:.02em;" onmousedown="this.style.opacity='.7'" onmouseup="this.style.opacity='1'">Paylaş →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kategori Filtresi -->
+  <div style="display:flex;gap:6px;padding:8px 12px;overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch;" id="forumCatFilter">
+    <div class="fcat act" onclick="filterForum('hepsi')" data-cat="hepsi">Tümü</div>
+    <div class="fcat" onclick="filterForum('genel')" data-cat="genel">💬 Genel</div>
+    <div class="fcat" onclick="filterForum('tarih')" data-cat="tarih">📜 Tarih</div>
+    <div class="fcat" onclick="filterForum('kultur')" data-cat="kultur">🎭 Kültür</div>
+    <div class="fcat" onclick="filterForum('spor')" data-cat="spor">⚽ Spor</div>
+    <div class="fcat" onclick="filterForum('muzik')" data-cat="muzik">🎵 Müzik</div>
+    <div class="fcat" onclick="filterForum('teknoloji')" data-cat="teknoloji">💻 Teknoloji</div>
+    <div class="fcat" onclick="filterForum('soru')" data-cat="soru">❓ Soru</div>
+  </div>
+
+  <!-- Gönderiler Listesi -->
+  <div id="forumFeed" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 12px 80px;">
+  </div>
+
+</div>
+
+<!-- ══ CHAT ══ -->
+<div class="screen" id="chatScreen">
+  <div class="c-header">
+    <div class="back-btn" onclick="goBack()">‹</div>
+    <div class="c-hdr-ic" id="chatHdrIcon">?</div>
+    <div class="c-hdr-body">
+      <div class="c-hdr-name" id="chatHdrName">—</div>
+      <div class="c-hdr-sub" id="chatHdrSub">—</div>
+    </div>
+    <div class="hdr-btns">
+      <div class="hdr-btn" id="chatSearchBtn" onclick="toggleChatSearch()" title="Ara" style="display:flex;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+
+      <div class="hdr-btn" id="callVideoBtn" onclick="startCall('video')" title="Görüntülü Ara" style="display:none;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <div class="hdr-btn" id="callScreenBtn" onclick="startCall('screen')" title="Ekran Paylaş" style="display:none;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="hdr-btn" id="callAudioBtn" onclick="startCall('audio')" title="Sesli Ara" style="display:none;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.09 6.09l1.95-1.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.12z"/></svg>
+      </div>
+      <div class="hdr-btn" id="chatMenuBtn" onclick="toggleChatMenu(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg></div>
+    </div>
+  </div>
+  <!-- Chat context menu -->
+  <div id="chatContextMenu" style="display:none;position:fixed;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:6px 0;z-index:500;min-width:200px;box-shadow:0 8px 32px rgba(0,0,0,.5);"></div>
+  <!-- Arama çubuğu -->
+  <div id="chatSearchBar">
+    <button onclick="toggleChatSearch()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:2px 4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <input id="chatSearchInp" placeholder="Mesajlarda ara..." oninput="onChatSearch()" />
+    <span id="chatSearchCount"></span>
+    <button onclick="chatSearchNav(-1)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">↑</button>
+    <button onclick="chatSearchNav(1)" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;">↓</button>
+  </div>
+  <!-- Yer işaretleri çubuğu -->
+  <div id="bookmarkBar"></div>
+  <!-- Sabitlenen mesaj çubuğu -->
+  <div id="pinBar">
+    <div class="pin-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.66 0-3 1.34-3 3 0 1.17.67 2.17 1.64 2.67L9 10H6l-1 3h14l-1-3h-3l-1.64-2.33A3 3 0 0 0 15 5a3 3 0 0 0-3-3z"/><line x1="12" y1="13" x2="12" y2="22"/></svg></div>
+    <div style="flex:1;min-width:0;">
+      <div class="pin-label">Sabitlenmiş Mesaj</div>
+      <div class="pin-text" id="pinBarText"></div>
+    </div>
+    <div class="pin-close" onclick="event.stopPropagation();unpinMsg()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+  </div>
+  <!-- Admin panel (Mobil) -->
+  <div id="adminSpyBanner" style="display:none;align-items:center;gap:8px;background:rgba(245,166,35,.08);border-bottom:1px solid rgba(245,166,35,.25);padding:7px 14px;flex-shrink:0;"></div>
+  <!-- Mesaj sağ tık menüsü -->
+  <div id="msgCtxMenu"></div>
+  <!-- Sürükle-Bırak Overlay -->
+  <div id="dropOverlay">
+    <div class="drop-icon">📂</div>
+    <div class="drop-text">Dosyayı buraya bırak</div>
+    <div class="drop-sub">PNG · JPG · PDF · ZIP desteklenir</div>
+  </div>
+  <div id="chatMsgs" onclick="document.activeElement&&document.activeElement.blur();closeEmoji()"></div>
+  <!-- Scroll-to-Bottom Butonu -->
+  <div id="scrollToBottomBtn" onclick="scrollToBottomSmooth()">
+    <span>↓</span>
+    <div class="stb-badge" id="stbBadge">yeni</div>
+  </div>
+  <div id="emojiPicker"></div>
+  <div style="position:relative;" id="slashSuggestWrap">
+    <div id="slashSuggestBox"></div>
+  </div>
+  
+  <div class="inp-wrap" id="chatInputRow">
+    <div id="acBar" style="display:none;overflow-x:auto;padding:5px 10px 2px;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;"></div>
+
+  <div class="inp-box">
+      <textarea id="msgInp" rows="1" placeholder="Mesaj yaz..." oninput="autoResize(this);if(typeof triggerAC==='function')triggerAC(this.value);if(typeof handleSlashInput==='function')handleSlashInput(this.value,'msgInp')" onkeydown="onMsgKey(event)"></textarea>
+      <div class="inp-btm">
+        <div class="ii" onclick="toggleEmoji()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
+        <div class="ii" onclick="pickFile()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></div>
+        
+        <span class="rec-timer" id="recTimer">0:00</span>
+        <div class="ii" style="font-weight:900;font-size:.9rem;">@</div>
+        <div class="ii" id="voiceRecBtn" onclick="toggleVoiceRecord()" title="Sesli mesaj">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <input type="file" id="fileInput" style="display:none" onchange="handleFile(this)">
+        <button class="send-btn" id="sendBtn" onclick="sendMsg()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div><!-- ══ ADMIN PANEL ══ -->
+<div class="screen" id="adminPanel">
+  <div class="admin-header">
+    <div style="width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M2 19h20v2H2v-2z" fill="#f0c040"/><path d="M2 19l3-9 4.5 4.5L12 5l2.5 9.5L19 10l3 9H2z" fill="#f0c040" stroke="#d4a017" stroke-width="1" stroke-linejoin="round"/><circle cx="2" cy="10" r="1.5" fill="#f0c040"/><circle cx="12" cy="5" r="1.5" fill="#f0c040"/><circle cx="22" cy="10" r="1.5" fill="#f0c040"/></svg>
+    </div>
+    <div>
+      <div class="admin-title">Admin Paneli</div>
+      <div id="adminSrvLabel" style="font-size:.65rem;color:rgba(255,255,255,.5);margin-top:1px;"></div>
+    </div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+      <div id="adminOnlineBadge" style="font-size:.68rem;color:#2eb67d;background:rgba(46,182,125,.12);border:1px solid rgba(46,182,125,.2);border-radius:100px;padding:3px 9px;font-weight:800;"></div>
+      <div class="admin-close" onclick="closeAdminPanel()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+  </div>
+  <!-- Sunucu Switcher -->
+  <div id="adminSrvSwitcher" style="display:flex;gap:6px;padding:8px 10px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;"></div>
+  <div class="admin-tabs">
+    <div class="atab act" onclick="adminTab('users')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg></span>Üyeler</div>
+    <div class="atab" onclick="adminTab('rooms')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></span>Odalar</div>
+    <div class="atab" onclick="adminTab('msgs')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Mesajlar</div>
+    <div class="atab" onclick="adminTab('forum')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M9 12h6m-6 4h4"/></svg></span>Forum</div>
+    <div class="atab" onclick="adminTab('announce')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9v18L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>Duyuru</div>
+    <div class="atab" onclick="adminTab('games')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4m-2-2v4"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="13" r="1" fill="currentColor" stroke="none"/></svg></span>Oyunlar</div>
+    <div class="atab" onclick="adminTab('health')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>Sistem</div>
+    <div class="atab" onclick="adminTab('security')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Güvenlik</div>
+    <div class="atab" onclick="adminTab('ipbans')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></span>IP Banlar</div>
+    <div class="atab" onclick="adminTab('settings')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span>Ayarlar</div>
+    <div class="atab" onclick="adminTab('design')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M13.5 9v4.5M11 8l-4.5 8M16 8l4.5 8"/></svg></span>Tasarım</div>
+    <div class="atab" onclick="adminTab('stats')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>İstatistik</div>
+    <div class="atab" onclick="adminTab('growth')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>Büyüme</div>
+    <div class="atab" onclick="adminTab('reports')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Raporlar</div>
+    <div class="atab" onclick="adminTab('naturebot')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 2v4M8 6l4 4M16 6l-4 4"/><circle cx="9" cy="16" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="1" fill="currentColor" stroke="none"/></svg></span>NatureBot</div>
+    <div class="atab" onclick="adminTab('create_user')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></span>Üye Oluştur</div>
+    <div class="atab" onclick="adminTab('invite')"><span class="atab-icon" style="font-size:0;display:inline-flex;align-items:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>Davet Link</div>
+  </div>
+  <div class="admin-body" id="adminBody">
+  </div>
+</div>
+
+<!-- ══ ARKADAŞLAR EKRANI ══ -->
+<div class="screen" id="friendsScreen">
+  <div class="ws-header">
+    
+    <div class="ws-name"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg> Arkadaşlar</div>
+    <button class="fr-btn add" style="margin-left:auto;margin-right:0;font-size:.75rem;" onclick="switchFrTab(3)">+ Ekle</button>
+  </div>
+  <div style="padding:8px 12px 4px;flex-shrink:0;">
+    <div style="display:flex;gap:0;background:var(--surface);border-radius:10px;padding:4px;gap:2px;">
+      <div class="ltab act" id="frTab1" onclick="switchFrTab(1)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg> Arkadaşlar</div>
+      <div class="ltab" id="frTab2" onclick="switchFrTab(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> İstekler <span id="frReqBadge" style="display:none;background:var(--red);color:#fff;border-radius:100px;padding:0 5px;font-size:.62rem;font-weight:900;margin-left:3px"></span></div>
+      <div class="ltab" id="frTab3" onclick="switchFrTab(3)">🔍 Kişi Ekle</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 12px;" id="frContent">
+  </div>
+</div>
+
+<!-- ══ MESAJLAR EKRANI ══ -->
+<div class="screen" id="msgsScreen">
+  <div class="ws-header">
+    
+    <div class="ws-name">💬 Mesajlar</div>
+  </div>
+  <div style="padding:10px 12px;flex-shrink:0;">
+    <input style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text-hi);font-size:.9rem;font-family:inherit;outline:none;-webkit-appearance:none;" type="text" placeholder="Kişi ara..." id="dmSearch" oninput="filterDMUsers()" autocorrect="off" autocapitalize="none">
+  </div>
+  <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 12px 8px;" id="dmUserList">
+  </div>
+</div>
+
+<!-- ══ PROFİL EKRANI ══ -->
+<div class="screen" id="profileScreen">
+  <div class="ws-header" style="background:var(--bg);border-bottom:none;padding-bottom:0;">
+    <div class="ws-name" style="font-size:.9rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;">Profil</div>
+  </div>
+  <!-- Profil Tab Bar -->
+  <div style="display:flex;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg);padding:0 4px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+    <div id="ptab-profile" onclick="switchProfTab('profile')" style="flex:1;flex-shrink:0;min-width:60px;padding:10px 4px;text-align:center;font-size:.72rem;font-weight:700;color:#fff;border-bottom:2px solid var(--accent);cursor:pointer;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:3px"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Profil</div>
+    <div id="ptab-appearance" onclick="switchProfTab('appearance')" style="flex:1;flex-shrink:0;min-width:60px;padding:10px 4px;text-align:center;font-size:.72rem;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="9"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/><circle cx="12" cy="12" r="3"/></svg>Görünüm</div>
+    <div id="ptab-sounds" onclick="switchProfTab('sounds')" style="flex:1;flex-shrink:0;min-width:60px;padding:10px 4px;text-align:center;font-size:.72rem;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:3px"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Sesler</div>
+    <div id="ptab-account" onclick="switchProfTab('account')" style="flex:1;flex-shrink:0;min-width:60px;padding:10px 4px;text-align:center;font-size:.72rem;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Hesap</div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;">
+
+    <!-- TAB: Profil -->
+    <div id="profTabBody-profile" style="display:flex;flex-direction:column;">
+      <!-- Banner -->
+      <div class="prof-banner" id="profBanner"></div>
+      <input type="file" id="photoFileInput" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+      <!-- Hero -->
+      <div class="prof-hero">
+        <div class="prof-av-wrap" onclick="triggerPhotoUpload()" style="position:relative;">
+          <div class="prof-av-ring" id="profAvBig"></div>
+          <div class="prof-status-dot"></div>
+        </div>
+        <div class="prof-display-name" id="profName"></div>
+        <div class="prof-handle" id="profHandleLabel"></div>
+        <!-- İstatistik Satırı -->
+        <div class="prof-stat-row">
+          <div class="prof-stat">
+            <span class="prof-stat-num" id="profMsgCount">—</span>
+            <span class="prof-stat-lbl">Mesaj</span>
+          </div>
+          <div class="prof-stat">
+            <span class="prof-stat-num" id="profFriendCount">—</span>
+            <span class="prof-stat-lbl">Arkadaş</span>
+          </div>
+          <div class="prof-stat">
+            <span class="prof-stat-num" id="profJoinDate">—</span>
+            <span class="prof-stat-lbl">Katılım</span>
+          </div>
+          <div class="prof-stat">
+            <span class="prof-stat-num"><svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#4ade80"/></svg></span>
+            <span class="prof-stat-lbl">Aktif</span>
+          </div>
+        </div>
+        <!-- Rozet Alanı -->
+        <div id="profBadgesRow" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:-4px;margin-bottom:4px;"></div>
+        <!-- Bio -->
+        <div class="prof-bio-card" style="width:100%;">
+          <div class="pbc-label" style="display:flex;align-items:center;gap:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-1px"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Hakkımda</div>
+          <textarea id="profBioInp" placeholder="Kendinizi kısaca tanıtın..." maxlength="160" rows="2" oninput="autoBioResize(this)"></textarea>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+            <span id="bioCharCount" style="font-size:.68rem;color:var(--muted);">0/160</span>
+            <button onclick="saveBio()" style="background:var(--accent);color:#fff;border:none;border-radius:8px;padding:5px 14px;font-size:.78rem;font-weight:700;cursor:pointer;">Kaydet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Görünüm -->
+    <div id="profTabBody-appearance" style="padding:16px;display:none;">
+      <!-- UI Stil Seçici -->
+      <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:0 2px 10px;display:flex;align-items:center;gap:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-1px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Arayüz Stili</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;" id="uiStyleGrid"></div>
+      <!-- Hazır Temalar -->
+      <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🎨 Hazır Temalar</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;" id="themePresetGrid">
+        <div onclick="applyThemePreset('nature')" id="tp-nature" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(74,143,64,.6);"><div style="height:44px;background:linear-gradient(135deg,#080f08,#0f1c0f);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#4a8f40;"></div><div style="height:3px;background:#4a8f40;border-radius:2px;width:24px;"></div></div><div style="background:#0c160c;padding:5px 8px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">🌿 Nature</span><span style="font-size:.58rem;background:rgba(74,143,64,.25);color:#6dbf67;border-radius:4px;padding:1px 5px;">✓</span></div></div>
+        <div onclick="applyThemePreset('midnight')" id="tp-midnight" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.1);"><div style="height:44px;background:linear-gradient(135deg,#060818,#0d1433);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#5b9bd5;"></div><div style="height:3px;background:#5b9bd5;border-radius:2px;width:24px;"></div></div><div style="background:#0a1228;padding:5px 8px;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">🌌 Gece Mavisi</span></div></div>
+        <div onclick="applyThemePreset('crimson')" id="tp-crimson" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.1);"><div style="height:44px;background:linear-gradient(135deg,#140808,#2a0a0a);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#e05555;"></div><div style="height:3px;background:#e05555;border-radius:2px;width:24px;"></div></div><div style="background:#180a0a;padding:5px 8px;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">🔴 Kızıl</span></div></div>
+        <div onclick="applyThemePreset('amethyst')" id="tp-amethyst" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.1);"><div style="height:44px;background:linear-gradient(135deg,#10081a,#1e0f38);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#9b59b6;"></div><div style="height:3px;background:#9b59b6;border-radius:2px;width:24px;"></div></div><div style="background:#140a24;padding:5px 8px;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">💜 Ametist</span></div></div>
+        <div onclick="applyThemePreset('amber')" id="tp-amber" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.1);"><div style="height:44px;background:linear-gradient(135deg,#120e02,#251a04);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#f0c040;"></div><div style="height:3px;background:#f0c040;border-radius:2px;width:24px;"></div></div><div style="background:#1a1404;padding:5px 8px;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">🟡 Kehribar</span></div></div>
+        <div onclick="applyThemePreset('teal')" id="tp-teal" style="cursor:pointer;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.1);"><div style="height:44px;background:linear-gradient(135deg,#041414,#081f1f);display:flex;align-items:center;justify-content:center;gap:4px;"><div style="width:6px;height:6px;border-radius:50%;background:#1abc9c;"></div><div style="height:3px;background:#1abc9c;border-radius:2px;width:24px;"></div></div><div style="background:#061818;padding:5px 8px;"><span style="font-size:.67rem;font-weight:800;color:rgba(255,255,255,.8);">🩵 Turkuaz</span></div></div>
+      </div>
+      <!-- SVG İkon - Kalıcı Aktif -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:12px;background:var(--surface);border-radius:12px;border:1px solid var(--border);">
+        <div>
+          <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);display:flex;align-items:center;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> SVG İkonlar</div>
+          <div style="font-size:.68rem;color:var(--muted);margin-top:2px;">Vektör tab ikonları</div>
+        </div>
+        <span style="background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.2);font-size:.68rem;font-weight:700;border-radius:100px;padding:3px 10px;">✓ Aktif</span>
+      </div>
+      <!-- Yazı Boyutu -->
+      <div style="margin-top:14px;">
+        <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:0 2px 10px;display:flex;align-items:center;gap:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg> Yazı Boyutu</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+          <div onclick="setFontSize('small')" id="fs-small" style="background:var(--surface);border:2px solid var(--border);border-radius:9px;padding:8px;text-align:center;cursor:pointer;transition:all .15s;">
+            <div style="font-size:.7rem;font-weight:900;color:var(--text-hi);">Küçük</div>
+            <div style="font-size:.58rem;color:var(--muted);margin-top:2px;">13px</div>
+          </div>
+          <div onclick="setFontSize('medium')" id="fs-medium" style="background:var(--accent);border:2px solid var(--accent);border-radius:9px;padding:8px;text-align:center;cursor:pointer;transition:all .15s;">
+            <div style="font-size:.75rem;font-weight:900;color:#fff;">Orta</div>
+            <div style="font-size:.6rem;color:rgba(255,255,255,.7);margin-top:2px;">15px</div>
+          </div>
+          <div onclick="setFontSize('large')" id="fs-large" style="background:var(--surface);border:2px solid var(--border);border-radius:9px;padding:8px;text-align:center;cursor:pointer;transition:all .15s;">
+            <div style="font-size:.82rem;font-weight:900;color:var(--text-hi);">Büyük</div>
+            <div style="font-size:.62rem;color:var(--muted);margin-top:2px;">17px</div>
+          </div>
+        </div>
+      </div>
+      <!-- Kompakt Mod -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:12px;background:var(--surface);border-radius:12px;border:1px solid var(--border);">
+        <div>
+          <div style="font-size:.82rem;font-weight:700;color:var(--text-hi);">Kompakt Mesaj Modu</div>
+          <div style="font-size:.68rem;color:var(--muted);margin-top:2px;">Mesajlar arası boşluğu azaltır</div>
+        </div>
+        <div onclick="toggleCompactMode()" id="compactModeToggle" style="width:42px;height:24px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);position:relative;cursor:pointer;transition:background .2s;">
+          <div id="compactModeKnob" style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3);"></div>
+        </div>
+      </div>
+      <div style="margin-top:18px;"><div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">🎨 Özel Tema Oluştur</div><div style="background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:14px;"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;"><div><div style="font-size:.67rem;color:var(--muted);margin-bottom:4px;">Ana Renk</div><input type="color" id="ct-accent" value="#5b9bd5" style="width:100%;height:34px;border-radius:8px;border:1px solid var(--border);cursor:pointer;padding:2px;background:var(--surface2);"></div><div><div style="font-size:.67rem;color:var(--muted);margin-bottom:4px;">Arka Plan</div><input type="color" id="ct-bg" value="#141618" style="width:100%;height:34px;border-radius:8px;border:1px solid var(--border);cursor:pointer;padding:2px;background:var(--surface2);"></div><div><div style="font-size:.67rem;color:var(--muted);margin-bottom:4px;">Yüzey</div><input type="color" id="ct-surface" value="#252830" style="width:100%;height:34px;border-radius:8px;border:1px solid var(--border);cursor:pointer;padding:2px;background:var(--surface2);"></div><div><div style="font-size:.67rem;color:var(--muted);margin-bottom:4px;">Mesaj Rengi</div><input type="color" id="ct-own" value="#2a4a7a" style="width:100%;height:34px;border-radius:8px;border:1px solid var(--border);cursor:pointer;padding:2px;background:var(--surface2);"></div></div><div style="display:flex;gap:8px;"><button onclick="applyCustomTheme()" style="flex:1;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px;font-size:.79rem;font-weight:700;cursor:pointer;">✓ Uygula</button><button onclick="resetCustomTheme()" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px;font-size:.79rem;font-weight:700;cursor:pointer;">↺ Sıfırla</button></div></div></div>
+    </div>
+
+    <!-- TAB: Sesler -->
+    <div id="profTabBody-sounds" style="padding:16px;display:none;">
+      <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:0 2px 10px;display:flex;align-items:center;gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-1px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.74a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Arama Zil Sesi</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="ringToneGrid"></div>
+      <div style="font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:14px 2px 10px;display:flex;align-items:center;gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-1px"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Bildirim Sesi</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;" id="notifToneGrid"></div>
+    </div>
+
+    <!-- TAB: Hesap -->
+    <div id="profTabBody-account" style="padding:16px;display:none;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <!-- Durum rozeti -->
+        <div id="myStatusBadge" style="display:none;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:8px 12px;font-size:.8rem;color:var(--muted);cursor:pointer;" onclick="openStatusModal()"></div>
+        <div class="prof-act" onclick="openStatusModal()" style="background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);">
+          <div class="prof-act-ic">💬</div>
+          <div class="prof-act-lb">Durumumu Ayarla</div>
+        </div>
+        <div class="prof-act" onclick="openSavedItems()" style="background:rgba(91,155,213,.06);border:1px solid rgba(91,155,213,.2);">
+          <div class="prof-act-ic">🔖</div>
+          <div class="prof-act-lb">Kaydedilenler</div>
+        </div>
+        <div class="prof-act" onclick="openRemindersModal()" style="background:rgba(240,192,64,.06);border:1px solid rgba(240,192,64,.2);">
+          <div class="prof-act-ic">⏰</div>
+          <div class="prof-act-lb">Hatırlatıcılar</div>
+        </div>
+        <div class="prof-act admin-action" id="adminPanelBtn" style="display:none" onclick="switchMainTab('home');openAdminPanel()">
+          <div class="prof-act-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 19h20v2H2v-2z" fill="#f0c040"/>
+  <path d="M2 19l3-9 4.5 4.5L12 5l2.5 9.5L19 10l3 9H2z" fill="#f0c040" stroke="#d4a017" stroke-width="1" stroke-linejoin="round"/>
+  <circle cx="2" cy="10" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+  <circle cx="12" cy="5" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+  <circle cx="22" cy="10" r="1.5" fill="#f0c040" stroke="#d4a017" stroke-width="0.5"/>
+</svg></div>
+          <div class="prof-act-lb">Admin Paneli</div>
+        </div>
+        <div class="prof-act" onclick="openChangePassword()">
+          <div class="prof-act-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3L22 7l-3-3"/></svg></div>
+          <div class="prof-act-lb">Şifre Değiştir</div>
+        </div>
+        <div class="prof-act" onclick="openBotPersonality()" style="background:rgba(91,155,213,.08);border:1px solid rgba(91,155,213,.2);">
+          <div class="prof-act-ic">🤖</div>
+          <div class="prof-act-lb">Bot Kişiliği</div>
+        </div>
+        <div class="prof-act" onclick="openTimeCapsule()" style="background:rgba(156,39,176,.08);border:1px solid rgba(156,39,176,.2);">
+          <div class="prof-act-ic">🧬</div>
+          <div class="prof-act-lb">Zaman Kapsülü</div>
+        </div>
+        <div class="prof-act danger" onclick="doLogout()">
+          <div class="prof-act-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+          <div class="prof-act-lb">Çıkış Yap</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Şifre Değiştir Modal (mobil için profil içinde kalır ama JS ile body'e taşınır) -->
+  <div id="changePwModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:99999;align-items:center;justify-content:center;padding:24px;">
+    <div style="background:var(--bg2);border-radius:16px;padding:22px;width:100%;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,.5);">
+      <div style="font-size:1rem;font-weight:900;color:var(--text-hi);margin-bottom:16px;">🔑 Şifre Değiştir</div>
+      <div class="login-err" id="pwChangeErr" style="margin-bottom:10px;"></div>
+      <input class="login-inp" id="pwOld" type="password" placeholder="Mevcut şifre..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="margin-bottom:10px;">
+      <input class="login-inp" id="pwNew" type="password" placeholder="Yeni şifre (min 6)..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="margin-bottom:10px;">
+      <input class="login-inp" id="pwNew2" type="password" placeholder="Yeni şifre tekrar..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="margin-bottom:16px;">
+      <div style="display:flex;gap:8px;">
+        <button onclick="closeChangePassword()" style="flex:1;padding:11px;background:var(--surface);border:none;border-radius:9px;color:var(--muted);font-size:.85rem;font-weight:700;cursor:pointer;">İptal</button>
+        <button onclick="submitChangePassword()" style="flex:1;padding:11px;background:#5b9bd5;border:none;border-radius:9px;color:#fff;font-size:.85rem;font-weight:700;cursor:pointer;">Kaydet</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ IMAGE OVERLAY ══ -->
+<div id="imgOverlay">
+  <div style="position:absolute;top:16px;right:16px;display:flex;gap:8px;z-index:10;">
+    <div onclick="downloadOverlayImg()" title="İndir" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-7-7 7 7 7-7"/></svg></div>
+    <div onclick="closeImg()" title="Kapat" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+  </div>
+  <img id="imgOverlayImg" src="" alt="">
+</div>
+
+<!-- ══ ARAMA EKRANI ══ -->
+<style>
+#callScreen {
+  background: linear-gradient(160deg, #0d1117 0%, #1a1e25 50%, #0f1520 100%) !important;
+}
+#callScreen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(91,155,213,.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(91,155,213,.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+.call-btn {
+  width: 58px; height: 58px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background .15s, transform .1s, border-color .15s;
+  position: relative;
+  flex-direction: column;
+  gap: 4px;
+}
+.call-btn:hover { background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.2); }
+.call-btn:active { transform: scale(.92); }
+.call-btn.active { background: rgba(91,155,213,.2); border-color: rgba(91,155,213,.4); }
+.call-btn-label {
+  font-size: .58rem; color: rgba(255,255,255,.45);
+  font-weight: 600; letter-spacing: .02em;
+  white-space: nowrap;
+}
+.call-end-btn {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e05555, #c0392b);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(224,85,85,.45), 0 0 0 0 rgba(224,85,85,.3);
+  transition: transform .1s, box-shadow .15s;
+  animation: callEndPulse 2.5s ease-in-out infinite;
+}
+.call-end-btn:active { transform: scale(.91); }
+@keyframes callEndPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(224,85,85,.45), 0 0 0 0 rgba(224,85,85,.25); }
+  50%      { box-shadow: 0 4px 24px rgba(224,85,85,.6), 0 0 0 10px rgba(224,85,85,0); }
+}
+#callAvatar {
+  position: relative;
+}
+#callAvatar::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(91,155,213,.3);
+  animation: avatarRing 2s ease-in-out infinite;
+}
+#callAvatar::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px solid rgba(91,155,213,.15);
+  animation: avatarRing 2s ease-in-out infinite .4s;
+}
+@keyframes avatarRing {
+  0%,100% { opacity: .6; transform: scale(1); }
+  50%      { opacity: .2; transform: scale(1.04); }
+}
+.call-wave-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--accent,#5b9bd5), rgba(91,155,213,.4));
+  animation: callWave 1.1s ease-in-out infinite;
+}
+.call-wave-bar:nth-child(1){height:10px;animation-delay:0s}
+.call-wave-bar:nth-child(2){height:18px;animation-delay:.15s}
+.call-wave-bar:nth-child(3){height:26px;animation-delay:.3s}
+.call-wave-bar:nth-child(4){height:18px;animation-delay:.45s}
+.call-wave-bar:nth-child(5){height:10px;animation-delay:.6s}
+@keyframes callWave {
+  0%,100% { transform: scaleY(.5); opacity: .5; }
+  50%      { transform: scaleY(1); opacity: 1; }
+}
+#callTimerDisplay { font-variant-numeric: tabular-nums; }
+</style>
+
+<div id="callScreen" style="display:none;position:fixed;inset:0;z-index:5000;flex-direction:column;align-items:center;justify-content:center;">
+
+  <!-- Top bar: minimize + timer -->
+  <div style="position:absolute;top:0;left:0;right:0;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 14px;display:flex;align-items:center;justify-content:space-between;z-index:20;">
+    <!-- Timer -->
+    <div id="callTimerDisplay" style="display:none;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:5px 14px;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.06em;">0:00</div>
+    <div style="flex:1;"></div>
+    <!-- Minimize -->
+    <div id="callMinimizeBtn" onclick="minimizeCallScreen()" title="Küçült"
+      style="width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </div>
+  </div>
+
+  <!-- Video alanı -->
+  <div id="callVideoArea" style="display:none;position:relative;width:100%;height:100%;background:#000;">
+    <video id="remoteVideo" autoplay playsinline style="width:100%;height:100%;object-fit:contain;background:#000;"></video>
+    <video id="localVideo" autoplay playsinline muted style="position:absolute;bottom:110px;right:16px;width:110px;height:82px;object-fit:cover;border-radius:14px;border:2px solid rgba(255,255,255,.2);background:#222;cursor:move;z-index:10;box-shadow:0 4px 16px rgba(0,0,0,.5);"></video>
+    <div id="callScreenBadge" style="display:none;position:absolute;top:60px;left:50%;transform:translateX(-50%);background:rgba(46,204,113,.2);border:1px solid rgba(46,204,113,.4);border-radius:100px;padding:5px 16px;font-size:.78rem;font-weight:700;color:#2ecc71;white-space:nowrap;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2.5" style="vertical-align:middle;margin-right:4px"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Ekran Paylaşılıyor
+    </div>
+  </div>
+
+  <!-- Sesli arama bilgi alanı -->
+  <div id="callAudioArea" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:20px;gap:0;">
+
+    <!-- Avatar + ring animasyonu -->
+    <div style="position:relative;margin-bottom:28px;">
+      <div id="callAvatar" style="width:96px;height:96px;border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;font-weight:900;color:#fff;background:linear-gradient(135deg,#2a3a52,#3a4d6a);box-shadow:0 8px 32px rgba(0,0,0,.4);position:relative;z-index:2;">?</div>
+    </div>
+
+    <!-- İsim -->
+    <div id="callName" style="font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-.01em;text-align:center;">—</div>
+
+    <!-- Durum -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px;">
+      <div id="callStatus" style="font-size:.85rem;color:rgba(255,255,255,.5);font-weight:500;">Bağlanıyor...</div>
+      <div id="callQualityIndicator" style="display:none;align-items:center;gap:2px;">
+        <div style="width:3px;height:8px;border-radius:1px;background:var(--accent,#5b9bd5);" id="cqi1"></div>
+        <div style="width:3px;height:11px;border-radius:1px;background:var(--accent,#5b9bd5);" id="cqi2"></div>
+        <div style="width:3px;height:14px;border-radius:1px;background:var(--accent,#5b9bd5);" id="cqi3"></div>
+        <div style="width:3px;height:17px;border-radius:1px;background:rgba(255,255,255,.2);" id="cqi4"></div>
+      </div>
+    </div>
+
+    <!-- Ses dalgaları -->
+    <div id="callWaves" style="display:flex;gap:5px;align-items:center;height:36px;margin-bottom:20px;">
+      <div class="call-wave-bar"></div><div class="call-wave-bar"></div><div class="call-wave-bar"></div><div class="call-wave-bar"></div><div class="call-wave-bar"></div>
+    </div>
+
+    <!-- Katılımcı avatarları -->
+    <div id="callParticipants" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:300px;"></div>
+  </div>
+
+  <!-- Kontroller -->
+  <div style="padding:20px 24px calc(20px + env(safe-area-inset-bottom,0px));width:100%;flex-shrink:0;">
+    <!-- Ana kontroller satırı -->
+    <div style="display:flex;justify-content:center;align-items:flex-end;gap:14px;margin-bottom:18px;">
+
+      <!-- Mikrofon -->
+      <div class="call-btn" id="callMuteBtn" onclick="toggleMute()" title="Mikrofon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <rect x="9" y="2" width="6" height="11" rx="3" fill="rgba(255,255,255,.85)"/>
+          <path d="M5 11a7 7 0 0 0 14 0" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="12" y1="18" x2="12" y2="22" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="9" y1="22" x2="15" y2="22" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="call-btn-label">Mikrofon</span>
+      </div>
+
+      <!-- Ekran Paylaş -->
+      <div class="call-btn" id="callShareScreenBtn" onclick="toggleScreenShare()" title="Ekran Paylaş">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+        </svg>
+        <span class="call-btn-label">Ekran</span>
+      </div>
+
+      <!-- Kapat (ortada büyük) -->
+      <div class="call-end-btn" onclick="endCall()" title="Aramayı Bitir">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.24 1.02L6.6 10.8z"/>
+        </svg>
+      </div>
+
+      <!-- Kamera -->
+      <div class="call-btn" id="callCamBtn" onclick="toggleCamera()" title="Kamera">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(255,255,255,.85)">
+          <path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+        </svg>
+        <span class="call-btn-label">Kamera</span>
+      </div>
+
+      <!-- Kişi Ekle -->
+      <div class="call-btn" id="callAddPersonBtn" onclick="openCallInviteDialog()" title="Kişi Ekle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <circle cx="10" cy="8" r="4" stroke="rgba(255,255,255,.85)" stroke-width="2"/>
+          <path d="M2 20c0-4 3.6-7 8-7" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="19" y1="13" x2="19" y2="21" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="15" y1="17" x2="23" y2="17" stroke="rgba(255,255,255,.85)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="call-btn-label">Ekle</span>
+      </div>
+
+    </div>
+
+    <!-- Hoparlör tek başına alt satır -->
+    <div style="display:flex;justify-content:center;">
+      <div class="call-btn" id="callSpeakerBtn" onclick="toggleSpeaker()" title="Hoparlör" style="width:48px;height:40px;border-radius:12px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M11 5L6 9H2v6h4l5 4V5z" fill="rgba(255,255,255,.85)"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ GELEN ARAMA BANNER ══ -->
+<style>
+#incomingCallScreen {
+  animation: incomingSlideDown .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes incomingSlideDown {
+  from { opacity:0; transform:translateX(-50%) translateY(-20px) scale(.95); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0) scale(1); }
+}
+#incomingCallScreen .inc-reject {
+  width:48px;height:48px;border-radius:16px;
+  background:rgba(224,85,85,.2);border:1px solid rgba(224,85,85,.35);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .15s,transform .1s;
+}
+#incomingCallScreen .inc-reject:active { transform:scale(.9); background:rgba(224,85,85,.4); }
+#incomingCallScreen .inc-accept {
+  width:48px;height:48px;border-radius:16px;
+  background:rgba(46,204,113,.2);border:1px solid rgba(46,204,113,.35);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .15s,transform .1s;
+  animation: acceptPulse 1.8s ease-in-out infinite;
+}
+#incomingCallScreen .inc-accept:active { transform:scale(.9); }
+@keyframes acceptPulse {
+  0%,100%{ box-shadow:0 0 0 0 rgba(46,204,113,.3); }
+  50%    { box-shadow:0 0 0 8px rgba(46,204,113,0); }
+}
+</style>
+
+<div id="incomingCallScreen" style="display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);z-index:6000;width:calc(100% - 24px);max-width:420px;background:rgba(22,26,34,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:14px 16px;box-shadow:0 12px 40px rgba(0,0,0,.7),0 0 0 1px rgba(91,155,213,.1);flex-direction:row;align-items:center;gap:12px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;">
+  <!-- Accent line top -->
+  <div style="position:absolute;top:0;left:20px;right:20px;height:2px;background:linear-gradient(90deg,transparent,rgba(91,155,213,.6),transparent);border-radius:0 0 2px 2px;"></div>
+  <!-- Avatar -->
+  <div id="incomingCallAv" style="width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#2a3a52,#3a4d6a);box-shadow:0 4px 12px rgba(0,0,0,.3);"></div>
+  <!-- Info -->
+  <div style="flex:1;min-width:0;">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;">
+      <div style="width:7px;height:7px;border-radius:50%;background:#2ecc71;animation:pulse 1.5s infinite;flex-shrink:0;"></div>
+      <div style="font-size:.68rem;color:rgba(46,204,113,.8);font-weight:700;letter-spacing:.05em;text-transform:uppercase;" id="incomingCallType">Sesli Arama</div>
+    </div>
+    <div id="incomingCallName" style="font-size:.95rem;font-weight:900;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+  </div>
+  <!-- Buttons -->
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <div class="inc-reject" onclick="rejectCall()" data-nodrag title="Reddet">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(224,85,85,.9)" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+    <div class="inc-accept" onclick="acceptCall()" data-nodrag title="Cevapla">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="rgba(46,204,113,.9)">
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.24 1.02L6.6 10.8z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MİNİMİZE ARAMA ÇUBUĞU ══ -->
+<style>
+#callMinimizedBar { animation: minBarSlideUp .3s cubic-bezier(.34,1.56,.64,1); }
+@keyframes minBarSlideUp {
+  from { opacity:0; transform:translateX(-50%) translateY(16px); }
+  to   { opacity:1; transform:translateX(-50%) translateY(0); }
+}
+</style>
+<div id="callMinimizedBar" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:5100;background:rgba(18,22,30,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(91,155,213,.2);border-radius:16px;padding:10px 14px;box-shadow:0 4px 24px rgba(0,0,0,.6),0 0 0 1px rgba(91,155,213,.08);flex-direction:row;align-items:center;gap:10px;cursor:grab;white-space:nowrap;touch-action:none;user-select:none;-webkit-user-select:none;">
+  <!-- Live indicator -->
+  <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;">
+    <div style="width:7px;height:7px;border-radius:50%;background:#2ecc71;animation:pulse 1.5s infinite;"></div>
+  </div>
+  <div id="callMinBar_name" style="font-size:.85rem;font-weight:800;color:#fff;max-width:120px;overflow:hidden;text-overflow:ellipsis;"></div>
+  <div id="callMinBar_status" style="font-size:.75rem;color:rgba(255,255,255,.45);font-variant-numeric:tabular-nums;min-width:32px;"></div>
+  <!-- Maximize -->
+  <div onclick="event.stopPropagation();maximizeCallScreen()" title="Büyüt" style="width:28px;height:28px;border-radius:9px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:background .15s;">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+  </div>
+  <!-- End call -->
+  <div onclick="event.stopPropagation();endCall()" title="Aramayı Bitir" style="width:28px;height:28px;border-radius:9px;background:rgba(224,85,85,.2);border:1px solid rgba(224,85,85,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:background .15s;">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="rgba(224,85,85,.9)">
+      <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.11.35.03.74-.24 1.02L6.6 10.8z"/>
+    </svg>
+  </div>
+</div>
+
+<div id="turkQuoteOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center;padding:24px;">
+  <div id="turkQuoteBox" style="width:100%;max-width:400px;background:linear-gradient(135deg,#1c1f23,#2c3038);border-radius:20px;padding:28px 24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.15);position:relative;">
+    
+    <div style="font-size:.65rem;font-weight:900;color:rgba(255,255,255,.5);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px" id="turkQuoteEra"></div>
+    <div style="font-size:.75rem;font-weight:900;color:rgba(255,255,255,.6);margin-bottom:12px;letter-spacing:.05em" id="turkQuoteRuler"></div>
+    <div style="font-size:1.5rem;color:rgba(255,255,255,.25);line-height:1;margin-bottom:8px">"</div>
+    <div style="font-size:.95rem;color:#fff;line-height:1.7;font-style:italic;font-weight:600;margin-bottom:8px" id="turkQuoteText"></div>
+    <div style="font-size:1.5rem;color:rgba(255,255,255,.25);line-height:1;margin-bottom:20px">"</div>
+    <div style="width:40px;height:2px;background:rgba(255,255,255,.3);margin:0 auto 20px;"></div>
+    <button onclick="closeTurkQuote()" style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 28px;border-radius:100px;font-size:.85rem;font-weight:700;cursor:pointer;">☪️ Kapat</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<!-- ══ GRUP OLUŞTUR MODAL ══ -->
+<div id="createGroupModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:3000;align-items:flex-end;justify-content:center;">
+  <div style="background:var(--bg2);border-radius:20px 20px 0 0;width:100%;max-width:480px;max-height:88vh;display:flex;flex-direction:column;padding:20px 16px 32px;" onclick="event.stopPropagation()">
+    <div style="width:40px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin:0 auto 16px;"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:1rem;font-weight:900;color:var(--text-hi);">👥 Yeni Grup Oluştur</div>
+      <div onclick="closeCGModal()" style="cursor:pointer;color:var(--muted);font-size:1.2rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <input id="cgName" class="admin-inp" placeholder="Grup adı..." style="margin-bottom:12px;" autocorrect="off">
+    <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;">Üye Ekle</div>
+    <input id="cgSearch" class="admin-inp" placeholder="Kullanıcı ara..." style="margin-bottom:8px;" oninput="loadCGUsers(this.value.toLowerCase())" autocorrect="off" autocapitalize="none">
+    <div id="cgUserList" style="flex:1;overflow-y:auto;max-height:200px;border:1px solid var(--border);border-radius:8px;padding:4px;margin-bottom:10px;"></div>
+    <div style="font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:6px;">SEÇİLENLER</div>
+    <div id="cgSelectedList" style="min-height:32px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:4px;"></div>
+    <button onclick="submitCreateGroup()" style="background:var(--blue);border:none;border-radius:10px;color:#fff;font-size:.9rem;font-weight:700;padding:13px;cursor:pointer;width:100%;">✚ Grubu Oluştur</button>
+  </div>
+</div>
+
+<!-- ══ GAMES SCREEN (Mobile) ══ -->
+<!-- ══ CANLI SOHBET ODASI (Mobile) ══ -->
+<div class="screen" id="liveRoomScreen">
+  <div class="ws-header" style="background:linear-gradient(135deg,#0a140a,#0f1f0f);">
+    <div onclick="switchMainTab('home')" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,.6);flex-shrink:0;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </div>
+    <div style="flex:1;display:flex;align-items:center;gap:8px;">
+      <div style="font-size:.92rem;font-weight:900;color:#fff;">📡 Canlı Oda</div>
+      <div id="mobLiveBadge" style="display:none;align-items:center;gap:5px;background:rgba(224,80,80,.15);border:1px solid rgba(224,80,80,.35);border-radius:100px;padding:3px 9px;font-size:.65rem;font-weight:900;color:#e05555;letter-spacing:.05em;">
+        <div style="width:6px;height:6px;border-radius:50%;background:#e05555;animation:livepulse 1.2s ease-in-out infinite;"></div>CANLI
+      </div>
+    </div>
+    <span id="mobLiveViewers" style="font-size:.72rem;color:rgba(255,255,255,.35);flex-shrink:0;"></span>
+  </div>
+
+  <!-- Video Alanı -->
+  <div id="mobLiveVideoPane" style="background:#050d05;position:relative;width:100%;aspect-ratio:16/9;flex-shrink:0;overflow:hidden;max-height:42vh;">
+    <div id="mobLivePlaceholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.2);">
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(74,143,64,.08);border:1.5px solid rgba(74,143,64,.15);display:flex;align-items:center;justify-content:center;font-size:1.6rem;">📡</div>
+      <div style="font-size:.85rem;font-weight:700;color:rgba(255,255,255,.25);">Şu an aktif yayın yok</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.15);text-align:center;padding:0 24px;line-height:1.5;">Yayın başlatmak için aşağıdaki butonları kullan</div>
+    </div>
+    <video id="mobLiveMainVideo" autoplay playsinline style="width:100%;height:100%;object-fit:contain;display:none;"></video>
+    <div id="mobLiveConfGrid" style="display:none;position:absolute;inset:0;padding:8px;gap:6px;grid-template-columns:1fr 1fr;overflow:hidden;"></div>
+    <div id="mobLiveStreamInfo" style="display:none;position:absolute;top:10px;left:10px;z-index:5;align-items:center;gap:6px;">
+      <div style="background:rgba(0,0,0,.6);backdrop-filter:blur(4px);color:#fff;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:7px;border:1px solid rgba(255,255,255,.1);" id="mobLiveStreamHost"></div>
+    </div>
+  </div>
+
+  <!-- Kontrol Butonları (yayın aktifken) -->
+  <div id="mobLiveControlBar" style="display:none;background:rgba(0,0,0,.5);padding:10px 16px;flex-shrink:0;flex-direction:row;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(74,143,64,.1);">
+    <button id="mobLiveMuteBtn" onclick="mobLiveMute()" style="width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+    </button>
+    <button id="mobLiveCamBtn" onclick="mobLiveCam()" style="display:none;width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,.12);color:#fff;align-items:center;justify-content:center;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+    </button>
+    <button onclick="mobLiveEnd()" style="width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;background:rgba(224,80,80,.85);color:#fff;display:flex;align-items:center;justify-content:center;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <!-- Başlat Butonları (yayın yokken) -->
+  <div id="mobLiveStartBtns" style="display:flex;gap:8px;padding:10px 14px;flex-shrink:0;border-bottom:1px solid rgba(74,143,64,.08);">
+    <button onclick="mobLiveStartStream()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(224,80,80,.1);border:1.5px solid rgba(224,80,80,.3);color:#f07070;border-radius:10px;padding:9px 12px;font-size:.78rem;font-weight:800;font-family:inherit;cursor:pointer;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>Ekran Yayını
+    </button>
+    <button onclick="mobLiveStartConference()" style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(74,143,64,.1);border:1.5px solid rgba(74,143,64,.3);color:#6dbf67;border-radius:10px;padding:9px 12px;font-size:.78rem;font-weight:800;font-family:inherit;cursor:pointer;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Konferans
+    </button>
+  </div>
+
+  <!-- Canlı Sohbet -->
+  <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(180deg,#080f08 0%,#060d06 100%);">
+    <div style="padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:6px;flex-shrink:0;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span style="font-size:.78rem;font-weight:800;color:rgba(255,255,255,.5);">Canlı Sohbet</span>
+      <span id="mobLiveMsgCount" style="background:rgba(74,143,64,.18);color:#6dbf67;border-radius:100px;font-size:.62rem;padding:1px 6px;font-weight:900;">0</span>
+    </div>
+    <div id="mobLiveChatMsgs" style="flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:4px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;">
+      <div style="display:flex;gap:6px;align-items:flex-start;padding:2px 0;">
+        <div style="flex:1;min-width:0;"><div style="font-size:.73rem;color:rgba(255,255,255,.25);font-style:italic;">Sohbet başladı 👋</div></div>
+      </div>
+    </div>
+    <div style="padding:8px 12px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid rgba(255,255,255,.05);flex-shrink:0;background:rgba(0,0,0,.2);">
+      <div style="display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px 10px;">
+        <input id="mobLiveChatInput" type="text" placeholder="Mesaj yaz..." maxlength="200" autocomplete="off"
+          onkeydown="if(event.key==='Enter')mobLiveSendMsg()"
+          style="flex:1;background:none;border:none;color:#fff;font-size:.84rem;font-family:inherit;outline:none;">
+        <button onclick="mobLiveSendMsg()" style="width:30px;height:30px;border:none;border-radius:8px;cursor:pointer;background:rgba(74,143,64,.25);color:#6dbf67;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" id="gamesScreen">
+  <div class="ws-header">
+    <div class="ws-name">🎮 Mini Oyunlar</div>
+    <div class="ws-av" onclick="openProfile()"><div class="sdot"></div></div>
+  </div>
+  <div id="gamesScreenBody" style="flex:1;overflow-y:auto;padding:16px;"></div>
+</div>
+
+<!-- ══ GAME PLAY MODAL ══ -->
+<div id="gamePlayModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:99999;align-items:center;justify-content:center;flex-direction:column;">
+  <div id="gamePlayBox" style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px;width:min(480px,95vw);max-height:90vh;overflow-y:auto;">
+    <div id="gamePlayContent"></div>
+  </div>
+</div>
+
+<!-- ══ WATCH SCREEN (Mobile) ══ -->
+<div class="screen" id="watchScreen">
+  <div class="ws-header">
+    <div class="ws-name">📺 Canlı İzle</div>
+    <span class="watch-live-badge">CANLI</span>
+    <div class="ws-av" onclick="openProfile()"><div class="sdot"></div></div>
+  </div>
+  <div id="watchScreenBody" style="flex:1;overflow-y:auto;position:relative;">
+    <!-- NatureBot Ev Alanı -->
+    <div id="natureBotHomeZone" style="
+      display:none;flex-direction:column;
+      align-items:center;justify-content:center;
+      pointer-events:none;
+      width:100%;padding:20px 0 60px;
+    ">
+      <!-- Ev zemini ve ağaçlar -->
+      <svg width="260" height="120" viewBox="0 0 260 120" fill="none" style="margin-bottom:-8px;">
+        <!-- Sol ağaç -->
+        <path d="M46 118 C46 84 28 54 34 32 C40 10 60 26 46 118Z" fill="#4a8f40" opacity=".9"/>
+        <line x1="46" y1="118" x2="46" y2="32" stroke="#2d6b25" stroke-width="1.5"/>
+        <line x1="46" y1="72" x2="34" y2="90" stroke="#3a7a34" stroke-width="1"/>
+        <line x1="46" y1="72" x2="58" y2="90" stroke="#3a7a34" stroke-width="1"/>
+        <line x1="46" y1="50" x2="37" y2="64" stroke="#4a8f40" stroke-width=".7"/>
+        <!-- Orta büyük ağaç -->
+        <path d="M130 118 C130 68 106 30 114 6 C122 -10 150 12 130 118Z" fill="#3a7a34"/>
+        <line x1="130" y1="118" x2="130" y2="6" stroke="#2d6b25" stroke-width="2"/>
+        <line x1="130" y1="58" x2="114" y2="80" stroke="#4a8f40" stroke-width="1.2"/>
+        <line x1="130" y1="58" x2="146" y2="80" stroke="#4a8f40" stroke-width="1.2"/>
+        <line x1="130" y1="34" x2="118" y2="50" stroke="#4a8f40" stroke-width=".9"/>
+        <line x1="130" y1="34" x2="142" y2="50" stroke="#4a8f40" stroke-width=".9"/>
+        <!-- Sağ ağaç -->
+        <path d="M214 118 C214 84 196 54 202 32 C208 10 228 26 214 118Z" fill="#4a8f40" opacity=".9"/>
+        <line x1="214" y1="118" x2="214" y2="32" stroke="#2d6b25" stroke-width="1.5"/>
+        <line x1="214" y1="72" x2="202" y2="90" stroke="#3a7a34" stroke-width="1"/>
+        <line x1="214" y1="72" x2="226" y2="90" stroke="#3a7a34" stroke-width="1"/>
+        <!-- Küçük çiçekler -->
+        <circle cx="78" cy="112" r="6" fill="rgba(107,191,103,.7)"/>
+        <circle cx="92" cy="108" r="4" fill="rgba(107,191,103,.5)"/>
+        <circle cx="160" cy="112" r="6" fill="rgba(107,191,103,.7)"/>
+        <circle cx="174" cy="108" r="4" fill="rgba(107,191,103,.5)"/>
+        <circle cx="68" cy="106" r="3" fill="rgba(150,220,100,.6)"/>
+        <circle cx="184" cy="106" r="3" fill="rgba(150,220,100,.6)"/>
+        <!-- Zemin -->
+        <line x1="4" y1="118" x2="256" y2="118" stroke="rgba(74,143,64,.5)" stroke-width="2"/>
+        <rect x="4" y="118" width="252" height="3" fill="rgba(74,143,64,.2)" rx="1"/>
+      </svg>
+      <!-- Yazı -->
+      <div style="font-size:.75rem;font-weight:900;color:rgba(107,191,103,.8);letter-spacing:.14em;text-transform:uppercase;margin-top:18px;text-shadow:0 0 12px rgba(74,143,64,.4);">🌿 NatureBot'un Yuvası</div>
+      <div style="font-size:.65rem;color:rgba(74,143,64,.5);margin-top:6px;">Robota dokunarak uyandır!</div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Emoji Modal -->
+<div class="ce-modal-overlay" id="ceModal">
+    <div class="ce-upload-area" id="ceUploadArea" onclick="document.getElementById('ceFileInput').click()">
+      <div style="font-size:1.5rem;margin-bottom:4px;">🖼️</div>
+      <div>GIF veya PNG/JPG yükle</div>
+      <div style="font-size:.75rem;margin-top:2px;opacity:.6;">Hareketli GIF desteklenir</div>
+    </div>
+    <input type="file" id="ceFileInput" accept="image/*,.gif" style="display:none" onchange="cePrevFile(this)">
+    <div class="ce-preview" id="cePreview"><span style="color:var(--muted);font-size:.7rem;text-align:center;">Önizleme</span></div>
+    <input type="text" id="ceNameInp" placeholder="Emoji adı (örn: dance, fire, patlama)" maxlength="32">
+    <div class="ce-modal-btns">
+      <button class="ce-cancel" onclick="closeCeModal()">İptal</button>
+      <button class="ce-save" onclick="saveCustomEmoji()">Ekle ✓</button>
+    </div>
+  </div>
+
+<!-- ══ UI KIT MODAL ══ -->
+
+
+<!-- ══ KULLANICI PROFİL GÖRÜNTÜLE MODAL ══ -->
+<div id="userProfileModal" onclick="closeUserProfile()">
+  <div class="up-card" onclick="event.stopPropagation()">
+    <div class="up-banner" id="upBanner">
+      <div class="up-close" onclick="closeUserProfile()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <div class="up-body-scroll">
+      <div id="upBody" style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+        <div class="ld"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ANKET OLUŞTUR MODAL ══ -->
+<div id="createPollModal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:6000;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;max-width:380px;width:100%;" onclick="event.stopPropagation()">
+    <div style="font-size:1rem;font-weight:900;color:var(--text-hi);margin-bottom:16px;">📊 Anket Oluştur</div>
+    <input id="pollQuestion" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text-hi);font-size:.88rem;outline:none;font-family:inherit;margin-bottom:10px;box-sizing:border-box;" placeholder="Soru girin..." maxlength="120">
+    <div id="pollOptionsWrap" style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+      <input class="poll-opt-inp" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text-hi);font-size:.85rem;outline:none;font-family:inherit;box-sizing:border-box;" placeholder="Seçenek 1" maxlength="80">
+      <input class="poll-opt-inp" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text-hi);font-size:.85rem;outline:none;font-family:inherit;box-sizing:border-box;" placeholder="Seçenek 2" maxlength="80">
+    </div>
+    <button onclick="addPollOption()" style="width:100%;padding:9px;background:var(--surface2);border:1px dashed var(--border);border-radius:8px;color:var(--muted);font-size:.82rem;cursor:pointer;margin-bottom:14px;">+ Seçenek Ekle</button>
+    <div style="display:flex;gap:8px;">
+      <button onclick="document.getElementById('createPollModal').style.display='none'" style="flex:1;padding:11px;background:var(--surface2);border:none;border-radius:9px;color:var(--muted);font-size:.85rem;font-weight:700;cursor:pointer;">İptal</button>
+      <button onclick="submitPoll()" style="flex:1;padding:11px;background:var(--accent);border:none;border-radius:9px;color:#fff;font-size:.85rem;font-weight:700;cursor:pointer;">📊 Oluştur</button>
+    </div>
+  </div>
+</div>
+<!-- ══ DÜZENLEME GEÇMİŞİ MODAL ══ -->
+<div id="editHistoryModal" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:6000;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;max-width:380px;width:100%;max-height:70vh;overflow-y:auto;" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div style="font-size:1rem;font-weight:900;color:var(--text-hi);">✏️ Düzenleme Geçmişi</div>
+      <span onclick="document.getElementById('editHistoryModal').style.display='none'" style="cursor:pointer;color:var(--muted);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+    </div>
+    <div id="editHistoryBody"></div>
+  </div>
+</div>
+
+<!-- ══ ÜYELİK SÖZLEŞMESİ & KVKK MODALİ ══ -->
+<div id="tosModal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.82);overflow-y:auto;-webkit-overflow-scrolling:touch;">
+  <div style="max-width:700px;margin:30px auto 60px;background:#1a1a1a;border-radius:14px;padding:28px 24px;color:#ddd;font-size:13.5px;line-height:1.75;font-family:system-ui,sans-serif;">
+
+    <!-- Sekme Başlıkları -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid #333;padding-bottom:12px;">
+      <button id="tabTos" onclick="showTosTab('tos')"
+        style="flex:1;padding:9px;border-radius:8px;border:none;background:#2ecc71;color:#fff;font-weight:700;font-size:13px;cursor:pointer;">
+        📄 Üyelik Sözleşmesi
+      </button>
+      <button id="tabKvkk" onclick="showTosTab('kvkk')"
+        style="flex:1;padding:9px;border-radius:8px;border:none;background:#2a2a2a;color:#aaa;font-weight:700;font-size:13px;cursor:pointer;">
+        🔒 KVKK Aydınlatma Metni
+      </button>
+    </div>
+
+    <!-- ── SÖZLEŞME SEKMESİ ── -->
+    <div id="tosTabContent">
+      <h2 style="color:#fff;font-size:17px;margin-bottom:4px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 120 120" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="lctos"><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z"/></clipPath></defs><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="#0e2b0c"/><g clip-path="url(#lctos)"><line x1="60" y1="14" x2="60" y2="108" stroke="#4a8f40" stroke-width="1.2"/><line x1="60" y1="35" x2="78" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="35" x2="42" y2="55" stroke="#4a8f40" stroke-width=".7"/><line x1="60" y1="52" x2="82" y2="68" stroke="#4a8f40" stroke-width=".6"/><line x1="60" y1="52" x2="38" y2="68" stroke="#4a8f40" stroke-width=".6"/></g><path d="M60 14 C76 22 98 44 98 68 C98 92 81 108 60 108 C39 108 22 92 22 68 C22 44 44 22 60 14Z" fill="none" stroke="#4a8f40" stroke-width="1.2"/></svg> NATURE.CO ÜYELİK SÖZLEŞMESİ</h2>
+      <p style="text-align:center;color:#888;font-size:12px;margin-bottom:20px;">Son güncelleme: Mart 2026</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">1. TARAFLAR VE KAPSAM</h3>
+      <p>Bu Üyelik Sözleşmesi ("Sözleşme"), Nature.co platformu ("Platform") ile platforma üye olan gerçek kişi ("Üye") arasında akdedilmektedir. Sözleşme, Türkiye Cumhuriyeti kanunlarına ve 6698 sayılı Kişisel Verilerin Korunması Kanunu'na (KVKK) uygun olarak düzenlenmiştir. Platforma üye olarak bu sözleşmeyi okuduğunuzu, anladığınızı ve tüm şartları kabul ettiğinizi beyan etmiş olursunuz.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">2. ÜYELİK KOŞULLARI</h3>
+      <p>Platforma üye olabilmek için 18 yaşını doldurmuş olmak gerekmektedir. 18 yaşından küçük kişilerin veli/vasi onayı olmaksızın üye olması yasaktır. Üye, kayıt sırasında gerçeğe aykırı bilgi vermemekle yükümlüdür; aksi hâlde hesap kalıcı olarak kapatılır ve gerektiğinde yetkili mercilere bildirilir.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">3. KİŞİSEL VERİLER VE KVKK</h3>
+      <p>Üyelik sırasında toplanan kişisel veriler (kullanıcı adı, e-posta adresi) ve özel nitelikli kişisel veri sayılan köken/milliyet bilgisi; 6698 sayılı KVKK'nın 5. ve 6. maddeleri kapsamında, yalnızca aşağıdaki amaçlarla ve <strong style="color:#fff;">açık rızanıza</strong> dayanılarak işlenmektedir:</p>
+      <ul style="margin:8px 0 8px 20px;">
+        <li>Üyelik kaydının oluşturulması ve yönetilmesi</li>
+        <li>Hesap güvenliğinin ve platform bütünlüğünün sağlanması</li>
+        <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+      </ul>
+      <p>Köken/milliyet bilgisi KVKK kapsamında <em>özel nitelikli kişisel veri</em> olup Kurul'un öngördüğü yeterli güvenlik tedbirleri alınarak işlenmektedir. Bu veri üçüncü kişilerle paylaşılmaz, satılmaz veya ticari amaçla kullanılmaz. Detaylı bilgi için <strong style="color:#fff;">KVKK Aydınlatma Metni</strong> sekmesini inceleyiniz.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">4. YASAK İÇERİK VE DAVRANIŞLAR</h3>
+      <p>Üyeler aşağıdaki içerik ve davranışlardan kesinlikle kaçınmakla yükümlüdür:</p>
+      <ul style="margin:8px 0 8px 20px;">
+        <li>Hakaret, küfür, iftira veya tehdit içeren paylaşımlar</li>
+        <li>Nefret söylemi, ırk/din/cinsiyet ayrımcılığı</li>
+        <li>Türk Ceza Kanunu'na aykırı her türlü içerik</li>
+        <li>Telif hakkı ihlali içeren materyal paylaşımı</li>
+        <li>Spam, reklam veya yanıltıcı içerik</li>
+        <li>Başka üyelerin hesaplarına yetkisiz erişim girişimi</li>
+        <li>Platform güvenliğini tehdit eden yazılım veya kod paylaşımı</li>
+      </ul>
+      <p>Bu kurallara aykırı davranışlar tespit edildiğinde hesap askıya alınır veya kalıcı olarak kapatılır. Suç teşkil eden içerikler Türk makamlarıyla paylaşılabilir.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">5. FİKRİ MÜLKİYET</h3>
+      <p>Platform üzerindeki logo, tasarım, yazılım ve içerikler Nature.co'ya aittir ve 5846 sayılı FSEK kapsamında korunmaktadır. Üyelerin paylaştığı içerikler kendilerine ait olmakla birlikte, bu içeriklerin platformda görüntülenmesi için Nature.co'ya sınırlı, münhasır olmayan, ücretsiz bir lisans verilmiş sayılır. Bu lisans, üyeliğin sona ermesiyle birlikte otomatik olarak geçerliliğini yitirir.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">6. HİZMET DEĞİŞİKLİKLERİ VE FESİH</h3>
+      <p>Nature.co, platformda değişiklik yapma, hizmeti askıya alma veya sonlandırma hakkını saklı tutar. Üye, dilediği zaman hesabını kapatabilir. Sözleşme ihlali tespit edildiğinde hesap önceden bildirim yapılmaksızın kapatılabilir. <strong style="color:#fff;">6502 sayılı Tüketicinin Korunması Hakkında Kanun</strong> kapsamındaki tüketici hakları bu maddeden bağımsız olarak saklıdır ve hiçbir sözleşme hükmü ile kısıtlanamaz.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">7. SORUMLULUK SINIRLAMASI</h3>
+      <p>Nature.co; üyeler arası iletişimden, üçüncü taraf içeriklerinden, teknik arızalardan, siber saldırılardan veya mücbir sebeplerden doğan doğrudan ya da dolaylı zararlardan sorumlu tutulamaz. Platform "olduğu gibi" sunulmakta olup kesintisiz hizmet taahhüdü verilmemektedir. Bu sorumluluk sınırlaması, tüketicilerin yasal haklarını etkilemez.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">8. VERİ GÜVENLİĞİ İHLALİ BİLDİRİMİ</h3>
+      <p>Kişisel verilerinizin güvenliğini tehdit eden bir ihlal tespit edilmesi hâlinde Nature.co; 6698 sayılı KVKK'nın 12. maddesi ve Kişisel Verileri Koruma Kurulu'nun 2019/10 sayılı Kararı uyarınca, ilgili kişileri ve Kişisel Verileri Koruma Kurumu'nu en geç <strong style="color:#fff;">72 saat</strong> içinde bilgilendirmeyi taahhüt eder.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">9. UYGULANACAK HUKUK VE YETKİLİ MAHKEME</h3>
+      <p>Bu Sözleşme, Türkiye Cumhuriyeti hukukuna tabidir. Uyuşmazlıklarda Türkiye mahkemeleri ve icra daireleri yetkilidir. Tüketici sıfatını haiz üyeler, bulundukları yerdeki Tüketici Hakem Heyeti'ne veya Tüketici Mahkemesi'ne başvurma haklarını saklı tutarlar.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">10. İLETİŞİM</h3>
+      <p>Her türlü soru, şikâyet ve KVKK başvuruları için: <strong style="color:#fff;"><a href="/cdn-cgi/l/email-protection#2f464149406f414e5b5a5d4a4c4001424a" style="color:inherit;"><span class="__cf_email__" data-cfemail="90f9fef6ffd0fef1e4e5e2f5f3ffbefdf5">[email&#160;protected]</span></a></strong></p>
+    </div>
+
+    <!-- ── KVKK SEKMESİ ── -->
+    <div id="kvkkTabContent" style="display:none;">
+      <h2 style="color:#fff;font-size:17px;margin-bottom:4px;text-align:center;">🔒 KVKK AYDINLATMA METNİ</h2>
+      <p style="text-align:center;color:#888;font-size:12px;margin-bottom:20px;">6698 Sayılı Kişisel Verilerin Korunması Kanunu Madde 10 Kapsamında</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">1. VERİ SORUMLUSU</h3>
+      <p>Kişisel verileriniz, veri sorumlusu sıfatıyla <strong style="color:#fff;">Biyom Business</strong> tarafından işlenmektedir. İletişim: <strong style="color:#fff;"><a href="/cdn-cgi/l/email-protection#1a73747c755a747b6e6f687f797534777f" style="color:inherit;"><span class="__cf_email__" data-cfemail="b1d8dfd7def1dfd0c5c4c3d4d2de9fdcd4">[email&#160;protected]</span></a></strong></p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">2. İŞLENEN KİŞİSEL VERİLER VE HUKUKİ DAYANAK</h3>
+      <p><strong style="color:#ddd;">Genel nitelikli kişisel veriler</strong> (KVKK md. 5/2-c — sözleşmenin ifası):</p>
+      <ul style="margin:6px 0 12px 20px;">
+        <li><strong>Kullanıcı adı</strong> — Kimlik doğrulama ve iletişim amacıyla</li>
+        <li><strong>E-posta adresi</strong> — Hesap güvenliği ve bildirim amacıyla</li>
+        <li><strong>Şifre özeti (hash)</strong> — Güvenli kimlik doğrulama amacıyla</li>
+      </ul>
+      <p><strong style="color:#e8a020;">Özel nitelikli kişisel veri</strong> (KVKK md. 6 — köken/milliyet bilgisi, <em>yalnızca açık rızanıza dayanılarak işlenmektedir</em>):</p>
+      <ul style="margin:6px 0 12px 20px;">
+        <li><strong>Köken / Milliyet bilgisi</strong> — Platform topluluk yönetimi amacıyla, Kurul'un öngördüğü yeterli güvenlik tedbirleri alınarak işlenmektedir</li>
+      </ul>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">3. VERİLERİN AKTARIMI</h3>
+      <p>Kişisel verileriniz; yurt içinde veya yurt dışında herhangi bir üçüncü kişiye, şirkete veya kuruma açık rızanız olmaksızın aktarılmaz. Yalnızca yasal zorunluluk hâlinde yetkili kamu kurumlarıyla paylaşılabilir.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">4. VERİLERİN SAKLANMA SÜRESİ</h3>
+      <p>Kişisel verileriniz, üyeliğinizin aktif olduğu süre boyunca saklanır. Üyeliğin sona ermesi veya hesabın silinmesi hâlinde verileriniz, yasal saklama yükümlülükleri saklı kalmak kaydıyla en geç <strong style="color:#fff;">30 gün</strong> içinde sistemden silinir veya anonim hâle getirilir.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">5. GÜVENLİK TEDBİRLERİ</h3>
+      <p>Verilerinizin korunması için aşağıdaki teknik ve idari tedbirler alınmaktadır:</p>
+      <ul style="margin:6px 0 12px 20px;">
+        <li>Şifreler kriptografik hash fonksiyonuyla saklanmakta, açık metin olarak tutulmamaktadır</li>
+        <li>Veriler güvenli Firebase altyapısında barındırılmaktadır</li>
+        <li>Platforma erişimler kayıt altına alınmaktadır</li>
+        <li>Güvenlik ihlali tespitinde 72 saat içinde bildirim yapılmaktadır</li>
+      </ul>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">6. İLGİLİ KİŞİNİN HAKLARI (KVKK MD. 11)</h3>
+      <p>KVKK'nın 11. maddesi kapsamında aşağıdaki haklara sahipsiniz:</p>
+      <ul style="margin:6px 0 12px 20px;">
+        <li>Kişisel verilerinizin işlenip işlenmediğini öğrenme</li>
+        <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+        <li>Verilerin işlenme amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme</li>
+        <li>Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+        <li>Verilerin eksik veya yanlış işlenmesi hâlinde düzeltilmesini isteme</li>
+        <li>KVKK'nın 7. maddesi kapsamında silinmesini veya yok edilmesini isteme</li>
+        <li>Düzeltme ve silme işlemlerinin üçüncü kişilere bildirilmesini talep etme</li>
+        <li>Münhasıran otomatik sistemler ile analiz edilmesi sonucu aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+        <li>Kanuna aykırı işleme nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme</li>
+      </ul>
+      <p>Bu haklarınızı kullanmak için <strong style="color:#fff;"><a href="/cdn-cgi/l/email-protection#3b52555d547b555a4f4e495e585415565e" style="color:inherit;"><span class="__cf_email__" data-cfemail="f891969e97b896998c8d8a9d9b97d6959d">[email&#160;protected]</span></a></strong> adresine yazılı olarak başvurabilirsiniz. Başvurularınız en geç <strong style="color:#fff;">30 gün</strong> içinde sonuçlandırılır.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">7. KVKK KURUMU'NA ŞİKÂYET HAKKI</h3>
+      <p>Başvurunuzun reddedilmesi, verilen yanıtı yetersiz bulmanız veya süresinde yanıt alamamanız hâlinde <strong style="color:#fff;">Kişisel Verileri Koruma Kurumu'na (kvkk.gov.tr)</strong> şikâyette bulunma hakkınız mevcuttur.</p>
+
+      <h3 style="color:#e8e8e8;font-size:14px;margin-top:20px;">8. ÇEREZLER (COOKIE)</h3>
+      <p>Platform, oturum yönetimi amacıyla yalnızca zorunlu yerel depolama (localStorage) kullanmaktadır. Pazarlama veya takip amaçlı çerez kullanılmamaktadır.</p>
+    </div>
+
+    <div style="margin-top:28px;text-align:center;">
+      <button onclick="document.getElementById('tosModal').style.display='none'"
+        style="background:#5b9bd5;border:none;border-radius:100px;color:#fff;font-size:14px;font-weight:700;padding:10px 32px;cursor:pointer;">
+        ✓ Okudum, Kapat
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EVRENSEL ARAMA MODAL ══ -->
+<div id="globalSearchModal" onclick="if(event.target===this)closeGlobalSearch()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:8000;align-items:flex-start;justify-content:center;padding:60px 16px 16px;backdrop-filter:blur(8px);">
+  <div style="background:var(--bg2);border-radius:18px;width:100%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden;animation:searchSlideIn .2s ease;">
+    <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="globalSearchInp" placeholder="Kullanıcı, oda veya forum ara..." autocorrect="off" autocapitalize="none" oninput="runGlobalSearch(this.value)"
+        style="flex:1;background:transparent;border:none;outline:none;color:var(--text-hi);font-size:.95rem;font-family:inherit;">
+      <div onclick="closeGlobalSearch()" style="cursor:pointer;color:var(--muted);font-size:.8rem;background:var(--surface);border-radius:6px;padding:3px 8px;font-weight:700;">ESC</div>
+    </div>
+    <div style="display:flex;gap:6px;padding:10px 16px 6px;">
+      <button class="gs-filter-btn gs-filter-act" onclick="setGsFilter('all',this)">Tümü</button>
+      <button class="gs-filter-btn" onclick="setGsFilter('users',this)">👤 Kişiler</button>
+      <button class="gs-filter-btn" onclick="setGsFilter('rooms',this)">🏠 Odalar</button>
+      <button class="gs-filter-btn" onclick="setGsFilter('forum',this)">📋 Forum</button>
+    </div>
+    <div id="globalSearchResults" style="max-height:360px;overflow-y:auto;padding:6px 8px 12px;">
+      <div style="text-align:center;padding:32px;color:var(--muted);font-size:.85rem;">Aramaya başlayın...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BİLDİRİM MERKEZİ MODAL ══ -->
+<div id="notifCenterModal" onclick="if(event.target===this)closeNotifCenter()" style="display:none;position:fixed;inset:0;background:transparent;z-index:8000;align-items:flex-start;justify-content:flex-start;">
+  <div id="notifCenterPanel" style="background:var(--bg2);border-radius:16px;width:360px;max-width:calc(100vw - 20px);box-shadow:0 16px 48px rgba(0,0,0,.5);overflow:hidden;animation:notifSlideIn .2s ease;position:absolute;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);">
+      <div style="font-size:.9rem;font-weight:900;color:var(--text-hi);display:flex;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Bildirimler
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span id="ncUnreadCount" style="background:var(--red);color:#fff;font-size:.62rem;font-weight:900;border-radius:100px;padding:1px 7px;display:none;">0</span>
+        <span onclick="markAllNotifsRead()" style="font-size:.72rem;color:var(--accent);cursor:pointer;font-weight:700;">Tümünü Oku</span>
+        <span onclick="clearAllNotifs()" style="font-size:.72rem;color:var(--red);cursor:pointer;font-weight:700;">Tümünü Sil</span>
+        <span onclick="closeNotifCenter()" style="color:var(--muted);cursor:pointer;font-size:1.1rem;line-height:1;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
+      </div>
+    </div>
+    <div id="notifCenterList" style="max-height:420px;overflow-y:auto;">
+      <div style="text-align:center;padding:32px;color:var(--muted);font-size:.85rem;">Bildirim yok</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NATUREBOT ROBOT MASKOTU v3 ══ -->
+
+<!-- ════════════════════════════════════════════════════════════
+     🚀 NATURE.CO MODERNİZASYON PAKETİ v2.0
+     Eklenen özellikler:
+     1. 🌙 Sistem Teması Algılama (OS dark/light mode sync)
+     2. 🤖 AI Mesaj Asistanı (Anthropic Claude API)
+     3. 🌍 Anlık Mesaj Çevirisi (MyMemory API)
+     4. 🎵 Müzik Odası (YouTube Firebase Sync)
+     5. ✅ Toplu Mesaj Seçimi (Long press multi-select)
+     6. ⏰ Mesaj Zamanlayıcı (Schedule messages)
+     7. 🎨 Özel Sticker Paketi (Upload & use stickers)
+════════════════════════════════════════════════════════════ -->
+
+<!-- ════════════════════════════════════
+     PROFİL GLASS DRAWER HTML
+════════════════════════════════════ -->
+<div id="profileDrawerOverlay" onclick="closeProfileDrawer()"></div>
+<div id="profileDrawer">
+  <div class="pdr-header">
+    <div style="font-size:.7rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Profilim</div>
+    <div class="pdr-close" onclick="closeProfileDrawer()">✕</div>
+  </div>
+
+  <!-- Reuse existing profile structure -->
+  <div style="padding:20px 20px 16px;text-align:center;">
+    <div class="prof-av-wrap" style="display:inline-block;cursor:pointer;position:relative;" onclick="triggerPhotoUpload()">
+      <div class="prof-av-ring" id="drawerAvatar" style="width:80px;height:80px;border-radius:20px;font-size:2rem;margin:0 auto;"></div>
+      <div class="prof-status-dot"></div>
+    </div>
+    <div class="prof-display-name" id="drawerName" style="margin-top:10px;"></div>
+    <div class="prof-handle" id="drawerHandle"></div>
+  </div>
+
+  <!-- Stats - reuses .prof-stat classes -->
+  <div class="prof-stat-row" style="margin:0 16px 16px;">
+    <div class="prof-stat">
+      <span class="prof-stat-num" id="drawerMsgCount">—</span>
+      <span class="prof-stat-lbl">Mesaj</span>
+    </div>
+    <div class="prof-stat">
+      <span class="prof-stat-num" id="drawerFriendCount">—</span>
+      <span class="prof-stat-lbl">Arkadaş</span>
+    </div>
+    <div class="prof-stat">
+      <span class="prof-stat-num" id="drawerJoinDate">—</span>
+      <span class="prof-stat-lbl">Katılım</span>
+    </div>
+  </div>
+
+  <div class="pdr-divider"></div>
+
+  <!-- Nav items - reuses .prof-act -->
+  <nav class="pdr-nav" style="padding:8px 12px;">
+    <div class="prof-act" onclick="closeProfileDrawer();switchMainTab&&switchMainTab('profile')">
+      <div class="prof-act-ic">👤</div>
+      <div class="prof-act-lb">Profil Sayfam</div>
+    </div>
+    <div class="prof-act" onclick="closeProfileDrawer();switchProfTab&&switchProfTab('appearance')">
+      <div class="prof-act-ic">🎨</div>
+      <div class="prof-act-lb">Görünüm & Tema</div>
+    </div>
+    <div class="prof-act" onclick="closeProfileDrawer();switchProfTab&&switchProfTab('sounds')">
+      <div class="prof-act-ic">🔔</div>
+      <div class="prof-act-lb">Bildirimler & Sesler</div>
+    </div>
+    <div class="prof-act" onclick="closeProfileDrawer();switchMainTab&&switchMainTab('games')">
+      <div class="prof-act-ic">🎮</div>
+      <div class="prof-act-lb">Oyunlarım</div>
+    </div>
+    <div class="prof-act" onclick="closeProfileDrawer();switchProfTab&&switchProfTab('account')">
+      <div class="prof-act-ic">⚙️</div>
+      <div class="prof-act-lb">Hesap Ayarları</div>
+    </div>
+  </nav>
+
+  <div class="pdr-divider"></div>
+
+  <div class="pdr-nav" style="padding:8px 12px;">
+    <div class="prof-act danger" onclick="closeProfileDrawer();typeof logout==='function'&&logout()">
+      <div class="prof-act-ic">🚪</div>
+      <div class="prof-act-lb">Çıkış Yap</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     iOS WIDGET PANELİ HTML
+════════════════════════════════════ -->
+<div id="widgetsPanel">
+  <!-- Saat Widget -->
+  <div class="ios-widget">
+    <div class="ios-widget-label">⏰ Saat</div>
+    <div class="w-clock-time" id="wpClock">--:--</div>
+    <div class="w-clock-date" id="wpDate"></div>
+  </div>
+
+  <!-- Online Widget -->
+  <div class="ios-widget">
+    <div class="ios-widget-label">👥 Aktif Kullanıcılar</div>
+    <div class="w-online-count">
+      <div class="w-online-dot"></div>
+      <span id="wpOnlineCount">—</span>
+    </div>
+    <div class="w-online-bar">
+      <div class="w-online-fill" id="wpOnlineBar" style="width:0%"></div>
+    </div>
+    <div class="w-online-sub">Şu an çevrimiçi</div>
+  </div>
+
+  <!-- Hava Durumu Widget (statik — hava API entegre değil) -->
+  <div class="ios-widget">
+    <div class="ios-widget-label">☁️ Hava Durumu</div>
+    <div class="w-weather-main">
+      <div class="w-weather-icon">🌤️</div>
+      <div>
+        <div class="w-weather-temp" id="wpTemp">—°</div>
+        <div class="w-weather-desc" id="wpWeatherDesc">/hava [şehir] yazarak sorgula</div>
+      </div>
+    </div>
+    <div class="w-weather-details">
+      <div class="w-weather-detail" id="wpHumidity">💧 —%</div>
+      <div class="w-weather-detail" id="wpWind">💨 — km/s</div>
+    </div>
+  </div>
+</div>
+
+<!-- Karbon Modal HTML -->
+<div id="carbonModalOverlay" onclick="if(event.target===this)closeCarbonModal()">
+  <div id="carbonModal">
+    <div class="cm-header">
+      <div class="cm-title">🌿 Karbon Ayak İzi</div>
+      <button class="cm-close" onclick="closeCarbonModal()">✕</button>
+    </div>
+    <div class="cm-score-wrap">
+      <div class="cm-score-num" id="cmScoreNum">0g</div>
+      <div class="cm-score-lbl">Tahmini CO₂ Kullanımı</div>
+      <div class="cm-score-grade" id="cmGrade">🌱 Mükemmel</div>
+    </div>
+    <div class="cm-items">
+      <div class="cm-item">
+        <div class="cm-item-icon">💬</div>
+        <div class="cm-item-label">Gönderilen mesajlar</div>
+        <div class="cm-item-val" id="cmMsgVal">—</div>
+      </div>
+      <div class="cm-item">
+        <div class="cm-item-icon">⏱️</div>
+        <div class="cm-item-label">Tahmini oturum süresi</div>
+        <div class="cm-item-val" id="cmTimeVal">—</div>
+      </div>
+      <div class="cm-item">
+        <div class="cm-item-icon">📡</div>
+        <div class="cm-item-label">Veri transferi</div>
+        <div class="cm-item-val" id="cmDataVal">—</div>
+      </div>
+    </div>
+    <div class="cm-tip" id="cmTip">🌍 Doğayı korumak için mesajlarını kısa tut ve gereksiz medya paylaşımından kaçın.</div>
+  </div>
+</div>
+
+<!-- Doğa Sesleri Panel HTML -->
+</div>
+</div>
+  <!-- JS Modülleri -->
+  <script src="js/config.js?v=12"></script>
+  <script src="js/rooms.js?v=12"></script>
+  <script src="js/messages.js?v=12"></script>
+  <script src="js/friends.js?v=12"></script>
+  <script src="js/profile.js?v=12"></script>
+  <script src="js/admin.js?v=12"></script>
+  <script src="js/ui.js?v=12"></script>
+  <script src="js/conference.js?v=12"></script>
+  <script src="js/slack-features.js?v=12"></script>
+  <script src="js/games.js?v=12"></script>
+  <script src="js/desktop.js?v=12"></script>
+  <script>
+    // guildRail overlay'ini tamamen engelle
+    window.renderGuildRail = function() {
+      var el = document.getElementById('guildRail');
+      if (el) el.remove();
+      document.body.style.paddingLeft = '';
+    };
+    // MutationObserver: #guildRail DOM'a eklenirse anında sil
+    var _grObs = new MutationObserver(function(muts) {
+      muts.forEach(function(m) {
+        m.addedNodes.forEach(function(n) {
+          if (n.id === 'guildRail') { n.remove(); document.body.style.paddingLeft = ''; }
+        });
+      });
+    });
+    _grObs.observe(document.documentElement, { childList: true, subtree: true });
+  </script>
+  <script src="js/servers.js?v=12"></script>
+  <!-- games.js kaldırıldı -->
+  <script src="js/media.js?v=12"></script>
+  <script src="js/auth.js?v=12"></script>
+  <script src="js/misc.js?v=12"></script>
+  <script src="js/bot.js?v=12"></script>
+  <script src="js/naturebot-brain.js?v=5"></script>
+  <script src="js/search.js?v=11"></script>
+  <script src="js/canvas.js?v=11"></script>
+  <script src="js/lists.js?v=11"></script>
+  <script src="js/features.js?v=11"></script>
+  <script src="js/mentions.js?v=11"></script>
+  <script>
+    // Tüm modüller yüklendi, sunucu listesini doldur
+    if (typeof renderServerSelect === 'function') renderServerSelect();
+    // Tek sunucu varsa otomatik seç, login ekranına geç
+    if (typeof FB_SERVERS !== 'undefined' && typeof selectServer === 'function') {
+      const keys = Object.keys(FB_SERVERS);
+      if (keys.length === 1) {
+        selectServer(keys[0]);
+      }
+    }
+  </script>
+
+<!-- ══ CANVAS PANEL ══ -->
+<div id="canvasPanel" onclick="if(event.target===this)closeCanvasPanel()">
+  <div class="canvas-sheet">
+    <div class="canvas-header">
+      <span style="font-size:1.1rem;">📄</span>
+      <span class="canvas-header-title">Eco Belgeler</span>
+      <button class="canvas-new-btn" onclick="newCanvas()">+ Yeni Belge</button>
+      <button class="canvas-close" onclick="closeCanvasPanel()">✕</button>
+    </div>
+    <!-- Liste görünümü -->
+    <div id="canvasListView" style="flex:1;flex-direction:column;overflow:hidden;display:flex;">
+      <div id="canvasList" class="canvas-list-body"></div>
+    </div>
+    <!-- Editör görünümü -->
+    <div id="canvasEditorView" style="flex:1;flex-direction:column;overflow:hidden;display:none;">
+      <div class="canvas-editor-header">
+        <button class="canvas-back-btn" onclick="showCanvasListView()">‹</button>
+        <input id="canvasTitleInput" class="canvas-title-inp" placeholder="Belge başlığı...">
+        <span id="canvasAuthorLabel" style="font-size:.65rem;color:var(--muted);"></span>
+        <button class="canvas-save-btn" onclick="saveCanvas()">Kaydet</button>
+      </div>
+      <div class="canvas-toolbar">
+        <button class="canvas-tb-btn" onclick="canvasInsert('h1')">H1</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('h2')">H2</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('bold')"><b>B</b></button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('italic')"><i>I</i></button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('list')">• Liste</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('check')">☑ Görev</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('code')">` Kod</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('hr')">— Çizgi</button>
+        <button class="canvas-tb-btn" onclick="canvasInsert('eco')" style="color:var(--green);">🌿 Eko</button>
+      </div>
+      <div class="canvas-body">
+        <textarea id="canvasEditor" placeholder="Markdown desteklenir: # Başlık, **kalın**, - liste, - [ ] görev..."></textarea>
+        <div id="canvasPreview"></div>
+      </div>
+      <div class="canvas-tab-bar">
+        <button class="canvas-tab-btn active" onclick="switchCanvasTab('edit')">✏️ Düzenle</button>
+        <button class="canvas-tab-btn" onclick="switchCanvasTab('preview')">👁 Önizle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LISTS PANEL ══ -->
+<div id="listsPanel" onclick="if(event.target===this)closeListsPanel()">
+  <div class="lists-sheet">
+    <div class="lists-header">
+      <span style="font-size:1.1rem;">✅</span>
+      <span class="lists-header-title">Görev Listeleri</span>
+      <button class="lists-new-btn" onclick="showNewListForm()">+ Yeni Liste</button>
+      <button class="lists-close" onclick="closeListsPanel()">✕</button>
+    </div>
+    <div id="listsHomeView" style="flex:1;flex-direction:column;overflow:hidden;display:flex;">
+      <div id="listsHomeBody" class="lists-home-body"></div>
+    </div>
+    <div id="listsEditorView" style="flex:1;flex-direction:column;overflow:hidden;display:none;">
+      <div class="list-editor-header">
+        <button class="list-back-btn" onclick="showListsHome()">‹</button>
+        <span id="listEditorEmoji">📋</span>
+        <span id="listEditorTitle" style="font-size:.92rem;font-weight:800;color:var(--text-hi);flex:1;"></span>
+      </div>
+      <div id="listItemsBody" style="flex:1;overflow-y:auto;padding:8px;"></div>
+      <div class="list-add-hint">Tip: @kullanıcı için atama, :2025-12-31 için tarih</div>
+      <div class="list-add-row">
+        <input id="listItemInput" class="list-add-inp" placeholder="Görev ekle... (@atama :tarih)" onkeydown="if(event.key==='Enter')addListItem()">
+        <button class="list-add-btn" onclick="addListItem()">Ekle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVED ITEMS MODAL ══ -->
+<div id="savedItemsModal" onclick="if(event.target===this)closeSavedItems()">
+  <div class="saved-sheet">
+    <div class="saved-header">
+      <span style="font-size:1.1rem;">🔖</span>
+      <span class="saved-header-title">Kaydedilenler</span>
+      <button onclick="closeSavedItems()" style="background:var(--surface);border:none;border-radius:50%;width:30px;height:30px;color:var(--muted);cursor:pointer;font-size:.9rem;">✕</button>
+    </div>
+    <div id="savedItemsBody" style="flex:1;overflow-y:auto;padding:10px;"></div>
+  </div>
+</div>
+
+<!-- ══ REMINDERS MODAL ══ -->
+<div id="remindersModal" onclick="if(event.target===this)closeRemindersModal()">
+  <div class="reminders-sheet">
+    <div class="reminders-header">
+      <span style="font-size:1.1rem;">⏰</span>
+      <span class="reminders-title">Hatırlatıcılar</span>
+      <button onclick="closeRemindersModal()" style="background:var(--surface);border:none;border-radius:50%;width:30px;height:30px;color:var(--muted);cursor:pointer;font-size:.9rem;">✕</button>
+    </div>
+    <div class="reminders-add-row">
+      <input id="reminderTextInp" class="reminders-inp" placeholder="Hatırlatıcı metni...">
+      <input id="reminderTimeInp" class="reminders-time" placeholder="10dk">
+      <button class="reminders-add-btn" onclick="addReminder(document.getElementById('reminderTextInp').value,document.getElementById('reminderTimeInp').value,_cRoom)">Kur</button>
+    </div>
+    <div id="remindersBody" style="flex:1;overflow-y:auto;padding:10px;"></div>
+  </div>
+</div>
+
+<!-- ══ STATUS MODAL ══ -->
+<div id="statusModal" onclick="if(event.target===this)closeStatusModal()">
+  <div class="status-sheet">
+    <div class="status-header">
+      <span style="font-size:1.1rem;">💬</span>
+      <span class="status-title">Durumunu Ayarla</span>
+      <button onclick="closeStatusModal()" style="background:var(--surface);border:none;border-radius:50%;width:30px;height:30px;color:var(--muted);cursor:pointer;font-size:.9rem;">✕</button>
+    </div>
+    <div class="status-body">
+      <div style="font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Hızlı Seçim</div>
+      <div class="status-presets">
+        <div class="status-preset" onclick="applyStatusPreset(0)"><span class="status-preset-emoji">🌿</span><div class="status-preset-info"><div class="status-preset-text">Doğayla Meşgul</div><div class="status-preset-clear">30 dk sonra temizle</div></div></div>
+        <div class="status-preset" onclick="applyStatusPreset(1)"><span class="status-preset-emoji">🎯</span><div class="status-preset-info"><div class="status-preset-text">Odaklanıyorum</div><div class="status-preset-clear">1 saat sonra</div></div></div>
+        <div class="status-preset" onclick="applyStatusPreset(2)"><span class="status-preset-emoji">🌊</span><div class="status-preset-info"><div class="status-preset-text">Mola</div><div class="status-preset-clear">15 dk sonra</div></div></div>
+        <div class="status-preset" onclick="applyStatusPreset(3)"><span class="status-preset-emoji">🚴</span><div class="status-preset-info"><div class="status-preset-text">Dışarıdayım</div><div class="status-preset-clear">2 saat sonra</div></div></div>
+        <div class="status-preset" onclick="applyStatusPreset(4)"><span class="status-preset-emoji">😴</span><div class="status-preset-info"><div class="status-preset-text">Rahatsız Etme</div><div class="status-preset-clear">8 saat · DND</div></div></div>
+        <div class="status-preset" onclick="applyStatusPreset(6)"><span class="status-preset-emoji">💻</span><div class="status-preset-info"><div class="status-preset-text">Çalışıyorum</div><div class="status-preset-clear">Süresiz</div></div></div>
+      </div>
+      <div class="status-custom-section">
+        <div class="status-custom-label">Özel Durum</div>
+        <div class="status-custom-row">
+          <input id="statusEmojiInput" class="status-emoji-inp" placeholder="🌿" maxlength="2">
+          <input id="statusTextInput" class="status-text-inp" placeholder="Ne yapıyorsun?">
+        </div>
+        <div class="status-dnd-row">
+          <span class="status-dnd-label">😴 Rahatsız Etme (DND)</span>
+          <input type="checkbox" id="statusDndToggle" style="width:18px;height:18px;accent-color:var(--accent);">
+        </div>
+        <select id="statusClearSelect" class="status-clear-sel">
+          <option value="">Süresiz</option>
+          <option value="30dk">30 dakika sonra temizle</option>
+          <option value="1s">1 saat sonra</option>
+          <option value="4s">4 saat sonra</option>
+          <option value="bugun">Bugün sonunda</option>
+        </select>
+        <button class="status-save-btn" onclick="saveCustomStatus()">Kaydet</button>
+        <button class="status-clear-btn" onclick="clearStatus();closeStatusModal()">Durumu Temizle</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ THREAD PANEL ══ -->
+<div id="threadPanel" style="display:none;">
+  <div class="thread-header">
+    <span style="font-size:1rem;">💬</span>
+    <span class="thread-header-title">Konu</span>
+    <button class="thread-close" onclick="closeThreadPanel()">✕</button>
+  </div>
+  <div class="thread-parent">
+    <div id="threadParentUser" class="thread-parent-user"></div>
+    <div id="threadParentText" class="thread-parent-text"></div>
+  </div>
+  <div id="threadRepliesBody" style="flex:1;overflow-y:auto;padding:10px;"></div>
+  <div class="thread-input-row">
+    <input id="threadInput" class="thread-inp" placeholder="Konuya cevap yaz..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendThreadReply();}">
+    <button class="thread-send-btn" onclick="sendThreadReply()">↑</button>
+  </div>
+</div>
+
+<!-- ══ SCHEDULE MSG PANEL ══ -->
+<div id="scheduleMsgPanel" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:4000;align-items:flex-end;justify-content:center;" onclick="if(event.target===this)closeSchedulePanel()">
+  <div style="background:var(--bg2);border-radius:20px 20px 0 0;width:100%;max-width:600px;border:1px solid var(--border);padding:16px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:1.1rem;">🗓</span>
+      <span style="font-size:.95rem;font-weight:800;color:var(--text-hi);flex:1;">Mesaj Planla</span>
+      <button onclick="closeSchedulePanel()" style="background:var(--surface);border:none;border-radius:50%;width:30px;height:30px;color:var(--muted);cursor:pointer;">✕</button>
+    </div>
+    <textarea id="scheduleMsgText" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:.85rem;color:var(--text);outline:none;font-family:inherit;resize:none;min-height:80px;margin-bottom:10px;" placeholder="Gönderilecek mesaj..."></textarea>
+    <input type="datetime-local" id="scheduleMsgTime" style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;font-size:.85rem;color:var(--text);outline:none;margin-bottom:10px;">
+    <div id="scheduledMsgList" style="max-height:160px;overflow-y:auto;margin-bottom:10px;"></div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="closeSchedulePanel()" style="flex:1;padding:11px;background:var(--surface2);border:none;border-radius:10px;color:var(--muted);font-size:.85rem;font-weight:700;cursor:pointer;">İptal</button>
+      <button onclick="confirmScheduleMsg()" style="flex:2;padding:11px;background:var(--accent);border:none;border-radius:10px;color:#fff;font-size:.85rem;font-weight:700;cursor:pointer;">Planla ↗</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ UIKit ══ -->
+<div id="uiKitModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;overflow-y:auto;padding:20px;padding-top:calc(20px + env(safe-area-inset-top,0px));">
+  <div style="max-width:480px;margin:0 auto;background:var(--bg2);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
+    <div style="display:flex;align-items:center;padding:14px 16px;background:var(--surface);border-bottom:1px solid var(--border);">
+      <div style="font-size:.95rem;font-weight:900;flex:1;">🎨 Uygulama Simgeleri</div>
+      <div onclick="closeUIKit()" style="cursor:pointer;padding:4px;color:var(--muted);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </div>
+    </div>
+    <div id="uiKitContent" style="padding:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;"></div>
+  </div>
+</div>
+
+<script src="js/push.js?v=11"></script>
+<script src="js/mobile-sync.js?v=11"></script>
+<script src="js/session.js?v=7"></script>
+<script src="js/fixes.js?v=11"></script>
+
+
+
+<!-- ══ TASK BOARD SCREEN ══ -->
+<div class="screen" id="taskBoardScreen">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0;">
+    <div style="font-size:1rem;font-weight:800;color:var(--text-hi);">✅ Görev Panosu</div>
+    <div style="display:flex;gap:8px;">
+      <button onclick="openCreateTaskModal()" style="padding:7px 16px;background:var(--accent);border:none;border-radius:9px;color:#fff;font-size:.8rem;font-weight:800;cursor:pointer;">+ Yeni Görev</button>
+      <button onclick="typeof deskNav==='function'?deskNav('home'):switchMainTab('home')" style="padding:7px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:.8rem;cursor:pointer;">✕</button>
+    </div>
+  </div>
+  <div id="taskBoardBody" style="flex:1;overflow:hidden;"></div>
+</div>
+
+<script src="js/business.js?v=1"></script>
+</body>
+</html>

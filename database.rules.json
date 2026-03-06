@@ -1,0 +1,171 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "admins": {
+      ".read": true,
+      ".write": false
+    },
+
+    "uidMap": {
+      ".read": true,
+      "$uid": {
+        ".write": true
+      }
+    },
+
+    "users": {
+      ".read": true,
+      ".write": true,
+      "$username": {
+        ".indexOn": ["lastSeen"],
+        "ipHistory": {
+          ".read": true,
+          ".write": true
+        },
+        "lastIP": {
+          ".read": true,
+          ".write": true
+        },
+        "isAdmin": {
+          ".read": true,
+          ".write": false
+        },
+        "banReason": {
+          ".read": true,
+          ".write": true
+        }
+      }
+    },
+
+    "online":             { ".read": true, ".write": true },
+    "rooms":              { ".read": true, ".write": true },
+
+    "msgs": {
+      "$roomId": {
+        ".read": true,
+        ".write": true,
+        ".indexOn": ["ts"]
+      }
+    },
+
+    "dms": {
+      ".read": true,
+      ".write": true,
+      "$chatId": {
+        "messages": { ".indexOn": ["ts"] }
+      }
+    },
+
+    "callInvites":        { ".read": true, ".write": true },
+    "reads":              { ".read": true, ".write": true },
+    "friends":            { ".read": true, ".write": true },
+    "friendRequests":     { ".read": true, ".write": true },
+    "friendRequestsSent": { ".read": true, ".write": true },
+
+    "forum": {
+      ".read": true,
+      ".write": true,
+      "posts":    { ".indexOn": ["ts", "author"] },
+      "comments": { "$postId": { ".indexOn": ["ts"] } }
+    },
+
+    "calls": { ".read": true, ".write": true },
+
+    "settings": {
+      ".read": true,
+      ".write": true,
+      "design":       { ".read": true },
+      "bannedWords":  { ".read": true },
+      "customGames":  { ".read": true },
+      "gameImages":   { ".read": true },
+      "serverConfig": { ".read": true },
+      "maintenance":  { ".read": true }
+    },
+
+    "bannedIPs":   { ".read": true, ".write": true },
+    "bans":        { ".read": true, ".write": true },
+    "mutes":       { ".read": true, ".write": true },
+    "pushTokens":  { ".read": true, ".write": true },
+
+    "savedItems": {
+      ".read": true,
+      ".write": true,
+      "$username": { ".indexOn": ["savedAt"] }
+    },
+
+    "reminders": {
+      ".read": true,
+      ".write": true,
+      "$username": { ".indexOn": ["ts"] }
+    },
+
+    "bookmarks":   { ".read": true, ".write": true },
+
+    "canvases": {
+      ".read": true,
+      ".write": true,
+      "$roomId": { ".indexOn": ["updatedAt"] }
+    },
+
+    "lists": {
+      ".read": true,
+      ".write": true,
+      "$roomId": { ".indexOn": ["createdAt"] }
+    },
+
+    "typing":        { ".read": true, ".write": true },
+    "notifications": { ".read": true, ".write": true },
+    "customEmojis":  { ".read": true, ".write": true },
+    "pins":          { ".read": true, ".write": true },
+    "pinned":        { ".read": true, ".write": true },
+    "reactions":     { ".read": true, ".write": true },
+    "threads":       { ".read": true, ".write": true },
+    "games":         { ".read": true, ".write": true },
+
+    "carbon": {
+      ".read": true,
+      ".write": true,
+      "$username": { ".indexOn": ["date"] }
+    },
+
+    "timeCapsules":      { ".read": true, ".write": true },
+    "watchParty":        { ".read": true, ".write": true },
+    "botSettings":       { ".read": true, ".write": true },
+
+    "modLogs": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": ["ts"]
+    },
+
+    "invites":            { ".read": true, ".write": true },
+
+    "activityLog": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": ["ts"]
+    },
+
+    "broadcasts":         { ".read": true, ".write": true },
+    "adminNotifications": { ".read": true, ".write": true },
+    "forceLogout":        { ".read": true, ".write": true },
+
+    "guilds":     { ".read": true, ".write": true },
+    "userGuilds": { ".read": true, ".write": true },
+    "guildReads": { ".read": true, ".write": true },
+
+    "guildMsgs": {
+      ".read": true,
+      ".write": true,
+      "$guildId": {
+        "$channelId": { ".indexOn": ["ts"] }
+      }
+    },
+
+    "conferences": { ".read": true, ".write": true },
+    "liveRoom":    { ".read": true, ".write": true },
+    "prefs":       { ".read": true, ".write": true }
+  }
+}
