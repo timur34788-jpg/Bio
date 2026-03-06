@@ -994,11 +994,9 @@ function _addConfButtonsToChatHeader() {
 /* ═══════════════════════════════════════
    26. SOHBET BAŞLIĞI GÜNCELLENINCE BUTONLARI EKLE
 ═══════════════════════════════════════ */
-const _origDeskOpenRoom = window.deskOpenRoom;
-window.deskOpenRoom = function() {
-  if (_origDeskOpenRoom) _origDeskOpenRoom.apply(this, arguments);
-  setTimeout(_addConfButtonsToChatHeader, 100);
-};
+// Bu override desktop.js içinde yönetiliyor - burada tekrar yapılmıyor
+// const _origDeskOpenRoom = window.deskOpenRoom;
+// window.deskOpenRoom = function() { ... };
 
 // Başlangıçta mevcut chat header varsa ekle
 setTimeout(_addConfButtonsToChatHeader, 2000);
