@@ -218,16 +218,6 @@
 </div>
 
 <!-- ══ LOGIN ══ -->
-    <div id="serverList" style="display:flex;flex-direction:column;gap:12px;">
-      <!-- JS tarafından doldurulur -->
-    </div>
-
-    <div style="margin-top:24px;text-align:center;font-size:.72rem;color:var(--muted);">
-      Her sunucu bağımsızdır — ayrı hesap, ayrı odalar
-    </div>
-  </div>
-</div>
-
 <div class="screen active" id="loginScreen">
 <div class="nc-aurora-1"></div><div class="nc-aurora-2"></div>
   <div class="login-box">
@@ -520,9 +510,8 @@
     <div class="tab" id="tabMsgs" onclick="openDMModal()"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div></div><div class="tab-lb">Mesajlar</div></div>
     <div class="tab" id="tabForum" onclick="switchMainTab('forum')"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M9 12h6m-6 4h4"/></svg></div></div><div class="tab-lb">Forum</div></div>
     <div class="tab-wrap" onclick="openFriendsModal()"><div class="tab" id="tabFriends"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/><circle cx="17" cy="9" r="3"/><path d="M21 21v-2a3 3 0 0 0-3-3h-2"/></svg></div></div><div class="tab-lb">Arkadaşlar</div></div><div class="notif-dot" id="frNotifDot"></div></div>
-    <div class="tab-lb">Oyunlar</div></div>
-    <div class="tab-lb">İzle</div></div>
-    <div class="tab" id="tabLiveRoom" onclick="switchMainTab('liveroom');mobLiveRoomInit()"><div class="tab-ic-wrap" style="position:relative;"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div><div id="tabLiveRoomDot" style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:#e05555;border-radius:50%;animation:livepulse 1.2s ease-in-out infinite;"></div></div><div class="tab-lb">Canlı</div></div>
+    <div class="tab" id="tabGames" onclick="switchMainTab('games')"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4m-2-2v4"/><circle cx="16" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="18" cy="13" r="1" fill="currentColor" stroke="none"/></svg></div></div><div class="tab-lb">Oyunlar</div></div>
+    <div class="tab" id="tabWatch" onclick="switchMainTab('watch')"><div class="tab-ic-wrap"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg></div></div><div class="tab-lb">İzle</div></div><div class="tab" id="tabLiveRoom" onclick="switchMainTab('liveroom');mobLiveRoomInit()"><div class="tab-ic-wrap" style="position:relative;"><div class="tab-ic" style="font-size:0;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div><div id="tabLiveRoomDot" style="display:none;position:absolute;top:2px;right:2px;width:8px;height:8px;background:#e05555;border-radius:50%;animation:livepulse 1.2s ease-in-out infinite;"></div></div><div class="tab-lb">Canlı</div></div>
   </div>
 
 <!-- ══ FORUM ══ -->
@@ -1835,8 +1824,6 @@
 </div>
 
 <!-- Doğa Sesleri Panel HTML -->
-</div>
-</div>
   <!-- JS Modülleri -->
   <script src="js/config.js?v=12"></script>
   <script src="js/rooms.js?v=12"></script>
