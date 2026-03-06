@@ -3110,7 +3110,7 @@ document.addEventListener('click', function(e){
    👑 GENİŞLETİLMİŞ ADMIN PANELİ
 ══════════════════════════════════════════════ */
 
-const _origDeskLoadAdmin = typeof deskLoadAdmin === 'function' ? deskLoadAdmin : null;
+if (typeof _origDeskLoadAdmin === 'undefined') var _origDeskLoadAdmin = typeof deskLoadAdmin === 'function' ? deskLoadAdmin : null;
 deskLoadAdmin = function(){
   const panel = document.getElementById('deskPanelContent');
   const tabs = [
